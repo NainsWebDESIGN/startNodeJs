@@ -1,0 +1,23 @@
+{
+  "name": "startnodejs",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000s\u0000t\u0000a\u0000r\u0000t\u0000N\u0000o\u0000d\u0000e\u0000J\u0000s\u0000\r\u0000 \u0000\r\u0000 \u0000[\u0000�d>e\u0005n�U,{ \u00001\u00002\u0000 \u0000Ɩ[R���Y]\u0000(\u0000h\u0000t\u0000t\u0000p\u0000s\u0000:\u0000/\u0000/\u0000y\u0000o\u0000u\u0000t\u0000u\u0000.\u0000b\u0000e\u0000/\u00004\u00000\u00005\u0000q\u0000q\u0000k\u0000j\u0000O\u0000s\u0000D\u0000M\u0000?\u0000s\u0000i\u0000=\u0000Z\u0000G\u00007\u0000k\u0000Y\u0000H\u0000c\u00008\u0000-\u0000a\u0000D\u0000Y\u0000T\u0000e\u0000R\u0000Z\u0000)\u0000\r\u0000 \u0000",
+  "main": "express.js",
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NainsWebDESIGN/startNodeJs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NainsWebDESIGN/startNodeJs/issues"
+  },
+  "homepage": "https://github.com/NainsWebDESIGN/startNodeJs#readme"
+}
