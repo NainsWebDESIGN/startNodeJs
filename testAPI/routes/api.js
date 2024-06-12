@@ -35,11 +35,18 @@ router.post("/product", (req, res) => {
 
 router.delete("/product/:id", (req, res) => {
   const id = req.params.id;
-  console.log(id);
-  //   res.send({
-  //     success: true,
-  //     data,
-  //   });
+  console.log(req);
+
+  data.forEach((item, index) => {
+    if (item.id == id) {
+      data.splice(index, 1);
+    }
+  });
+
+  res.send({
+    success: true,
+    data,
+  });
 
   res.end();
 });

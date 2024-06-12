@@ -5,6 +5,9 @@
   <title>
     <%= title %>
   </title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.2/axios.min.js"
+    integrity="sha512-JSCFHhKDilTRRXe9ak/FJ28dcpOJxzQaCd3Xg8MyF6XFjODhy/YMCM8HW0TFDckNHWUewW+kfvhin43hKtJxAw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <link rel='stylesheet' href='/stylesheets/style.css' />
 </head>
 
@@ -15,5 +18,19 @@
   <p>Welcome to <%= title %>
   </p>
 </body>
+<script>
+  fetch("http://localhost:3000/api/product")
+    .then(res => res.json())
+    .then(res => console.log(res))
+
+  axios.get("http://localhost:3000/api/product")
+    .then(res => console.log(res.data))
+
+  axios.post("http://localhost:3000/api/product", { title: "Test123456789" })
+    .then(res => console.log(res.data))
+
+  axios.delete("http://localhost:3000/api/product/1")
+    .then(res => console.log(res.data))
+</script>
 
 </html>
