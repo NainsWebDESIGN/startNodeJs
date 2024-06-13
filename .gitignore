@@ -2,6 +2,5 @@
 /package-lock.json
 /package.json
 /test.html
-/testAPI/node_modules
-/testAPI/package-lock.json
-/testAPI/package.json
+/startAPI/node_modules
+/startAPI/package-lock.json
