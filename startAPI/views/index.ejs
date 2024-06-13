@@ -19,18 +19,28 @@
   </p>
 </body>
 <script>
-  fetch("http://localhost:3000/api/product")
+  let url = "/api/product";
+  function checkAPI(res) {
+    let data = res.data;
+    return (data.success) ? data.data : `Server Error: ${data.success}`;
+  }
+
+  fetch(url)
     .then(res => res.json())
-    .then(res => console.log(res))
+    .then(res => console.log("1", res.data))
+    .catch(err => console.log(err))
 
-  axios.get("http://localhost:3000/api/product")
-    .then(res => console.log(res.data))
+  axios.get(url)
+    .then(res => console.log("2", checkAPI(res)))
+    .catch(err => console.log(err))
 
-  axios.post("http://localhost:3000/api/product", { title: "Test123456789" })
-    .then(res => console.log(res.data))
+  axios.post(url, { title: "Test123456789" })
+    .then(res => console.log("3", checkAPI(res)))
+    .catch(err => console.log(err))
 
-  axios.delete("http://localhost:3000/api/product/1")
-    .then(res => console.log(res.data))
+  axios.delete(`${url}/1`)
+    .then(res => console.log("4", checkAPI(res)))
+    .catch(err => console.log(err))
 </script>
 
 </html>

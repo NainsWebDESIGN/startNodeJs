@@ -12,7 +12,7 @@ const data = [
 /* GET home page. */
 router.get("/product", (req, res, next) => {
   res.send({
-    sussess: true,
+    success: true,
     data,
   });
   res.end();
@@ -35,7 +35,7 @@ router.post("/product", (req, res) => {
 
 router.delete("/product/:id", (req, res) => {
   const id = req.params.id;
-  console.log(req);
+  //   console.log(req);
 
   data.forEach((item, index) => {
     if (item.id == id) {
