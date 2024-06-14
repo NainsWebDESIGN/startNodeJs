@@ -7,27 +7,39 @@ import { ApiService } from './api.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  constructor(private api: ApiService) { }
   todoList = [];
   Add: string = "";
+  changeNumber: number;
   Change: string = "";
   Delete: string = "";
-  constructor(private api: ApiService) { }
+  finalTodo = {
+    next: res => this.todoList = res,
+    error: err => console.log(err),
+    complete: () => {
+      ["Add", "Change", "Delete"].forEach(item => this[item] = "");
+      this.changeNumber = undefined;
+    }
+  }
   ngOnInit() {
-    this.api.apiServer("get").subscribe(res => this.todoList = res);
-    // this.api.apiServer("post", { data: { title: "NainsTest" } }).subscribe(res => console.log(res));
-    // this.api.apiServer("delete", { getway: 1718328597083 }).subscribe(res => console.log(res));
+    this.api.apiServer("get").subscribe(this.finalTodo);
   }
   postServer(_name: string) {
+
+    let req;
+
     switch (_name) {
-      case "Add":
-        this.api.apiServer("post").subscribe(res => this.todoList = res);
+      case "post":
+        req = { data: { title: this.Add } };
         break;
-      case "Change":
-        this.api.apiServer("put").subscribe(res => this.todoList = res);
+      case "put":
+        req = { getway: this.changeNumber, data: { title: this.Change } };
         break;
-      case "Delete":
-        this.api.apiServer("delete").subscribe(res => this.todoList = res);
+      case "delete":
+        req = { getway: this.Delete };
         break;
     }
+
+    this.api.apiServer(_name, req).subscribe(this.finalTodo);
   }
 }

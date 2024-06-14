@@ -9,13 +9,14 @@ router.get("/product", (req, res) => {
     success: true,
     data,
   });
+
   res.end();
 });
 
 router.post("/product", (req, res) => {
   const product = req.body;
   data.push({
-    id: data[data.length - 1].id + 1,
+    id: data.length == 0 ? 1 : data[data.length - 1].id + 1,
     ...product,
   });
 
@@ -27,13 +28,37 @@ router.post("/product", (req, res) => {
   res.end();
 });
 
+router.put("/product/:id", (req, res) => {
+  const id = req.params.id,
+    body = req.body;
+
+  let _index = data.findIndex((item) => item.id == id);
+
+  data[_index] = {
+    id: id,
+    ...body,
+  };
+
+  res.send({
+    success: true,
+    data,
+  });
+
+  res.end();
+});
+
 router.delete("/product/:id", (req, res) => {
   const id = req.params.id;
-  //   console.log(req);
 
   data.forEach((item, index) => {
     if (item.id == id) {
       data.splice(index, 1);
+    }
+  });
+
+  data.forEach((item) => {
+    if (item.id > id) {
+      item.id--;
     }
   });
 
