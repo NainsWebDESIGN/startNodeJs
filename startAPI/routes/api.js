@@ -1,16 +1,10 @@
-var express = require("express");
-var router = express.Router();
-
+const express = require("express");
+const router = express.Router();
 // 假資料庫
-const data = [
-  {
-    id: 1,
-    title: "產品資訊",
-  },
-];
+const data = require("../public/json/data.json");
 
 /* GET home page. */
-router.get("/product", (req, res, next) => {
+router.get("/product", (req, res) => {
   res.send({
     success: true,
     data,
@@ -21,7 +15,7 @@ router.get("/product", (req, res, next) => {
 router.post("/product", (req, res) => {
   const product = req.body;
   data.push({
-    id: new Date().getTime(),
+    id: data[data.length - 1].id + 1,
     ...product,
   });
 

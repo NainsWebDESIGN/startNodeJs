@@ -1,6 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "baseUrl": "",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
@@ -14,6 +15,17 @@
     "lib": [
       "es2017",
       "dom"
-    ]
+    ],
+    "paths": {
+    "@service": [ "app/service/index.service" ],
+    "@pipe": [ "app/pipe/index.pipe" ],
+    "@app/*": [ "app/*" ],
+    "@ts/*": [ "app/ts/*"],
+    "@comModule": [
+    "app/component.module"
+    ],
+    "@pipeModule": [
+    "app/pipe.module"
+    ]}
   }
 }
