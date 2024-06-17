@@ -1,31 +1,31 @@
 const apiModel = require("../modules/apiModel");
 
 exports.getAllTodos = (req, res) => {
-  const api = apiModel.getAll();
-  res.send({ success: true, api });
+  const data = apiModel.getAll();
+  res.send({ success: true, data });
   res.end();
 };
 
 exports.createTodo = (req, res) => {
-  const newTodo = apiModel.create(req.body);
-  res.send({ success: true, newTodo });
+  const data = apiModel.create(req.body);
+  res.send({ success: true, data });
   res.end();
 };
 
 exports.updateTodo = (req, res) => {
-  const newTodo = apiModel.update(req);
+  const data = apiModel.update(req);
   res.send({
-    status:
-      newTodo == "Success" ? "Success Update" : `Filed Update: ${newTodo}`,
+    success: true,
+    data,
   });
   res.end();
 };
 
 exports.deleteTodo = (req, res) => {
-  const newTodo = apiModel.delete(req.params);
+  const data = apiModel.delete(req.params);
   res.send({
-    status:
-      newTodo == "Success" ? "Success Delete" : `Filed Delete: ${newTodo}`,
+    success: true,
+    data,
   });
   res.end();
 };

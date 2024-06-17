@@ -22,9 +22,9 @@ export class AppComponent {
     }
   }
   ngOnInit() {
-    this.api.apiServer("get").subscribe(this.finalTodo);
+    this.postServer();
   }
-  postServer(_name: string) {
+  postServer(_name?: string) {
 
     let req;
 

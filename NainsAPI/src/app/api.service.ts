@@ -15,10 +15,6 @@ export class ApiService {
             let url = `/api/product/`;
 
             switch (method) {
-                  case "get":
-                        return this.http.get(url)
-                              .map((res: any) => this.checkAPI(res))
-                              .catch(err => this.catchError(err));
                   case "post":
                         return this.http.post(url, body.data)
                               .map((res: any) => this.checkAPI(res))
@@ -31,6 +27,10 @@ export class ApiService {
                   case "delete":
                         url = url + body.getway;
                         return this.http.delete(url)
+                              .map((res: any) => this.checkAPI(res))
+                              .catch(err => this.catchError(err));
+                  default:
+                        return this.http.get(url)
                               .map((res: any) => this.checkAPI(res))
                               .catch(err => this.catchError(err));
             }

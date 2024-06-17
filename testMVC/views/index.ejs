@@ -2,10 +2,37 @@
 <html>
   <head>
     <title><%= title %></title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.2/axios.min.js"
+    integrity="sha512-JSCFHhKDilTRRXe9ak/FJ28dcpOJxzQaCd3Xg8MyF6XFjODhy/YMCM8HW0TFDckNHWUewW+kfvhin43hKtJxAw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
   </body>
+<script>
+  let url = "/api/product";
+  function checkAPI(res) {
+    let data = res.data;
+    return (data.success) ? data.data : `Server Error: ${data.success}`;
+  }
+
+  fetch(url)
+    .then(res => res.json())
+    .then(res => console.log("1", res.data))
+    .catch(err => console.log(err))
+
+  axios.get(url)
+    .then(res => console.log("2", checkAPI(res)))
+    .catch(err => console.log(err))
+
+  axios.post(url, { title: "Test123456789" })
+    .then(res => console.log("3", checkAPI(res)))
+    .catch(err => console.log(err))
+
+  axios.delete(`${url}/1`)
+    .then(res => console.log("4", checkAPI(res)))
+    .catch(err => console.log(err))
+</script>
 </html>

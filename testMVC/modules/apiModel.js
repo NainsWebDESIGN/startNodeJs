@@ -17,49 +17,41 @@ class ApiModel {
     };
     this.todos.push(newTodo);
 
-    return newTodo;
+    return this.todos;
   }
 
   // 更新資料
   update(req) {
-    try {
-      const { id } = req.params.id;
-      const { body } = req.body;
+    const { id } = req.params;
+    const { body } = req;
 
-      let _index = this.todos.findIndex((item) => item.id == id);
+    let _index = this.todos.findIndex((item) => item.id == id);
 
-      this.todos[_index] = {
-        id: id,
-        ...body,
-      };
+    this.todos[_index] = {
+      id: id,
+      ...body,
+    };
 
-      return "Success";
-    } catch (e) {
-      return e;
-    }
+    return this.todos;
   }
 
   // 刪除資料
   delete(params) {
-    try {
-      const { id } = params.id;
+    const { id } = params;
 
-      this.todos.forEach((item, index) => {
-        if (item.id == id) {
-          this.todos.splice(index, 1);
-        }
-      });
+    this.todos.forEach((item, index) => {
+      if (item.id == id) {
+        this.todos.splice(index, 1);
+      }
+    });
 
-      this.todos.forEach((item) => {
-        if (item.id > id) {
-          item.id--;
-        }
-      });
+    this.todos.forEach((item) => {
+      if (item.id > id) {
+        item.id--;
+      }
+    });
 
-      return "Success";
-    } catch (e) {
-      return e;
-    }
+    return this.todos;
   }
 }
 
