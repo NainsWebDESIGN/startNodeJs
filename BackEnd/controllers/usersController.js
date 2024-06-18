@@ -19,7 +19,6 @@ exports.SignUp = (req, res) => {
 // 2. 登入
 exports.Login = async (req, res) => {
   const status = await usersModel.Login(req);
-  console.log("status", status);
 
   // 2-4 回應
   switch (status) {

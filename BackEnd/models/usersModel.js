@@ -20,7 +20,6 @@ class UsersModel {
 
     // 1-1 加密
     const hashPassword = await bcrypt.hash(password, 10);
-    console.log(hashPassword);
 
     // 1-2 儲存
     this.users[email] = {
