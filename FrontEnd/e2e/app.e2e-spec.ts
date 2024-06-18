@@ -1,6 +1,6 @@
 import { AppPage } from './app.po';
 
-describe('nains-api App', () => {
+describe('Front-End App', () => {
   let page: AppPage;
 
   beforeEach(() => {
