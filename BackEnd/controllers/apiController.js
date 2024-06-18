@@ -1,4 +1,4 @@
-const apiModel = require("../modules/apiModel");
+const apiModel = require("../models/apiModel");
 
 exports.getAllTodos = (req, res) => {
   const data = apiModel.getAll();
