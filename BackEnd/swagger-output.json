@@ -191,6 +191,23 @@
           "Users"
         ],
         "description": "驗證，加密後的token須放在headers的Authorization",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "header",
+            "description": "登入內容",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Authorization": {
+                  "type": "string",
+                  "example": "加密後的token"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"

@@ -46,6 +46,14 @@ router.get(
   "/profile",
   /* 	#swagger.tags = ['Users']
         #swagger.description = '驗證，加密後的token須放在headers的Authorization' */
+  /*	#swagger.parameters['obj'] = {
+          in: 'header',
+          description: '登入內容',
+          required: true,
+          schema: {
+  "Authorization": "加密後的token"
+}
+  } */
   /* #swagger.responses[200] = { 
       schema: {
         message: "成功",
