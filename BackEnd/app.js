@@ -7,6 +7,7 @@ const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger-output.json");
 
 var indexRouter = require("./routes/index");
+var errorRouter = require("./routes/errorRouter");
 var apiRouter = require("./routes/api");
 var todoRouter = require("./routes/todoRouter");
 var usersRouter = require("./routes/users");
@@ -24,6 +25,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
+app.use("/error", errorRouter);
 app.use("/api", apiRouter);
 app.use("/todos", todoRouter);
 app.use("/users", usersRouter);
