@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socket</title>
+</head>
+
+<body>
+    <ul id="list"></ul>
+    <input type="text" name="" id="message">
+    <button:button id="sendBtn">送出</button:button>
+    <p>uuid: <span id="uuid"></span></p>
+</body>
+<script>
+    const host = 'ws://localhost:2862/ws';
+    const inputMessage = document.querySelector("#message");
+    const spanUUID = document.querySelector("#uuid");
+    const ulList = document.querySelector("#list");
+    const btnSend = document.querySelector("#sendBtn");
+</script>
+
+</html>
