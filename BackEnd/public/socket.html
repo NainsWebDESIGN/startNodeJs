@@ -20,6 +20,33 @@
     const spanUUID = document.querySelector("#uuid");
     const ulList = document.querySelector("#list");
     const btnSend = document.querySelector("#sendBtn");
+
+    const ws = new WebSocket(host);
+    ws.onopen = res => console.log(res);
+
+    const message = [];
+    ws.onmessage = res => {
+        const data = JSON.parse(res.data);
+        console.log(data);
+
+        switch (data.context) {
+            case "user":
+                spanUUID.innerHTML = data.uid;
+                break;
+            case "message":
+                message.push(data);
+                const html = message.map(item => `<li>${item.content}</li>`).join("");
+                ulList.innerHTML = html;
+                break;
+        }
+    };
+
+    btnSend.addEventListener('click', () => {
+        const value = inputMessage.value;
+        ws.send(JSON.stringify({
+            content: value
+        }))
+    })
 </script>
 
 </html>
