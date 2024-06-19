@@ -14,7 +14,7 @@ const Err = require("../public/js/catchError");
 //   };
 // };
 
-const errorController = async function (req, res) {
+const errorController = async (req, res) => {
   a; // 未定義
   res.send({
     message: "正常狀態",
