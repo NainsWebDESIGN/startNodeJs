@@ -9,9 +9,7 @@ router.get(
   /* 	#swagger.tags = ['Todos']
       #swagger.description = '取得所有Todos' 
       #swagger.responses[200] = { 
-        schema: [
-          { "id": 1, "title": "第一條備忘錄事項" }
-        ]
+        schema: { $ref: '#/Todos/resPonse' }
       } */
   apiController.getAllTodos
 );
@@ -27,9 +25,7 @@ router.post(
         schema: { "title": "這是標題" }
       } 
       #swagger.responses[200] = { 
-        schema: [
-          { "id": 1, "title": "第一條備忘錄事項" }
-        ]
+        schema: { $ref: '#/Todos/resPonse' }
       } */
   apiController.createTodo
 );
@@ -45,9 +41,7 @@ router.put(
         schema: { "title": "這是標題" }
       } 
       #swagger.responses[200] = { 
-        schema: [
-          { "id": 1, "title": "第一條備忘錄事項" }
-        ]
+        schema: { $ref: '#/Todos/resPonse' }
       } */
   apiController.updateTodo
 );
@@ -57,9 +51,7 @@ router.delete(
   /* 	#swagger.tags = ['Todos']
       #swagger.description = '刪除特定 Todo' 
       #swagger.responses[200] = { 
-        schema: [
-          { "id": 1, "title": "第一條備忘錄事項" }
-        ]
+        schema: { $ref: '#/Todos/resPonse' }
       } */
   apiController.deleteTodo
 );

@@ -2,10 +2,25 @@ const swaggerAutogen = require("swagger-autogen")();
 
 const doc = {
   info: {
-    title: "Sample Todos",
-    description: "Description",
+    title: "Nains API",
+    description: "學習 Node.js 的心路歷程",
   },
   host: "localhost:2862",
+  Todos: {
+    resPonse: [{ id: 1, title: "第一條備忘錄事項" }],
+  },
+  Users: {
+    Signup: { message: "註冊成功" },
+    Login: { message: "登入成功", status: "加密後的token" },
+    Profile: {
+      message: "成功",
+      status: {
+        email: "test@gmail.com",
+        username: "Nains",
+        password: "123456",
+      },
+    },
+  },
 };
 
 const outputFile = "./swagger-output.json";

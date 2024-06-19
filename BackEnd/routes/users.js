@@ -12,13 +12,13 @@ router.post(
         description: '註冊內容',
         required: true,
         schema: {
-          "email": "test@gmail.com",
-          "password": "123456",
-          "username": "Nains"
+          email: "test@gmail.com",
+          password: "123456",
+          username: "Nains",
         }
       }
       #swagger.responses[200] = { 
-        schema: {message: "註冊成功"}
+        schema: { $ref: '#/Users/Signup' }
       } */
   usersController.SignUp
 );
@@ -33,12 +33,12 @@ router.post(
       description: '登入內容',
       required: true,
       schema: {
-        "email": "test@gmail.com",
-        "password": "123456"
+        email: "test@gmail.com",
+        password: "123456",
       }
     } 
     #swagger.responses[200] = { 
-    schema: {message: "登入成功", status: "加密後的token"}
+    schema: { $ref: '#/Users/Login' }
     } */
   usersController.Login
 );
@@ -49,19 +49,12 @@ router.get(
   /* 	#swagger.tags = ['Users']
       #swagger.description = '驗證，加密後的token須放在headers的Authorization'
       #swagger.parameters['headers'] = {
-            in: 'Authorization',
-            type: 'string',
-            description: '加密後的Token' 
-        }
+        in: 'Authorization',
+        type: 'string',
+        description: '加密後的Token' 
+      }
       #swagger.responses[200] = { 
-        schema: {
-          message: "成功",
-          status: {
-            email: "test@gmail.com",
-            username: "Nains",
-            password: "123456"
-          }
-        }
+        schema: { $ref: '#/Users/Profile' }
       } */
   usersController.Profile
 );

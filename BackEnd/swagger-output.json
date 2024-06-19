@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Sample Todos",
-    "description": "Description",
+    "title": "Nains API",
+    "description": "學習 Node.js 的心路歷程",
     "version": "1.0.0"
   },
   "host": "localhost:2862",
@@ -21,23 +21,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "number",
-                    "example": 1
-                  },
-                  "title": {
-                    "type": "string",
-                    "example": "第一條備忘錄事項"
-                  }
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
+              "$ref": "#/Todos/resPonse"
             }
           }
         }
@@ -68,23 +52,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "number",
-                    "example": 1
-                  },
-                  "title": {
-                    "type": "string",
-                    "example": "第一條備忘錄事項"
-                  }
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
+              "$ref": "#/Todos/resPonse"
             }
           }
         }
@@ -123,23 +91,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "number",
-                    "example": 1
-                  },
-                  "title": {
-                    "type": "string",
-                    "example": "第一條備忘錄事項"
-                  }
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
+              "$ref": "#/Todos/resPonse"
             }
           }
         }
@@ -161,23 +113,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "number",
-                    "example": 1
-                  },
-                  "title": {
-                    "type": "string",
-                    "example": "第一條備忘錄事項"
-                  }
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
+              "$ref": "#/Todos/resPonse"
             }
           }
         }
@@ -217,16 +153,7 @@
         "responses": {
           "200": {
             "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string",
-                  "example": "註冊成功"
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
+              "$ref": "#/Users/Signup"
             },
             "description": "OK"
           },
@@ -270,20 +197,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string",
-                  "example": "登入成功"
-                },
-                "status": {
-                  "type": "string",
-                  "example": "加密後的token"
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
+              "$ref": "#/Users/Login"
             }
           },
           "401": {
@@ -310,39 +224,38 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string",
-                  "example": "成功"
-                },
-                "status": {
-                  "type": "object",
-                  "properties": {
-                    "email": {
-                      "type": "string",
-                      "example": "test@gmail.com"
-                    },
-                    "username": {
-                      "type": "string",
-                      "example": "Nains"
-                    },
-                    "password": {
-                      "type": "string",
-                      "example": "123456"
-                    }
-                  }
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
+              "$ref": "#/Users/Profile"
             }
           },
           "401": {
             "description": "Unauthorized"
           }
         }
+      }
+    }
+  },
+  "Todos": {
+    "resPonse": [
+      {
+        "id": 1,
+        "title": "第一條備忘錄事項"
+      }
+    ]
+  },
+  "Users": {
+    "Signup": {
+      "message": "註冊成功"
+    },
+    "Login": {
+      "message": "登入成功",
+      "status": "加密後的token"
+    },
+    "Profile": {
+      "message": "成功",
+      "status": {
+        "email": "test@gmail.com",
+        "username": "Nains",
+        "password": "123456"
       }
     }
   }
