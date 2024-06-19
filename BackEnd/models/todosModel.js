@@ -1,4 +1,5 @@
-const uuid = require("uuid/v4");
+// const uuid = require("uuid/v4");
+const uuid = require("uuid").v4;
 
 class TodoModel {
   constructor() {
