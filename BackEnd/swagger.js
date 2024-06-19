@@ -5,7 +5,7 @@ const doc = {
     title: "Sample Todos",
     description: "Description",
   },
-  host: "localhost:3000",
+  host: "localhost:2862",
 };
 
 const outputFile = "./swagger-output.json";
