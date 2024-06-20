@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const err = require("../public/js/catchError");
 const usersController = require("../controllers/usersController");
 
 // 1. 註冊
@@ -20,7 +21,7 @@ router.post(
       #swagger.responses[200] = { 
         schema: { $ref: '#/Users/Signup' }
       } */
-  usersController.SignUp
+  err.catch(usersController.SignUp)
 );
 
 // 2. 登入
@@ -40,7 +41,7 @@ router.post(
     #swagger.responses[200] = { 
     schema: { $ref: '#/Users/Login' }
     } */
-  usersController.Login
+  err.catch(usersController.Login)
 );
 
 // 3. 驗證用戶(同時取得用戶資料)
@@ -56,7 +57,7 @@ router.get(
       #swagger.responses[200] = { 
         schema: { $ref: '#/Users/Profile' }
       } */
-  usersController.Profile
+  err.catch(usersController.Profile)
 );
 
 module.exports = router;

@@ -1,18 +1,6 @@
 var express = require("express");
 var router = express.Router();
-const Err = require("../public/js/catchError");
-
-// const catchErr = (asyncFun) => {
-//   return (req, res, next) => {
-//     asyncFun(req, res, next).catch((err) => {
-//       console.log("錯誤捕捉: ", err);
-//       res.status(500).send({
-//         message: "伺服器錯誤",
-//         errMsg: err,
-//       });
-//     }); // Promise
-//   };
-// };
+const err = require("../public/js/catchError");
 
 const errorController = async (req, res) => {
   a; // 未定義
@@ -26,7 +14,7 @@ const errorController = async (req, res) => {
 router.get(
   "/",
   // #swagger.ignore = true
-  Err.catchError(errorController)
+  err.catch(errorController)
 );
 
 module.exports = router;

@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const err = require("../public/js/catchError");
 // 假資料庫
 const apiController = require("../controllers/apiController");
 
@@ -11,7 +12,7 @@ router.get(
       #swagger.responses[200] = { 
         schema: { $ref: '#/Todos/resPonse' }
       } */
-  apiController.getAllTodos
+  err.catch(apiController.getAllTodos)
 );
 
 router.post(
@@ -27,7 +28,7 @@ router.post(
       #swagger.responses[200] = { 
         schema: { $ref: '#/Todos/resPonse' }
       } */
-  apiController.createTodo
+  err.catch(apiController.createTodo)
 );
 
 router.put(
@@ -43,7 +44,7 @@ router.put(
       #swagger.responses[200] = { 
         schema: { $ref: '#/Todos/resPonse' }
       } */
-  apiController.updateTodo
+  err.catch(apiController.updateTodo)
 );
 
 router.delete(
@@ -53,7 +54,7 @@ router.delete(
       #swagger.responses[200] = { 
         schema: { $ref: '#/Todos/resPonse' }
       } */
-  apiController.deleteTodo
+  err.catch(apiController.deleteTodo)
 );
 
 module.exports = router;
