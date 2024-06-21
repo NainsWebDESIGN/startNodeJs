@@ -17,22 +17,22 @@ export class ApiService {
             switch (method) {
                   case "post":
                         return this.http.post(url, body.data)
-                              .map((res: any) => this.checkAPI(res))
-                              .catch(err => this.catchError(err));
+                              .map(this.checkAPI)
+                              .catch(this.catchError);
                   case "put":
                         url = url + body.getway;
                         return this.http.put(url, body.data)
-                              .map((res: any) => this.checkAPI(res))
-                              .catch(err => this.catchError(err));
+                              .map(this.checkAPI)
+                              .catch(this.catchError);
                   case "delete":
                         url = url + body.getway;
                         return this.http.delete(url)
-                              .map((res: any) => this.checkAPI(res))
-                              .catch(err => this.catchError(err));
+                              .map(this.checkAPI)
+                              .catch(this.catchError);
                   default:
                         return this.http.get(url)
-                              .map((res: any) => this.checkAPI(res))
-                              .catch(err => this.catchError(err));
+                              .map(this.checkAPI)
+                              .catch(this.catchError);
             }
 
       }
