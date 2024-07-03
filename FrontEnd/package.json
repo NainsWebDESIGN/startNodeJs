@@ -11,6 +11,10 @@
     "e2e": "ng e2e"
   },
   "private": true,
+  "packageManager": "pnpm@5.18.10",
+  "engines": {
+    "node": "10.16.0"
+  },
   "dependencies": {
     "@angular/animations": "^5.2.0",
     "@angular/common": "^5.2.0",
