@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-// import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
 
 //RxJS
 import 'rxjs/add/operator/map'
@@ -42,8 +42,8 @@ export class ApiService {
       }
 
       catchError(err) {
-            return err || 'Server error';
-            // return Observable.throw(err || 'Server error');
+            // return err || 'Server error';
+            return Observable.throw(err || 'Server error');
       }
 }
 
