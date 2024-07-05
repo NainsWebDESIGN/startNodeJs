@@ -14,6 +14,7 @@ var usersRouter = require("./routes/users");
 
 var app = express();
 
+// 解決 CORS 問題
 app.all("*", (req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "PUT, GET, POST, DELETE, OPTIONS");
