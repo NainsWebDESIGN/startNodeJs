@@ -19,7 +19,7 @@ const checkClickDom = async (page, selector) => {
 
     await page.setViewport({ width: 1500, height: 1000 }); // 設定視窗大小
 
-    await page.goto('http://localhost:1491/', { // 前往這個網址
+    await page.goto('https://frontexample.zeabur.app/', { // 前往這個網址
         waitUntil: 'networkidle2',
     });
 

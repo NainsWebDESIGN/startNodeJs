@@ -2,7 +2,6 @@ const usersModel = require("../models/usersModel");
 
 // 1. 註冊
 exports.SignUp = (req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
   const status = usersModel.SignUp(req);
 
   if (!status) {
@@ -20,7 +19,6 @@ exports.SignUp = (req, res) => {
 
 // 2. 登入
 exports.Login = async (req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
   const status = await usersModel.Login(req);
 
   // 2-4 回應
@@ -51,7 +49,6 @@ exports.Login = async (req, res) => {
 
 // 3. 驗證用戶(同時取得用戶資料)
 exports.Profile = (req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
   const status = usersModel.Profile(req);
 
   // 3-3 回應
