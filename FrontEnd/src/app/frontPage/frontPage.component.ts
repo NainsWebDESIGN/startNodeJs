@@ -30,8 +30,11 @@ export class FrontPageComponent implements OnInit {
     const req = { data: { email: username, password: password } };
     this.api.apiServer('/users/login', "post", req)
       .subscribe(
-        res => this.Authorization = res.status,
-        err => console.log(err),
+        res => {
+          console.log(res);
+          this.Authorization = res.status;
+        },
+        err => console.log("123456", err),
         () => {
           this.signUpPage.emit('login');
         }

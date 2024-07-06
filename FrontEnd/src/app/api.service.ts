@@ -25,7 +25,7 @@ export class ApiService {
                               .map(this.checkAPI)
                               .catch(this.catchError);
                   case "put":
-                        url = url + body.getway;
+                        url = url + `/${body.getway}`;
                         return this.http.put(url, body.data)
                               .map(this.checkAPI)
                               .catch(this.catchError);
@@ -43,11 +43,18 @@ export class ApiService {
       }
 
       checkAPI(res: any) {
-            return (res.success) ? res.data : `Server Error`;
+            switch (res.success) {
+                  case true:
+                        return res.data;
+                  default:
+                        alert(res.message);
+                        return `Server Error`;
+            }
       }
 
       catchError(err) {
-            return Observable.throw(err || `Server error`);
+            alert(err.message);
+            return Observable.throw(err);
       }
 }
 
