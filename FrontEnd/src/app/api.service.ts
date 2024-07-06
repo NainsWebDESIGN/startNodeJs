@@ -17,7 +17,7 @@ export class ApiService {
       }
 
       apiServer(getway: string, method: string = "get", body?: any) {
-            let url = this.Location.includes("backexample.zeabur") ? `${_location}${getway}` : getway;
+            let url = this.Location.includes("front-example.zeabur") ? `${_location}${getway}` : getway;
 
             switch (method) {
                   case "post":
