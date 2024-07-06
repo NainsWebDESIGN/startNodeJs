@@ -2,10 +2,10 @@ const todoModel = require("../models/todosModel");
 
 exports.getAllTodos = (req, res) => {
   const todos = todoModel.getAll();
-  res.send({ status: "success", todos });
+  res.send({ success: true, todos });
 };
 
 exports.createTodo = (req, res) => {
   const newTodo = todoModel.create(req.body);
-  res.send({ status: "success", newTodo });
+  res.send({ success: true, newTodo });
 };
