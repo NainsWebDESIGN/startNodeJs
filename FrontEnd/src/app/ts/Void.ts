@@ -1,1 +1,1 @@
-export const _location = "https://backexample.zeabur.app/api/product";
+export const _location = "https://backexample.zeabur.app";
