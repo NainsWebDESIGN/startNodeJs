@@ -1,0 +1,1 @@
+export const _location = "https://frontexample.zeabur.app/api/product";

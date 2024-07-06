@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { _location } from '@app/ts/Void';
+
 import { Observable } from 'rxjs/Observable';
 
 //RxJS
@@ -8,11 +10,14 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class ApiService {
+      Location: string;
 
-      constructor(private http: HttpClient) { }
+      constructor(private http: HttpClient) {
+            this.Location = window.location.href;
+      }
 
-      apiServer(method: string, body?: any) {
-            let url = `https://backexample.zeabur.app/api/product/`;
+      apiServer(getway: string, method: string, body?: any) {
+            let url = this.Location.includes("https://frontexample.zeabur.app/") ? `${_location}${getway}` : getway;
 
             switch (method) {
                   case "post":
@@ -38,12 +43,11 @@ export class ApiService {
       }
 
       checkAPI(res: any) {
-            return (res.success) ? res.data : `Server Error`;
+            return (res.success) ? res : `Server Error`;
       }
 
       catchError(err) {
-            // return err || 'Server error';
-            return Observable.throw(err || 'Server error');
+            return Observable.throw(err || `Server error`);
       }
 }
 

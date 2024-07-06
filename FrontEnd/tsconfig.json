@@ -1,7 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "",
+    "baseUrl": "src",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
@@ -17,15 +17,24 @@
       "dom"
     ],
     "paths": {
-    "@service": [ "app/service/index.service" ],
-    "@pipe": [ "app/pipe/index.pipe" ],
-    "@app/*": [ "app/*" ],
-    "@ts/*": [ "app/ts/*"],
-    "@comModule": [
-    "app/component.module"
-    ],
-    "@pipeModule": [
-    "app/pipe.module"
-    ]}
+      "@service": [
+        "app/service/index.service"
+      ],
+      "@pipe": [
+        "app/pipe/index.pipe"
+      ],
+      "@app/*": [
+        "app/*"
+      ],
+      "@ts/*": [
+        "app/ts/*"
+      ],
+      "@comModule": [
+        "app/component.module"
+      ],
+      "@pipeModule": [
+        "app/pipe.module"
+      ]
+    }
   }
 }

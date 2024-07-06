@@ -12,12 +12,16 @@ import { ApiService } from './api.service';
 // Pipe && Component
 // import { xxx } from '@pipeModule';
 // import { xxx } from '@comModule';
+import { SignupComponent } from './signup/signup.component';
+import { FrontPageComponent } from './frontPage/frontPage.component';
 
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [		
+    AppComponent,
+      SignupComponent,
+      FrontPageComponent
+   ],
   imports: [
     BrowserModule,
     FormsModule,

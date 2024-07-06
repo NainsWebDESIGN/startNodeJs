@@ -1,0 +1,24 @@
+<h1>Memorandum:</h1>
+<!-- <div class="btn">
+  <input type="text" [(ngModel)]="changeNumber" placeholder="欲修改之編號">
+  <input type="text" [(ngModel)]="Change" placeholder="欲修改之事項">
+  <button (click)='postServer("put")'>修改</button>
+  <input type="text" [(ngModel)]="Add" placeholder="備忘事項">
+  <button (click)='postServer("post")'>新增</button>
+  <input type="text" [(ngModel)]="Delete" placeholder="欲刪除之編號">
+  <button (click)='postServer("delete")'>刪除</button>
+</div> -->
+<ul>
+  <li *ngFor="let item of todoList">
+    事項 {{item.id}} : {{item.title}}
+  </li>
+</ul>
+<footer>
+  <p>Login:</p>
+  <span>帳號：</span>
+  <input type="text" placeholder="帳號" [(ngModel)]="username" (keyup.enter)="login()">
+  <span>密碼：</span>
+  <input type="text" placeholder="密碼" [(ngModel)]="password" (keyup.enter)="login()">
+  <button (click)="changeSignupPage()">註冊</button>
+  <button (click)="login()">登入</button>
+</footer>
