@@ -1,18 +1,19 @@
-var createError = require("http-errors");
-var express = require("express");
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
+const createError = require("http-errors");
+const express = require("express");
+const path = require("path");
+const cookieParser = require("cookie-parser");
+const logger = require("morgan");
+const cors = require("cors");
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger-output.json");
 
-var indexRouter = require("./routes/index");
-var errorRouter = require("./routes/errorRouter");
-var apiRouter = require("./routes/api");
-var todoRouter = require("./routes/todoRouter");
-var usersRouter = require("./routes/users");
+const indexRouter = require("./routes/index");
+const errorRouter = require("./routes/errorRouter");
+const apiRouter = require("./routes/api");
+const todoRouter = require("./routes/todoRouter");
+const usersRouter = require("./routes/users");
 
-var app = express();
+const app = express();
 
 // 解決 CORS 問題
 // app.all("*", (req, res, next) => {
@@ -26,6 +27,8 @@ var app = express();
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
+
+app.use(cors());
 
 app.use(logger("dev"));
 app.use(express.json());
