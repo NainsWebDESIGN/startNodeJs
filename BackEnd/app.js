@@ -12,6 +12,7 @@ const errorRouter = require("./routes/errorRouter");
 const apiRouter = require("./routes/api");
 const todoRouter = require("./routes/todoRouter");
 const usersRouter = require("./routes/users");
+const newebPay = require("./routes/newebpay");
 
 const app = express();
 app.use(cors());
@@ -40,6 +41,7 @@ app.use("/error", errorRouter);
 app.use("/api", apiRouter);
 app.use("/todos", todoRouter);
 app.use("/users", usersRouter);
+app.use("/webPay", newebPay);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // catch 404 and forward to error handler
