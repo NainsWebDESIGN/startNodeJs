@@ -1,2 +1,3 @@
-<app-frontPage *ngIf="!signupPage" (signUpPage)="signupPage = $event"></app-frontPage>
-<app-signup *ngIf="signupPage" (signUpPage)="signupPage = $event"></app-signup>
+<app-frontPage *ngIf="page == 'front'" (signUpPage)="page = $event"></app-frontPage>
+<app-signup *ngIf="page == 'signup'" (signUpPage)="page = $event"></app-signup>
+<app-login *ngIf="page == 'login'" (signUpPage)="page = $event"></app-login>

@@ -16,8 +16,8 @@ export class ApiService {
             this.Location = window.location.href;
       }
 
-      apiServer(getway: string, method: string, body?: any) {
-            let url = this.Location.includes("https://frontexample.zeabur.app/") ? `${_location}${getway}` : getway;
+      apiServer(getway: string, method: string = "get", body?: any) {
+            let url = this.Location.includes("backexample.zeabur") ? `${_location}${getway}` : getway;
 
             switch (method) {
                   case "post":
@@ -30,7 +30,7 @@ export class ApiService {
                               .map(this.checkAPI)
                               .catch(this.catchError);
                   case "delete":
-                        url = url + body.getway;
+                        url = url + `/${body.getway}`;
                         return this.http.delete(url)
                               .map(this.checkAPI)
                               .catch(this.catchError);
@@ -43,7 +43,7 @@ export class ApiService {
       }
 
       checkAPI(res: any) {
-            return (res.success) ? res : `Server Error`;
+            return (res.success) ? res.data : `Server Error`;
       }
 
       catchError(err) {

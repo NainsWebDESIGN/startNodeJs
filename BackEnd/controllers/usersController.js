@@ -2,16 +2,20 @@ const usersModel = require("../models/usersModel");
 
 // 1. 註冊
 exports.SignUp = (req, res) => {
-  const status = usersModel.SignUp(req);
+  const password = usersModel.SignUp(req);
 
-  if (!status) {
+  if (!password) {
     res.status(400).send({ success: false, message: "用戶已存在" });
   }
+  console.log(JSON.stringify(password));
 
   // 1-3 回應
   res.status(201).send({
     success: true,
-    message: "註冊成功",
+    data: {
+      message: "註冊成功"
+    }
+
   });
 
   res.end();
@@ -26,20 +30,19 @@ exports.Login = async (req, res) => {
     case "用戶不存在":
       res.status(401).send({
         success: false,
-        message: "用戶不存在",
+        data: { message: "用戶不存在", }
       });
       break;
     case "登入錯誤":
       res.status(401).send({
         success: false,
-        message: "登入錯誤",
+        data: { message: "登入錯誤", }
       });
       break;
     default:
       res.send({
         success: true,
-        message: "登入成功",
-        status,
+        data: { message: "登入成功", status }
       });
       break;
   }
@@ -56,19 +59,18 @@ exports.Profile = (req, res) => {
     case "未登入":
       res.status(401).send({
         success: false,
-        message: "未登入",
+        data: { message: "未登入", }
       });
       break;
     case "驗證錯誤":
       res.status(401).send({
         success: true,
-        message: "驗證錯誤",
+        data: { message: "驗證錯誤", }
       });
       break;
     default:
       res.send({
-        message: "成功",
-        status,
+        data: { message: "成功", status }
       });
       break;
   }

@@ -14,13 +14,15 @@ import { ApiService } from './api.service';
 // import { xxx } from '@comModule';
 import { SignupComponent } from './signup/signup.component';
 import { FrontPageComponent } from './frontPage/frontPage.component';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
-  declarations: [		
+  declarations: [			
     AppComponent,
       SignupComponent,
-      FrontPageComponent
+      FrontPageComponent,
+      LoginComponent
    ],
   imports: [
     BrowserModule,

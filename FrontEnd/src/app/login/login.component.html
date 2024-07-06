@@ -1,0 +1,16 @@
+<h1>Memorandum:</h1>
+<div class="btn">
+  <input type="text" [(ngModel)]="changeNumber" placeholder="欲修改之編號">
+  <input type="text" [(ngModel)]="Change" placeholder="欲修改之事項">
+  <button (click)='postServer("put")'>修改</button>
+  <input type="text" [(ngModel)]="Add" placeholder="備忘事項">
+  <button (click)='postServer("post")'>新增</button>
+  <input type="text" [(ngModel)]="Delete" placeholder="欲刪除之編號">
+  <button (click)='postServer("delete")'>刪除</button>
+</div>
+<ul>
+  <li *ngFor="let item of todoList">
+    事項 {{item.id}} : {{item.title}}
+  </li>
+</ul>
+<button (click)='signUpPage.emit("front")'>登出</button>

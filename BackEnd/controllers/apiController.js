@@ -1,31 +1,31 @@
 const apiModel = require("../models/apiModel");
 
 exports.getAllTodos = (req, res) => {
-  const data = apiModel.getAll();
-  res.send({ success: true, data });
+  const todos = apiModel.getAll();
+  res.send({ success: true, data: todos });
   res.end();
 };
 
 exports.createTodo = (req, res) => {
-  const data = apiModel.create(req.body);
-  res.send({ success: true, data });
+  const todos = apiModel.create(req.body);
+  res.send({ success: true, data: todos });
   res.end();
 };
 
 exports.updateTodo = (req, res) => {
-  const data = apiModel.update(req);
+  const todos = apiModel.update(req);
   res.send({
     success: true,
-    data,
+    data: todos,
   });
   res.end();
 };
 
 exports.deleteTodo = (req, res) => {
-  const data = apiModel.delete(req.params);
+  const todos = apiModel.delete(req.params);
   res.send({
     success: true,
-    data,
+    data: todos,
   });
   res.end();
 };

@@ -5,8 +5,10 @@ class UsersModel {
   constructor() {
     this.key = "Nains";
     this.users = {
-      username: "123",
-      password: "",
+      "NainsTest@gmail.com": {
+        password: "",
+        username: "123",
+      }
     };
   }
 
