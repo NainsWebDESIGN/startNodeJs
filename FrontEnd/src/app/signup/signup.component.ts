@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { ApiService } from '@app/api.service';
+import { ApiService } from '@app/service/api.service';
 
 @Component({
   selector: 'app-signup',

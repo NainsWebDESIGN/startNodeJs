@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+// const uuid = require("uuid").v4;
 
 class UsersModel {
   constructor() {
@@ -8,7 +9,7 @@ class UsersModel {
       "NainsTest@gmail.com": {
         password: "",
         username: "123",
-      }
+      },
     };
   }
 
@@ -75,6 +76,9 @@ class UsersModel {
         return "驗證錯誤";
       }
 
+      // let cret = user.iat + "_" + uuid();
+      // user.cret = cret;
+      // this.users[user.email].cret = cret;
       return user;
     });
   }

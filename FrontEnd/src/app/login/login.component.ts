@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { ApiService } from '@app/api.service';
+import { ApiService } from '@app/service/api.service';
+// import { ObserverService } from '@app/service/observer';
 
 @Component({
   selector: 'app-login',
@@ -24,9 +25,19 @@ export class LoginComponent implements OnInit {
       this.changeNumber = undefined;
     }
   }
-  constructor(private api: ApiService) { }
+  constructor(
+    private api: ApiService,
+    // private share: ObserverService
+  ) { }
 
   ngOnInit() {
+    // this.share.obAuthorization.subscribe(value => {
+    //   this.api.apiServer("/users/profile", "get", { Authorization: value })
+    //     .subscribe(
+    //       res => console.log(res),
+    //       err => console.log(err)
+    //     )
+    // });
     this.postServer();
   }
 

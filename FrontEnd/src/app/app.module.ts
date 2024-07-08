@@ -7,7 +7,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 
 // Service
-import { ApiService } from './api.service';
+import { ApiService } from './service/api.service';
+import { ObserverService } from './service/observer';
 
 // Pipe && Component
 // import { xxx } from '@pipeModule';
@@ -18,18 +19,18 @@ import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
-  declarations: [			
+  declarations: [
     AppComponent,
-      SignupComponent,
-      FrontPageComponent,
-      LoginComponent
-   ],
+    SignupComponent,
+    FrontPageComponent,
+    LoginComponent
+  ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule
   ],
-  providers: [ApiService],
+  providers: [ApiService, ObserverService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
