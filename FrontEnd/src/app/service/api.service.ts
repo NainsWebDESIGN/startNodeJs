@@ -6,7 +6,9 @@ import { Observable } from 'rxjs/Observable';
 
 //RxJS
 import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/retry';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/shareReplay';
 
 @Injectable()
 export class ApiService {
@@ -21,34 +23,32 @@ export class ApiService {
 
             switch (method) {
                   case "post":
-                        return this.http.post(url, body.data)
-                              .map(this.checkAPI)
-                              .catch(this.catchError);
+                        return this.finalAPI(this.http.post(url, body.data));
                   case "put":
                         url = url + `/${body.getway}`;
-                        return this.http.put(url, body.data)
-                              .map(this.checkAPI)
-                              .catch(this.catchError);
+                        return this.finalAPI(this.http.put(url, body.data));
                   case "delete":
                         url = url + `/${body.getway}`;
-                        return this.http.delete(url)
-                              .map(this.checkAPI)
-                              .catch(this.catchError);
+                        return this.finalAPI(this.http.delete(url));
                   default:
                         if (body) {
                               let options = {
                                     headers: new HttpHeaders().set("Authorization", body.Authorization)
                               }
-                              return this.http.get(url, options)
-                                    .map(this.checkAPI)
-                                    .catch(this.catchError);
+                              return this.finalAPI(this.http.get(url, options));
                         } else {
-                              return this.http.get(url)
-                                    .map(this.checkAPI)
-                                    .catch(this.catchError);
+                              return this.finalAPI(this.http.get(url));
                         }
             }
 
+      }
+
+      finalAPI(res: Observable<any>) {
+            return res
+                  .retry(2)
+                  .map(this.checkAPI)
+                  .catch(this.catchError)
+                  .shareReplay();
       }
 
       checkAPI(res: any) {

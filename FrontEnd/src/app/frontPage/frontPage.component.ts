@@ -13,13 +13,9 @@ export class FrontPageComponent implements OnInit {
     private share: ObserverService
   ) { }
   @Output() signUpPage = new EventEmitter();
-  todoList = [];
   username: string = "";
   password: string = "";
-  finalTodo = {
-    next: res => this.todoList = res,
-    error: err => console.log(err)
-  };
+  todoList = [];
   ngOnInit() {
     this.share.obAuthorization.subscribe(value => {
       if (value !== null) {
@@ -50,9 +46,6 @@ export class FrontPageComponent implements OnInit {
         },
         err => console.log(err)
       );
-  }
-  changeSignupPage() {
-    this.signUpPage.emit('signup');
   }
 
 }

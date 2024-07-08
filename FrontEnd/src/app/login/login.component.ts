@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ApiService } from '@app/service/api.service';
-// import { ObserverService } from '@app/service/observer';
+import { ObserverService } from '@app/service/observer';
 
 @Component({
   selector: 'app-login',
@@ -14,30 +14,19 @@ export class LoginComponent implements OnInit {
   changeNumber: number;
   Change: string = "";
   Delete: string = "";
-  finalTodo = {
-    next: res => {
-      console.log(res);
-      this.todoList = res;
-    },
-    error: error => console.error(error),
-    complete: () => {
-      ["Add", "Change", "Delete"].forEach((item: string) => this[item] = "");
-      this.changeNumber = undefined;
-    }
-  }
   constructor(
     private api: ApiService,
-    // private share: ObserverService
+    private share: ObserverService
   ) { }
 
   ngOnInit() {
-    // this.share.obAuthorization.subscribe(value => {
-    //   this.api.apiServer("/users/profile", "get", { Authorization: value })
-    //     .subscribe(
-    //       res => console.log(res),
-    //       err => console.log(err)
-    //     )
-    // });
+    this.share.obAuthorization.subscribe(value => {
+      this.api.apiServer("/users/profile", "get", { Authorization: value })
+        .subscribe(
+          res => console.log(res),
+          err => console.log(err)
+        )
+    });
     this.postServer();
   }
 
@@ -57,6 +46,13 @@ export class LoginComponent implements OnInit {
         break;
     }
 
-    this.api.apiServer('/api/product', _name, req).subscribe(this.finalTodo);
+    this.api.apiServer('/api/product', _name, req).subscribe(
+      res => this.todoList = res,
+      error => console.error(error),
+      () => {
+        ["Add", "Change", "Delete"].forEach((item: string) => this[item] = "");
+        this.changeNumber = undefined;
+      }
+    );
   }
 }
