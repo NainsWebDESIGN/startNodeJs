@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { _location } from '@app/ts/Void';
 
 import { Observable } from 'rxjs/Observable';
@@ -35,9 +35,18 @@ export class ApiService {
                               .map(this.checkAPI)
                               .catch(this.catchError);
                   default:
-                        return this.http.get(url)
-                              .map(this.checkAPI)
-                              .catch(this.catchError);
+                        if (body) {
+                              let options = {
+                                    headers: new HttpHeaders().set("Authorization", body.Authorization)
+                              }
+                              return this.http.get(url, options)
+                                    .map(this.checkAPI)
+                                    .catch(this.catchError);
+                        } else {
+                              return this.http.get(url)
+                                    .map(this.checkAPI)
+                                    .catch(this.catchError);
+                        }
             }
 
       }
@@ -47,6 +56,7 @@ export class ApiService {
                   case true:
                         return res.data;
                   default:
+                        console.log(res);
                         alert(res.message);
                         return `Server Error`;
             }
@@ -54,6 +64,7 @@ export class ApiService {
 
       catchError(err) {
             alert(err.message);
+            console.log(err);
             return Observable.throw(err);
       }
 }

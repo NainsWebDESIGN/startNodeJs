@@ -13,9 +13,8 @@ exports.SignUp = (req, res) => {
   res.status(201).send({
     success: true,
     data: {
-      message: "註冊成功"
-    }
-
+      message: "註冊成功",
+    },
   });
 
   res.end();
@@ -30,19 +29,19 @@ exports.Login = async (req, res) => {
     case "用戶不存在":
       res.status(401).send({
         success: false,
-        data: { message: "用戶不存在", }
+        data: { message: "用戶不存在" },
       });
       break;
     case "登入錯誤":
       res.status(401).send({
         success: false,
-        data: { message: "登入錯誤", }
+        data: { message: "登入錯誤" },
       });
       break;
     default:
       res.send({
         success: true,
-        data: { message: "登入成功", status }
+        data: { message: "登入成功", status },
       });
       break;
   }
@@ -59,18 +58,19 @@ exports.Profile = (req, res) => {
     case "未登入":
       res.status(401).send({
         success: false,
-        data: { message: "未登入", }
+        data: { message: "未登入" },
       });
       break;
     case "驗證錯誤":
       res.status(401).send({
         success: true,
-        data: { message: "驗證錯誤", }
+        data: { message: "驗證錯誤" },
       });
       break;
     default:
       res.send({
-        data: { message: "成功", status }
+        success: true,
+        data: { message: "成功", status },
       });
       break;
   }

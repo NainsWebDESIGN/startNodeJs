@@ -36,6 +36,12 @@ export class FrontPageComponent implements OnInit {
         },
         err => console.log("123456", err),
         () => {
+          let re = { Authorization: this.Authorization };
+          this.api.apiServer("/users/profile", "get", re)
+            .subscribe(
+              res => console.log(res),
+              err => console.log(err)
+            )
           this.signUpPage.emit('login');
         }
       );
