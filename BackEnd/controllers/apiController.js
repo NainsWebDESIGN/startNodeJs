@@ -1,4 +1,5 @@
 const apiModel = require("../models/apiModel");
+const usersModel = require("../models/usersModel");
 
 exports.getAllTodos = (req, res) => {
   const todos = apiModel.getAll();

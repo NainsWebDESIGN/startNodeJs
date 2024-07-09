@@ -79,9 +79,13 @@ class UsersModel {
       let cret = user.iat + "_" + uuid();
       user.cret = cret;
       this.users[user.email].cret = cret;
+      console.log("user", user);
+      console.log("this", this.users);
       return user;
     });
   }
+
+  Check(iat) {}
 }
 
 module.exports = new UsersModel();
