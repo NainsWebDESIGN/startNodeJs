@@ -6,7 +6,8 @@
     "start": "node ./bin/www",
     "swa": "node ./swagger.js",
     "pup": "node ./puppeteerExample.js",
-    "che": "node ./cheerioExample.js"
+    "che": "node ./cheerioExample.js",
+    "data": "node ./testDatabase.js"
   },
   "packageManager": "npm@10.7.0",
   "engines": {
