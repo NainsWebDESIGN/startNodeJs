@@ -9,7 +9,8 @@ const {
   } = process.env, // 取得環境變數
   mysql = require("mysql"),
   connection = mysql.createConnection({
-    host: `${MYSQL_HOST}:${MYSQL_PORT}`,
+    host: MYSQL_HOST,
+    port: MYSQL_PORT,
     user: MYSQL_USERNAME,
     password: MYSQL_PASSWORD,
     database: MYSQL_DATABASE,
@@ -17,7 +18,9 @@ const {
 
 connection.connect();
 
-connection.query("SELECT * FROM todos", function (error, results, fields) {
-  if (error) throw error;
-  console.log("The solution is: ", results[0].solution);
+connection.query("SELECT * FROM todos", (err, data) => {
+  if (err) throw err;
+  console.log(data);
 });
+
+connection.end();
