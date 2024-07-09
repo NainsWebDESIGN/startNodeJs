@@ -1,11 +1,15 @@
+const database = require("../public/js/database.js");
 class ApiModel {
   constructor() {
-    this.todos = require("../public/json/data.json");
+    this.todos;
   }
 
   //取得全部
   getAll() {
-    return this.todos;
+    return database
+      .query("SELECT * FROM todos")
+      .then((res) => res)
+      .catch((err) => console.log("err", err));
   }
 
   //新增資料

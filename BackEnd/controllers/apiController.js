@@ -1,8 +1,9 @@
 const apiModel = require("../models/apiModel");
 const usersModel = require("../models/usersModel");
 
-exports.getAllTodos = (req, res) => {
-  const todos = apiModel.getAll();
+exports.getAllTodos = async (req, res) => {
+  const todos = await apiModel.getAll();
+
   res.send({ success: true, data: todos });
   res.end();
 };

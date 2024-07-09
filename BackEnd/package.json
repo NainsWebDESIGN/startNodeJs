@@ -7,7 +7,7 @@
     "swa": "node ./swagger.js",
     "pup": "node ./puppeteerExample.js",
     "che": "node ./cheerioExample.js",
-    "data": "node ./testDatabase.js"
+    "data": "node ./public/js/database.js"
   },
   "packageManager": "npm@10.7.0",
   "engines": {
