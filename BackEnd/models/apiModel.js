@@ -8,20 +8,31 @@ class ApiModel {
   getAll() {
     return database
       .query("SELECT * FROM todos")
-      .then((res) => res)
+      .then((res) => {
+        this.todos = res;
+        return res;
+      })
       .catch((err) => console.log("err", err));
   }
 
   //新增資料
   create(todo) {
     const { title } = todo;
-    const newTodo = {
-      title,
-      id: this.todos.length == 0 ? 1 : this.todos[this.todos.length - 1].id + 1,
-    };
-    this.todos.push(newTodo);
+    return database
+      .query(`INSERT INTO todos VALUES(NULL, ${title})`)
+      .then((res) => {
+        console.log(res);
+        // this.todos.push(res);
+        return res;
+      })
+      .catch((err) => console.log("err", err));
+    // const newTodo = {
+    //   title,
+    //   id: this.todos.length == 0 ? 1 : this.todos[this.todos.length - 1].id + 1,
+    // };
+    // this.todos.push(newTodo);
 
-    return this.todos;
+    // return this.todos;
   }
 
   // 更新資料
