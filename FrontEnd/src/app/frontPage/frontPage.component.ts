@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ApiService } from '@app/service/api.service';
-import { ObserverService } from '@app/service/observer';
+import { UidService } from '@app/service/uid.service';
 
 @Component({
   selector: 'app-frontPage',
@@ -10,23 +10,13 @@ import { ObserverService } from '@app/service/observer';
 export class FrontPageComponent implements OnInit {
   constructor(
     private api: ApiService,
-    private share: ObserverService
+    private uidStatus: UidService
   ) { }
   @Output() signUpPage = new EventEmitter();
   username: string = "";
   password: string = "";
   todoList = [];
   ngOnInit() {
-    this.share.obAuthorization.subscribe(value => {
-      if (value !== null) {
-        this.api.apiServer("/users/profile", "get", { Authorization: value })
-          .subscribe(
-            res => console.log(res),
-            err => console.log(err),
-            () => this.signUpPage.emit('login')
-          )
-      }
-    });
     this.api.apiServer('/api/product').subscribe(
       res => this.todoList = res,
       err => console.log(err)
@@ -39,12 +29,9 @@ export class FrontPageComponent implements OnInit {
     const req = { data: { email: username, password: password } };
     this.api.apiServer('/users/login', "post", req)
       .subscribe(
-        res => {
-          if (res !== null) {
-            this.share.changeObserver({ item: 'Authorization', value: res.status });
-          }
-        },
-        err => console.log(err)
+        res => this.uidStatus.Authorization = res.status,
+        err => console.log(err),
+        () => this.signUpPage.emit('login')
       );
   }
 

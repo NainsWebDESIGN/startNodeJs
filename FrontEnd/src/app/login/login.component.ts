@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ApiService } from '@app/service/api.service';
-import { ObserverService } from '@app/service/observer';
+import { UidService } from '@app/service/uid.service';
 
 @Component({
   selector: 'app-login',
@@ -16,21 +16,19 @@ export class LoginComponent implements OnInit {
   Delete: string = "";
   constructor(
     private api: ApiService,
-    private share: ObserverService
+    private uidStatus: UidService
   ) { }
 
   ngOnInit() {
-    this.share.obAuthorization.subscribe(value => {
-      this.api.apiServer("/users/profile", "get", { Authorization: value })
-        .subscribe(
-          res => console.log(res),
-          err => console.log(err)
-        )
-    });
+    this.api.apiServer("/users/profile", "get", { Authorization: this.uidStatus.Authorization })
+      .subscribe(
+        res => this.uidStatus.uid = res.status.cret,
+        err => console.log(err)
+      )
     this.postServer();
   }
 
-  postServer(_name?: string) {
+  postServer(_name: string = "get") {
 
     let req;
 
@@ -48,10 +46,12 @@ export class LoginComponent implements OnInit {
 
     this.api.apiServer('/api/product', _name, req).subscribe(
       res => {
+        if (res !== "Server Error") {
+          this.todoList = res;
+        }
         console.log(res);
-        // this.todoList = res;
       },
-      error => console.error(error),
+      error => console.log(error),
       () => {
         ["Add", "Change", "Delete"].forEach((item: string) => this[item] = "");
         this.changeNumber = undefined;

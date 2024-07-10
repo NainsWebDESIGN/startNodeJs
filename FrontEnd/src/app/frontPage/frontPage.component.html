@@ -7,7 +7,7 @@
 <footer>
   <p>Login:</p>
   <span>帳號：</span>
-  <input type="text" placeholder="信箱" [(ngModel)]="username" (keyup.enter)="login()">
+  <input type="email" placeholder="信箱" [(ngModel)]="username" (keyup.enter)="login()">
   <span>密碼：</span>
   <input type="text" placeholder="密碼" [(ngModel)]="password" (keyup.enter)="login()">
   <button (click)="signUpPage.emit('signup')">註冊</button>

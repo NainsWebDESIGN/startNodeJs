@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 // Service
 import { ApiService } from './service/api.service';
 import { ObserverService } from './service/observer';
+import { UidService } from './service/uid.service';
 
 // Pipe && Component
 // import { xxx } from '@pipeModule';
@@ -30,7 +31,7 @@ import { LoginComponent } from './login/login.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [ApiService, ObserverService],
+  providers: [ApiService, ObserverService, UidService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
