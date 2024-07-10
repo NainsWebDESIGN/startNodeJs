@@ -30,6 +30,7 @@ connection.connect();
 
 exports.query = (need) => {
   return new Promise((resolve, reject) => {
+    console.log(connection.state);
     connection.query(need, (err, data) => {
       if (err) throw err;
       switch (data) {
