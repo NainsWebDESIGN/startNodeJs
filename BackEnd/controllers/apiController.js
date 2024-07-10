@@ -8,8 +8,8 @@ exports.getAllTodos = async (req, res) => {
   res.end();
 };
 
-exports.createTodo = (req, res) => {
-  const todos = apiModel.create(req.body);
+exports.createTodo = async (req, res) => {
+  const todos = await apiModel.create(req.body);
   res.send({ success: true, data: todos });
   res.end();
 };

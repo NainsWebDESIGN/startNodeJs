@@ -47,7 +47,10 @@ export class LoginComponent implements OnInit {
     }
 
     this.api.apiServer('/api/product', _name, req).subscribe(
-      res => this.todoList = res,
+      res => {
+        console.log(res);
+        // this.todoList = res;
+      },
       error => console.error(error),
       () => {
         ["Add", "Change", "Delete"].forEach((item: string) => this[item] = "");

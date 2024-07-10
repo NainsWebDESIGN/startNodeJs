@@ -21,7 +21,7 @@ class ApiModel {
     return database
       .query(`INSERT INTO todos VALUES(NULL, ${title})`)
       .then((res) => {
-        console.log(res);
+        console.log("createRes", res);
         // this.todos.push(res);
         return res;
       })
