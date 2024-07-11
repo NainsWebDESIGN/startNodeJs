@@ -5,10 +5,10 @@
     "description": "學習 Node.js 的心路歷程",
     "version": "1.0.0"
   },
-  "host": "localhost:2862",
+  "host": "backexample.zebur.app",
   "basePath": "/",
   "schemes": [
-    "http"
+    "https"
   ],
   "paths": {
     "/api/product": {

@@ -1,11 +1,16 @@
+const { serve } = require("swagger-ui-express");
+
 const swaggerAutogen = require("swagger-autogen")();
+
 
 const doc = {
   info: {
     title: "Nains API",
     description: "學習 Node.js 的心路歷程",
   },
-  host: "localhost:2862",
+  basePath: "/",
+  schemes: ["https"],
+  host: "backexample.zebur.app",
   Todos: {
     resPonse: [{ id: 1, title: "第一條備忘錄事項" }],
   },
