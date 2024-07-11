@@ -20,11 +20,6 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.api.apiServer("/users/profile", "get", { Authorization: this.uidStatus.Authorization })
-      .subscribe(
-        res => this.uidStatus.uid = res.status.cret,
-        err => console.log(err)
-      )
     this.postServer();
   }
 
@@ -34,13 +29,13 @@ export class LoginComponent implements OnInit {
 
     switch (_name) {
       case "post":
-        req = { data: { title: this.Add } };
+        req = { data: { title: this.Add, uuid: this.uidStatus.uid } };
         break;
       case "put":
-        req = { getway: this.changeNumber, data: { title: this.Change } };
+        req = { getway: this.changeNumber, data: { title: this.Change, uuid: this.uidStatus.uid } };
         break;
       case "delete":
-        req = { getway: this.Delete };
+        req = { getway: this.Delete, uuid: this.uidStatus.uid };
         break;
     }
 

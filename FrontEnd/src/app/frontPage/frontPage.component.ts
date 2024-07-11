@@ -29,7 +29,7 @@ export class FrontPageComponent implements OnInit {
     const req = { data: { email: username, password: password } };
     this.api.apiServer('/users/login', "post", req)
       .subscribe(
-        res => this.uidStatus.Authorization = res.status,
+        res => this.uidStatus.uid = res.status,
         err => console.log(err),
         () => this.signUpPage.emit('login')
       );

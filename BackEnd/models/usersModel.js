@@ -1,6 +1,8 @@
+
+require("dotenv").config(); // 載入.env 檔案
+const { jwtKey } = process.env; // 取得環境變數
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const uuid = require("uuid").v4;
 
 class UsersModel {
   constructor() {
@@ -55,7 +57,7 @@ class UsersModel {
         email,
         username: user.username,
       },
-      this.key
+      jwtKey
     ); // key原則上會儲存在環境變數
 
     return token;
@@ -71,21 +73,14 @@ class UsersModel {
     }
 
     // 3-2 進行驗證
-    return jwt.verify(token, this.key, (err, user) => {
+    return jwt.verify(token, jwtKey, (err, user) => {
       if (err) {
         return "驗證錯誤";
       }
 
-      let cret = user.iat + "_" + uuid();
-      user.cret = cret;
-      this.users[user.email].cret = cret;
-      // console.log("user", user);
-      // console.log("this", this.users);
       return user;
     });
   }
-
-  Check(iat) {}
 }
 
 module.exports = new UsersModel();

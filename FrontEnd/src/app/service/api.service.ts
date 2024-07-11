@@ -20,25 +20,22 @@ export class ApiService {
 
       apiServer(getway: string, method: string = "get", body?: any) {
             let url = this.Location.includes("front-example.zeabur") ? `${_location}${getway}` : getway;
+            let options;
+            if (getway.includes("/api") && method !== "get") {
+                  options = { headers: new HttpHeaders().set("Authorization", body.data.uuid) }
+            }
 
             switch (method) {
                   case "post":
-                        return this.finalAPI(this.http.post(url, body.data));
+                        return this.finalAPI(this.http.post(url, body.data, options));
                   case "put":
                         url = url + `/${body.getway}`;
-                        return this.finalAPI(this.http.put(url, body.data));
+                        return this.finalAPI(this.http.put(url, body.data, options));
                   case "delete":
                         url = url + `/${body.getway}`;
-                        return this.finalAPI(this.http.delete(url));
+                        return this.finalAPI(this.http.delete(url, options));
                   default:
-                        if (body) {
-                              let options = {
-                                    headers: new HttpHeaders().set("Authorization", body.Authorization)
-                              }
-                              return this.finalAPI(this.http.get(url, options));
-                        } else {
-                              return this.finalAPI(this.http.get(url));
-                        }
+                        return this.finalAPI(this.http.get(url));
             }
 
       }
