@@ -19,6 +19,7 @@ exports.query = (need) => {
     user: MYSQL_USERNAME,
     password: MYSQL_PASSWORD,
     database: MYSQL_DATABASE,
+    multipleStatements: true, // 允許多個SQL語句執行
   })
   connection.connect();
 

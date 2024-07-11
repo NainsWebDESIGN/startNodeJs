@@ -16,13 +16,12 @@ exports.getAllTodos = async (req, res) => {
 
 exports.createTodo = async (req, res) => {
   const create = await apiModel.create(req.body);
-  switch (create) {
-    case "OK":
-      const todos = await apiModel.getAll();
-      res.send(final(true, todos));
+  switch (create.status) {
+    case "Error":
+      res.status(400).send(final(false, create.Msg));
       break;
     default:
-      res.send(final(false, create));
+      res.send(final(true, create));
       break;
   }
   res.end();
@@ -30,37 +29,26 @@ exports.createTodo = async (req, res) => {
 
 exports.updateTodo = async (req, res) => {
   const update = await apiModel.update(req);
-  switch (update) {
+  switch (update.status) {
     case "OK":
-      const todos = await apiModel.getAll();
-      res.send(final(true, todos));
+      res.status(400).send(final(false, update.Msg));
       break;
     default:
-      res.send(final(false, update));
+      res.send(final(true, update));
       break;
   }
   res.end();
 };
 
 exports.deleteTodo = async (req, res) => {
-  const data = await apiModel.getAll().then(async res => {
-    const _delete = await apiModel.delete(req.params, res);
-    console.log("_delete", _delete);
-
-    switch (_delete) {
-      case "OK":
-        const todos = await apiModel.getAll();
-        return final(true, todos);
-      // res.send(final(true, todos));
-      // break;
-      default:
-        return final(false, _delete);
-      // res.send(final(false, _delete));
-      // break;
-    }
-    // res.end();
-  })
-
-  res.send(data);
+  const _delete = await apiModel.delete(req.params);
+  switch (_delete) {
+    case "Error":
+      res.status(400).send(final(false, _delete.Msg));
+      break;
+    default:
+      res.send(final(true, _delete));
+      break;
+  }
   res.end();
 };

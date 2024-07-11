@@ -1,7 +1,13 @@
 const database = require("../public/js/database.js");
 class ApiModel {
   constructor() {
-    this.todos;
+  }
+
+  final = async el => {
+    return el ? await this.getAll() : JSON.stringify({
+      status: "Error",
+      Msg: el.message
+    });
   }
 
   //取得全部
@@ -17,7 +23,7 @@ class ApiModel {
     const { title } = todo;
     return database
       .query(`INSERT INTO todos VALUES(NULL, '${title}')`)
-      .then((res) => (res.affectedTows !== 0) ? "OK" : res.message)
+      .then((res) => this.final(res.affectedTows !== 0))
       .catch((err) => console.log("err", err));
   }
 
@@ -28,36 +34,28 @@ class ApiModel {
 
     return database
       .query(`UPDATE todos SET title='${title}' WHERE id='${id}'`)
-      .then((res) => (res.changedRows !== 0) ? "OK" : res.message)
-      .catch((err) => console.log("err", err));
-  }
-
-  truncate() {
-    return database
-      .query('TRUNCATE TABLE todos')
-      .then((res) => "OK")
+      .then((res) => this.final(res.changedRows !== 0))
       .catch((err) => console.log("err", err));
   }
 
   // 刪除資料
-  async delete(params, data) {
-    const trun = this.truncate();
+  async delete(params) {
     const { id } = params;
-    //! 如要刪除多個可以從 id=${id} 設置成 id IN(${id.join(",")})
-    data = data.filter(item => item.id !== id).map(item => `(NULL, '${item.title}')`);
+    const data = await this.truncate(id);
+    const box = data.map(item => `(NULL, '${item.title}')`);
 
-    console.log("data", data);
+    return database
+      .query(`INSERT INTO todos VALUES ${box.join(",")}`)
+      .then((res) => this.final(res.affectedTows !== 0))
+      .catch((err) => console.log("err", err));
+  }
 
-    return trun.finally(() => {
-      return database
-        .query(`INSERT INTO todos VALUES ${data.join(",")}`)
-        .then((res) => {
-          console.log(res);
-          return (res.affectedRows !== 0) ? "OK" : res.message;
-        })
-        .catch((err) => console.log("err", err));
-    })
-    return "OK";
+  truncate(id) {
+    const sql = `DELETE FROM todos WHERE id='${id}';SELECT * FROM todos;TRUNCATE TABLE todos;`;
+    return database
+      .query(sql)
+      .then((res) => (res[0].affectedRows !== 0) ? res[1] : this.final(false))
+      .catch((err) => console.log("err", err));
   }
 }
 
