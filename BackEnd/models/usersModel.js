@@ -3,16 +3,12 @@ require("dotenv").config(); // 載入.env 檔案
 const { jwtKey } = process.env; // 取得環境變數
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const uuid = require("uuid").v4;
 
 class UsersModel {
   constructor() {
-    this.key = "Nains";
-    this.users = {
-      "NainsTest@gmail.com": {
-        password: "",
-        username: "123",
-      },
-    };
+    this.token = [];
+    this.users;
   }
 
   // 1. 註冊
@@ -60,15 +56,23 @@ class UsersModel {
       jwtKey
     ); // key原則上會儲存在環境變數
 
+    jwt.verify(token, jwtKey, (err, user) => {
+      if (err) {
+        return "驗證錯誤";
+      }
+      this.token.push(`${token}?uuid=${uuid()}`); // 儲存token
+    });
+
     return token;
   }
 
   // 3. 驗證用戶(同時取得用戶資料)
   Profile(req) {
-    const token = req.headers["authorization"];
+    const Authorization = req.headers["authorization"];
+    const token = Authorization.split("?uuid=")[0];
 
     // 3-1 驗證用戶有送token
-    if (!token) {
+    if (!token || !this.token.includes(Authorization)) {
       return "未登入";
     }
 
@@ -80,6 +84,19 @@ class UsersModel {
 
       return user;
     });
+  }
+
+  // 4. 登出
+  Logout(req) {
+    const Authorization = req.headers["authorization"];
+    let index = this.token.indexOf(Authorization);
+    switch (index) {
+      case -1:
+        return "未登入";
+      default:
+        this.token.splice(index, 1); // 刪除token
+        return "OK";
+    }
   }
 }
 

@@ -55,3 +55,18 @@ exports.Profile = (req, res) => {
 
   res.end();
 };
+
+exports.Logout = (req, res) => {
+  const status = usersModel.Profile(req);
+  const msg = { message: status };
+
+  switch (status) {
+    case "未登入":
+      res.status(401).send(formData.form(false, msg));
+      break;
+    default:
+      res.send(formData.form(true, msg));
+      break;
+  }
+  res.end();
+}
