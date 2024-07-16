@@ -1,6 +1,6 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { ApiService } from '@app/service/api.service';
-import { UidService } from '@app/service/uid.service';
+import { Component, OnInit } from '@angular/core';
+import { TodosService } from '@service/todos.service';
+import { LoginService } from '@service/login.service';
 
 @Component({
   selector: 'app-frontPage',
@@ -9,27 +9,22 @@ import { UidService } from '@app/service/uid.service';
 })
 export class FrontPageComponent implements OnInit {
   constructor(
-    private api: ApiService,
-    private uidStatus: UidService
+    private todos: TodosService,
+    public islogin: LoginService
   ) { }
-  @Output() signUpPage = new EventEmitter();
   username: string = "";
   password: string = "";
   todoList;
   ngOnInit() {
-    this.todoList = this.api.apiServer('/api/product');
+    this.todos.getTodos('/api/product');
+    this.todoList = this.todos.todos$;
   }
   login() {
     const username = this.username.trim(),
       password = this.password.trim();
 
     const req = { data: { email: username, password: password } };
-    this.api.apiServer('/users/login', "post", req)
-      .subscribe(
-        res => this.uidStatus.uid = res.status,
-        err => console.log(err),
-        () => this.signUpPage.emit('login')
-      );
+    this.islogin.login(req);
   }
 
 }

@@ -2,7 +2,7 @@
 <div class="btn">
   <!-- <input type="text" [(ngModel)]="changeNumber" placeholder="欲修改之編號"> -->
   <select [(ngModel)]="changeNumber">
-    <ng-container *ngFor="let changeID of todoList | async | todos;let i = index;">
+    <ng-container *ngFor="let changeID of todoList | async | todos">
       <option *ngIf="!changeID" selected>0</option>
       <option *ngIf="changeID && index == 0" selected [value]="changeID.id">
         {{changeID.id}}
@@ -10,9 +10,9 @@
       <option *ngIf="changeID">{{changeID.id}}</option>
     </ng-container>
   </select>
-  <input type="text" [(ngModel)]="Change" placeholder="欲修改之事項">
+  <input type="text" [(ngModel)]="Change" placeholder="欲修改之事項" (keyup.enter)="postServer('put')">
   <button (click)='postServer("put")'>修改</button>
-  <input type="text" [(ngModel)]="Add" placeholder="備忘事項">
+  <input type="text" [(ngModel)]="Add" placeholder="備忘事項" (keyup.enter)="postServer('post')">
   <button (click)='postServer("post")'>新增</button>
   <!-- <input type="text" [(ngModel)]="Delete" placeholder="欲刪除之編號"> -->
   <select [(ngModel)]="Delete">
@@ -31,4 +31,4 @@
     事項 {{todo.id}} : {{todo.title}}
   </li>
 </ul>
-<button (click)='signUpPage.emit("front")'>登出</button>
+<button (click)='islogin.changePage("front")'>登出</button>

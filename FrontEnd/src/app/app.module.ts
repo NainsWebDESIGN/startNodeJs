@@ -9,7 +9,8 @@ import { AppComponent } from './app.component';
 // Service
 import { ApiService } from './service/api.service';
 import { UidService } from './service/uid.service';
-
+import { TodosService } from '@service/todos.service';
+import { LoginService } from '@service/login.service';
 // Pipe && Component
 import { PipeModule } from '@pipeModule';
 // import { xxx } from '@comModule';
@@ -31,7 +32,7 @@ import { LoginComponent } from './login/login.component';
     HttpClientModule,
     PipeModule
   ],
-  providers: [ApiService, UidService],
+  providers: [ApiService, UidService, TodosService, LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

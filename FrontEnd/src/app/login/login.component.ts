@@ -1,6 +1,8 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { ApiService } from '@app/service/api.service';
-import { UidService } from '@app/service/uid.service';
+import { UidService } from '@service/uid.service';
+import { TodosService } from '@service/todos.service';
+import { LoginService } from '@service/login.service';
+import { Observable } from 'rxjs';
 
 import 'rxjs/add/operator/shareReplay';
 
@@ -10,23 +12,23 @@ import 'rxjs/add/operator/shareReplay';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  @Output() signUpPage = new EventEmitter();
-  todoList;
+  todoList: Observable<any>;
   Add: string = "";
-  changeNumber: number;
+  changeNumber: number = 1;
   Change: string = "";
   Delete: string = "";
   constructor(
-    private api: ApiService,
-    private uidStatus: UidService
+    private uidStatus: UidService,
+    private todos: TodosService,
+    public islogin: LoginService
   ) { }
 
   ngOnInit() {
     this.postServer();
+    this.todoList = this.todos.todos$;
   }
 
   postServer(_name: string = "get") {
-
     let req;
 
     switch (_name) {
@@ -37,10 +39,12 @@ export class LoginComponent implements OnInit {
         req = { getway: this.changeNumber, data: { title: this.Change, uuid: this.uidStatus.uid } };
         break;
       case "delete":
-        req = { getway: this.Delete, uuid: this.uidStatus.uid };
+        req = { getway: this.Delete, data: { uuid: this.uidStatus.uid } };
         break;
     }
 
-    this.todoList = this.api.apiServer('/api/product', _name, req);
+    this.todos.getTodos('/api/product', _name, req);
+    ["Add", "Change", "Delete"].forEach(item => this[item] = "");
+    this.changeNumber = 1;
   }
 }

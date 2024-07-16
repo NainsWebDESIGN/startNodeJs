@@ -4,4 +4,4 @@
     用戶密碼 : <input type="text" [(ngModel)]="password" placeholder="用戶密碼" (keyup.enter)="signup()">
 </div>
 <button (click)='signup()'>完成</button>
-<button (click)='signUpPage.emit("front")'>離開</button>
+<button (click)='islogin.changePage("front")'>離開</button>

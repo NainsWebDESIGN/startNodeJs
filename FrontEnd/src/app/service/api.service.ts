@@ -23,7 +23,7 @@ export class ApiService {
             let url, options;
 
             if (getway.includes("/api") && method !== "get") {
-                  options = { headers: new HttpHeaders({ "Authorization": body.uuid }) }
+                  options = { headers: new HttpHeaders({ "Authorization": body.data.uuid }) }
             }
 
             switch (method) {
@@ -50,6 +50,7 @@ export class ApiService {
       }
 
       checkAPI(res: APIResponse) {
+            console.log(res);
             switch (res.success) {
                   case true:
                         return res.data;
