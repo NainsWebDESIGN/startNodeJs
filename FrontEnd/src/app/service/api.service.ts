@@ -22,7 +22,7 @@ export class ApiService {
       apiServer(getway: string, method: string = "get", body?: any) {
             let url, options;
 
-            if (getway.includes("/api") && method !== "get") {
+            if ((getway.includes("/api") && method !== "get") || getway.includes("logout")) {
                   options = { headers: new HttpHeaders({ "Authorization": body.data.uuid }) }
             }
 

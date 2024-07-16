@@ -60,4 +60,19 @@ router.get(
   err.catch(usersController.Profile)
 );
 
+router.post(
+  '/logout',
+  /* 	#swagger.tags = ['Users']
+      #swagger.description = '驗證，加密後的token須放在headers的Authorization'
+      #swagger.parameters['headers'] = {
+        in: 'Authorization',
+        type: 'string',
+        description: '加密後的Token' 
+      }
+      #swagger.responses[200] = { 
+        schema: { $ref: '#/Users/Profile' }
+      } */
+  err.catch(usersController.Logout)
+)
+
 module.exports = router;

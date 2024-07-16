@@ -55,16 +55,16 @@ class UsersModel {
       jwtKey
     ); // key原則上會儲存在環境變數
 
-    const uid = uuid();
+    const uid = `${token}?uuid=${uuid()}`;
 
     jwt.verify(token, jwtKey, (err, user) => {
       if (err) {
         return "驗證錯誤";
       }
-      this.token.push(`${token}?uuid=${uid}`); // 儲存token
+      this.token.push(uid); // 儲存token
     });
-
-    return `${token}?uuid=${uid}`;
+    
+    return uid;
   }
 
   // 3. 驗證用戶(同時取得用戶資料)

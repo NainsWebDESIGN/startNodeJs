@@ -31,4 +31,4 @@
     事項 {{todo.id}} : {{todo.title}}
   </li>
 </ul>
-<button (click)='islogin.changePage("front")'>登出</button>
+<button (click)='islogin.logout({data: {uuid: uidStatus.uid}})'>登出</button>

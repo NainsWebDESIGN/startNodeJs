@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   Change: string = "";
   Delete: string = "";
   constructor(
-    private uidStatus: UidService,
+    public uidStatus: UidService,
     private todos: TodosService,
     public islogin: LoginService
   ) { }

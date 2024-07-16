@@ -57,7 +57,7 @@ exports.Profile = (req, res) => {
 };
 
 exports.Logout = (req, res) => {
-  const status = usersModel.Profile(req);
+  const status = usersModel.Logout(req);
   const msg = { message: status };
 
   switch (status) {
