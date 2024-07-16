@@ -50,7 +50,6 @@ export class ApiService {
       }
 
       checkAPI(res: APIResponse) {
-            console.log(res);
             switch (res.success) {
                   case true:
                         return res.data;
