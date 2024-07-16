@@ -55,15 +55,16 @@ class UsersModel {
       jwtKey
     ); // key原則上會儲存在環境變數
 
+    const uid = uuid();
+
     jwt.verify(token, jwtKey, (err, user) => {
       if (err) {
         return "驗證錯誤";
       }
-      this.token.push(`${token}?uuid=${uuid()}`); // 儲存token
-      console.log(this.token);
+      this.token.push(`${token}?uuid=${uid}`); // 儲存token
     });
 
-    return token;
+    return `${token}?uuid=${uid}`;
   }
 
   // 3. 驗證用戶(同時取得用戶資料)
@@ -73,8 +74,6 @@ class UsersModel {
 
     // 3-1 驗證用戶有送token
     if (!token || !this.token.includes(Authorization)) {
-      console.log("token", this.token);
-      console.log("Authorization", token);
       return "未登入";
     }
 

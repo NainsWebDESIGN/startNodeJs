@@ -42,7 +42,5 @@ export class LoginComponent implements OnInit {
     }
 
     this.todoList = this.api.apiServer('/api/product', _name, req);
-
-    console.log(this.todoList);
   }
 }

@@ -2,12 +2,12 @@
 <div class="btn">
   <!-- <input type="text" [(ngModel)]="changeNumber" placeholder="欲修改之編號"> -->
   <select [(ngModel)]="changeNumber">
-    <ng-container *ngFor="let changeID of (todoList | async | todos);let i = index;">
-      <option *ngIf="(todoList | async | todos).length == 0" selected>0</option>
-      <option *ngIf="(todoList | async | todos).length != 0 && index == 0" selected [value]="changeID.id">
+    <ng-container *ngFor="let changeID of todoList | async | todos;let i = index;">
+      <option *ngIf="!changeID" selected>0</option>
+      <option *ngIf="changeID && index == 0" selected [value]="changeID.id">
         {{changeID.id}}
       </option>
-      <option *ngIf="(todoList | async | todos).length != 0">{{changeID.id}}</option>
+      <option *ngIf="changeID">{{changeID.id}}</option>
     </ng-container>
   </select>
   <input type="text" [(ngModel)]="Change" placeholder="欲修改之事項">
@@ -16,12 +16,12 @@
   <button (click)='postServer("post")'>新增</button>
   <!-- <input type="text" [(ngModel)]="Delete" placeholder="欲刪除之編號"> -->
   <select [(ngModel)]="Delete">
-    <ng-container *ngFor="let changeID of (todoList | async | todos);let i = index;">
-      <option *ngIf="(todoList | async | todos).length == 0" selected>0</option>
-      <option *ngIf="(todoList | async | todos).length != 0 && index == 0" selected [value]="changeID.id">
+    <ng-container *ngFor="let changeID of todoList | async | todos;let i = index;">
+      <option *ngIf="!changeID" selected>0</option>
+      <option *ngIf="changeID && index == 0" selected [value]="changeID.id">
         {{changeID.id}}
       </option>
-      <option *ngIf="(todoList | async | todos).length != 0">{{changeID.id}}</option>
+      <option *ngIf="changeID">{{changeID.id}}</option>
     </ng-container>
   </select>
   <button (click)='postServer("delete")'>刪除</button>

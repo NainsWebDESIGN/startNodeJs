@@ -21,7 +21,6 @@ export class ApiService {
       constructor(private http: HttpClient) { }
       apiServer(getway: string, method: string = "get", body?: any) {
             let url, options;
-            console.log(getway, method, body);
 
             if (getway.includes("/api") && method !== "get") {
                   options = { headers: new HttpHeaders({ "Authorization": body.uuid }) }
@@ -64,7 +63,7 @@ export class ApiService {
       catchError(err) {
             alert(err.message);
             console.log(err);
-            return Observable.throw(err);
+            return Observable.throw(err.error.data.message || err);
       }
 }
 
