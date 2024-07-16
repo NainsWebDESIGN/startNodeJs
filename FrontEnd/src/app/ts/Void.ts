@@ -1,1 +1,0 @@
-export const _location = "https://back-example.zeabur.app";

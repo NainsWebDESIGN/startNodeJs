@@ -9,7 +9,7 @@ import { UidService } from '@app/service/uid.service';
 })
 export class LoginComponent implements OnInit {
   @Output() signUpPage = new EventEmitter();
-  todoList = [];
+  todoList;
   Add: string = "";
   changeNumber: number;
   Change: string = "";
@@ -39,18 +39,6 @@ export class LoginComponent implements OnInit {
         break;
     }
 
-    this.api.apiServer('/api/product', _name, req).subscribe(
-      res => {
-        if (res !== "Server Error") {
-          this.todoList = res;
-        }
-        console.log(res);
-      },
-      error => console.log(error),
-      () => {
-        ["Add", "Change", "Delete"].forEach((item: string) => this[item] = "");
-        this.changeNumber = undefined;
-      }
-    );
+    this.todoList = this.api.apiServer('/api/product', _name, req);
   }
 }

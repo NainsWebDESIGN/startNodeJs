@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { _location } from '@app/ts/Void';
+import _url from '@app/ts/location';
 
 import { Observable } from 'rxjs/Observable';
 
@@ -10,32 +10,33 @@ import 'rxjs/add/operator/retry';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/shareReplay';
 
+export interface APIResponse {
+      success: boolean
+      data: any
+      message: string
+}
+
 @Injectable()
 export class ApiService {
-      Location: string;
-
-      constructor(private http: HttpClient) {
-            this.Location = window.location.href;
-      }
-
+      constructor(private http: HttpClient) { }
       apiServer(getway: string, method: string = "get", body?: any) {
-            let url = this.Location.includes("front-example.zeabur") ? `${_location}${getway}` : getway;
-            let options;
+            let url, options;
+
             if (getway.includes("/api") && method !== "get") {
-                  options = { headers: new HttpHeaders().set("Authorization", body.data.uuid) }
+                  options = { headers: new HttpHeaders({ "Authorization": body.data.uuid }) }
             }
 
             switch (method) {
                   case "post":
-                        return this.finalAPI(this.http.post(url, body.data, options));
+                        return this.finalAPI(this.http.post(_url + getway, body.data, options));
                   case "put":
-                        url = url + `/${body.getway}`;
+                        url = `${_url + getway}/${body.getway}`;
                         return this.finalAPI(this.http.put(url, body.data, options));
                   case "delete":
-                        url = url + `/${body.getway}`;
+                        url = `${_url + getway}/${body.getway}`;
                         return this.finalAPI(this.http.delete(url, options));
                   default:
-                        return this.finalAPI(this.http.get(url));
+                        return this.finalAPI(this.http.get(_url + getway));
             }
 
       }
@@ -48,7 +49,7 @@ export class ApiService {
                   .shareReplay();
       }
 
-      checkAPI(res: any) {
+      checkAPI(res: APIResponse) {
             switch (res.success) {
                   case true:
                         return res.data;

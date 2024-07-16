@@ -9,7 +9,7 @@
   <button (click)='postServer("delete")'>刪除</button>
 </div>
 <ul>
-  <li *ngFor="let item of todoList">
+  <li *ngFor="let item of todoList | async | todos">
     事項 {{item.id}} : {{item.title}}
   </li>
 </ul>

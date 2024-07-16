@@ -15,12 +15,9 @@ export class FrontPageComponent implements OnInit {
   @Output() signUpPage = new EventEmitter();
   username: string = "";
   password: string = "";
-  todoList = [];
+  todoList;
   ngOnInit() {
-    this.api.apiServer('/api/product').subscribe(
-      res => this.todoList = res,
-      err => console.log(err)
-    );
+    this.todoList = this.api.apiServer('/api/product');
   }
   login() {
     const username = this.username.trim(),

@@ -8,11 +8,10 @@ import { AppComponent } from './app.component';
 
 // Service
 import { ApiService } from './service/api.service';
-import { ObserverService } from './service/observer';
 import { UidService } from './service/uid.service';
 
 // Pipe && Component
-// import { xxx } from '@pipeModule';
+import { PipeModule } from '@pipeModule';
 // import { xxx } from '@comModule';
 import { SignupComponent } from './signup/signup.component';
 import { FrontPageComponent } from './frontPage/frontPage.component';
@@ -29,9 +28,10 @@ import { LoginComponent } from './login/login.component';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    PipeModule
   ],
-  providers: [ApiService, ObserverService, UidService],
+  providers: [ApiService, UidService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

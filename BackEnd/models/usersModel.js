@@ -1,4 +1,3 @@
-
 require("dotenv").config(); // 載入.env 檔案
 const { jwtKey } = process.env; // 取得環境變數
 const jwt = require("jsonwebtoken");
@@ -8,7 +7,7 @@ const uuid = require("uuid").v4;
 class UsersModel {
   constructor() {
     this.token = [];
-    this.users;
+    this.users = {};
   }
 
   // 1. 註冊

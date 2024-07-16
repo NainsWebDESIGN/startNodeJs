@@ -17,14 +17,9 @@ export class SignupComponent implements OnInit {
   signup() {
     let req = { data: { email: this.email, username: this.username, password: this.password } };
     this.api.apiServer('/users/signup', 'post', req).subscribe(
-      res => {
-        ["email", "username", "password"].forEach(item => this[item] = "");
-        this.signUpPage.emit('front');
-      },
+      res => ["email", "username", "password"].forEach(item => this[item] = ""),
       err => console.log(err),
-      () => {
-        ["email", "username", "password"].forEach(item => this[item] = "");
-      }
+      () => this.signUpPage.emit('front')
     );
   }
 
