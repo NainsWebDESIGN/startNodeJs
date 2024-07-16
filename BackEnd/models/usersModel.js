@@ -60,6 +60,7 @@ class UsersModel {
         return "驗證錯誤";
       }
       this.token.push(`${token}?uuid=${uuid()}`); // 儲存token
+      console.log(this.token);
     });
 
     return token;
@@ -72,6 +73,8 @@ class UsersModel {
 
     // 3-1 驗證用戶有送token
     if (!token || !this.token.includes(Authorization)) {
+      console.log("token", this.token);
+      console.log("Authorization", token);
       return "未登入";
     }
 

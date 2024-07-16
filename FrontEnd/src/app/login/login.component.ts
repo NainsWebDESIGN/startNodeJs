@@ -2,6 +2,8 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ApiService } from '@app/service/api.service';
 import { UidService } from '@app/service/uid.service';
 
+import 'rxjs/add/operator/shareReplay';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -40,5 +42,7 @@ export class LoginComponent implements OnInit {
     }
 
     this.todoList = this.api.apiServer('/api/product', _name, req);
+
+    console.log(this.todoList);
   }
 }

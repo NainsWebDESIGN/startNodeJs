@@ -21,9 +21,10 @@ export class ApiService {
       constructor(private http: HttpClient) { }
       apiServer(getway: string, method: string = "get", body?: any) {
             let url, options;
+            console.log(getway, method, body);
 
             if (getway.includes("/api") && method !== "get") {
-                  options = { headers: new HttpHeaders({ "Authorization": body.data.uuid }) }
+                  options = { headers: new HttpHeaders({ "Authorization": body.uuid }) }
             }
 
             switch (method) {
