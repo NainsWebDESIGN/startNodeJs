@@ -3,6 +3,7 @@ const { jwtKey } = process.env; // 取得環境變數
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const uuid = require("uuid").v4;
+const mysql = require("../public/js/database.js");
 
 class UsersModel {
   constructor() {
@@ -13,6 +14,12 @@ class UsersModel {
   // 1. 註冊
   async SignUp(req) {
     const { email, password, username } = req.body;
+
+    const user = await mysql
+      .query(`SELECT * FROM users WHERE username='${username}'`)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+    console.log(user);
 
     if (this.users[email]) {
       return false;
@@ -63,7 +70,7 @@ class UsersModel {
       }
       this.token.push(uid); // 儲存token
     });
-    
+
     return uid;
   }
 
