@@ -2,16 +2,16 @@ const usersModel = require("../models/usersModel");
 const formData = require("../public/js/dataFrom");
 
 // 1. 註冊
-exports.SignUp = (req, res) => {
-  const password = usersModel.SignUp(req);
+exports.SignUp = async (req, res) => {
+  const password = await usersModel.SignUp(req);
+  // console.log(JSON.stringify(password));
 
   if (!password) {
     res.status(400).send(formData.form(false, { message: "用戶已存在" }));
+  } else {
+    // 1-3 回應
+    res.status(201).send(formData.form(true, { message: "註冊成功" }));
   }
-  console.log(JSON.stringify(password));
-
-  // 1-3 回應
-  res.status(201).send(formData.form(true, { message: "註冊成功" }));
 
   res.end();
 };
@@ -69,4 +69,4 @@ exports.Logout = (req, res) => {
       break;
   }
   res.end();
-}
+};

@@ -15,63 +15,68 @@ class UsersModel {
   async SignUp(req) {
     const { email, password, username } = req.body;
 
-    const user = await mysql
-      .query(`SELECT * FROM users WHERE username='${username}'`)
-      .then((res) => console.log(res))
+    return mysql
+      .query(`SELECT * FROM users WHERE email='${email}'`)
+      .then(async (res) => {
+        if (res.length !== 0) return false;
+        // 1-1 加密
+        return await bcrypt.hash(password, 10);
+      })
+      .then((hashPassword) =>
+        !hashPassword
+          ? false
+          : // 1-2 儲存
+            mysql
+              .query(
+                `INSERT INTO users VALUES ('${username}', '${email}', '${hashPassword}')`
+              )
+              .then((res) => res.affectedTows !== 0)
+              .catch((err) => console.log(err))
+      )
       .catch((err) => console.log(err));
-    console.log(user);
-
-    if (this.users[email]) {
-      return false;
-    }
-
-    // 1-1 加密
-    const hashPassword = await bcrypt.hash(password, 10);
-
-    // 1-2 儲存
-    this.users[email] = {
-      password: hashPassword,
-      username,
-    };
-
-    // 1-3 回應
-    return true;
   }
 
   // 2. 登入
   async Login(req) {
     const { email, password } = req.body;
 
-    // 2-1 驗證用戶是否存在
-    const user = this.users[email];
-    if (!user) {
-      return "用戶不存在";
-    }
+    return mysql
+      .query(`SELECT * FROM users WHERE email='${email}'`)
+      .then(async (res) => {
+        console.log(res);
 
-    // 2-2 密碼驗證                 密碼, 加密後的密碼
-    if (!(await bcrypt.compare(password, user.password))) {
-      return "登入錯誤";
-    }
+        // 2-1 驗證用戶是否存在
+        // const user = this.users[email];
+        if (res.length == 0) {
+          return "用戶不存在";
+        }
 
-    // 2-3 JWT 簽章
-    const token = jwt.sign(
-      {
-        email,
-        username: user.username,
-      },
-      jwtKey
-    ); // key原則上會儲存在環境變數
+        // 2-2 密碼驗證                 密碼, 加密後的密碼
+        if (!(await bcrypt.compare(password, res.password))) {
+          return "登入錯誤";
+        }
 
-    const uid = `${token}?uuid=${uuid()}`;
+        // 2-3 JWT 簽章
+        const token = jwt.sign(
+          {
+            email,
+            username: res.username,
+          },
+          jwtKey
+        ); // key原則上會儲存在環境變數
 
-    jwt.verify(token, jwtKey, (err, user) => {
-      if (err) {
-        return "驗證錯誤";
-      }
-      this.token.push(uid); // 儲存token
-    });
+        const uid = `${token}?uuid=${uuid()}`;
 
-    return uid;
+        jwt.verify(token, jwtKey, (err, user) => {
+          if (err) {
+            return "驗證錯誤";
+          }
+          this.token.push(uid); // 儲存token
+        });
+
+        return uid;
+      })
+      .catch((err) => console.log(err));
   }
 
   // 3. 驗證用戶(同時取得用戶資料)
