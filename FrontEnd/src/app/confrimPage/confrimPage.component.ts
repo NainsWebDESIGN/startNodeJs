@@ -41,7 +41,7 @@ export class ConfrimPageComponent implements OnInit {
           AtomicsItemDesc: res.AtomicsItemDesc,
           Email: res.Email
         }
-        this.api.apiServer(res.PayGateWay, 'post', req)
+        this.api.apiServer("https://ccore.newebpay.com/MPG/mpg_gateway", 'post', req)
           .subscribe(_res => console.log(_res))
       },
       err => console.log(err)
