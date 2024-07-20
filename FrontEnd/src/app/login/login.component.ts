@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UidService } from '@service/uid.service';
 import { TodosService } from '@service/todos.service';
 import { LoginService } from '@service/login.service';
