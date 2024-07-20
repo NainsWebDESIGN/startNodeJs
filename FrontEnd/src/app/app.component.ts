@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-// import { Router } from '@angular/Router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,11 +8,11 @@ import { Component, Inject } from '@angular/core';
 })
 export class AppComponent {
   constructor(
-    // @Inject(Router) private router: Router
+    @Inject(Router) private router: Router
   ) { }
   ngOnInit() {
-    // if (window.location.href.includes('confrim')) {
-    //   this.router.navigate(['/front/todos']);
-    // }
+    if (window.location.href.includes('confrim')) {
+      this.router.navigate(['/front/todos']);
+    }
   }
 }
