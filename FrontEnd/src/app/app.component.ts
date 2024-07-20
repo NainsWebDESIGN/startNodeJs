@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { Router } from '@angular/Router';
 
 @Component({
@@ -7,7 +7,7 @@ import { Router } from '@angular/Router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(private router: Router) { }
+  constructor(@Inject(Router) private router: Router) { }
   ngOnInit() {
     if (window.location.href.includes('confrim')) {
       this.router.navigate(['/front/todos']);
