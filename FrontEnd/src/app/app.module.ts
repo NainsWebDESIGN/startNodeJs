@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/Router';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from '@app/app.routing';
 
@@ -40,7 +41,8 @@ import { ConfrimPageComponent } from './confrimPage/confrimPage.component';
     FormsModule,
     HttpClientModule,
     PipeModule,
-    AppRoutingModule
+    AppRoutingModule,
+    RouterModule
   ],
   providers: [
     ApiService,
