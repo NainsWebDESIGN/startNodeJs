@@ -43,23 +43,20 @@ export class ConfrimPageComponent implements OnInit {
           ItemDesc: "ItemDesc",
           Email: "Email",
         };
-        let test = {};
         const form = document.createElement('form');
         form.method = 'POST';
         form.action = res.PayGateWay;
 
         Object.keys(req).forEach(key => {
-          test[key] = res[key];
           const input = document.createElement('input');
           input.type = 'hidden';
           input.name = req[key];
           input.value = res[key];
           form.appendChild(input);
         })
-        console.log(test);
 
-        // document.body.appendChild(form);
-        // form.submit();
+        document.body.appendChild(form);
+        form.submit();
       },
       err => console.log(err)
     )
