@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { Todos } from '@pipe/app.pipe';
+import { Todos, AsObject } from '@pipe/app.pipe';
 
 
 @NgModule({
@@ -9,10 +9,10 @@ import { Todos } from '@pipe/app.pipe';
         CommonModule
     ],
     declarations: [
-        Todos
+        Todos, AsObject
     ],
     exports: [
-        Todos
+        Todos, AsObject
     ]
 })
 export class PipeModule { }

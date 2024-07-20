@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { LoginService } from '@service/login.service';
 import emailRule from '@ts/email';
 
@@ -11,7 +12,7 @@ export class SignupComponent implements OnInit {
   email: string = "";
   username: string = "";
   password: string = "";
-  constructor(public islogin: LoginService) { }
+  constructor(public islogin: LoginService, public router: Router) { }
   ngOnInit() {
   }
   signup() {

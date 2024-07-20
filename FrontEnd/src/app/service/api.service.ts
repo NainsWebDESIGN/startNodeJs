@@ -61,9 +61,9 @@ export class ApiService {
       }
 
       catchError(err) {
-            alert(err.error.data.message);
+            alert(err.error.message);
             console.log(err);
-            return Observable.throw(err.error.data.message || err);
+            return Observable.throw(err.error.message || err);
       }
 }
 

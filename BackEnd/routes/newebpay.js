@@ -1,9 +1,8 @@
 var express = require("express");
 var router = express.Router();
+const err = require("../public/js/catchError");
+const webPayController = require("../controllers/newebpayController");
 
-router.get("/", function (req, res) {
-    // #swagger.ignore = true
-    res.render("index", { title: "NewebPay" });
-});
+router.post("/order", err.catch(webPayController.createOrder));
 
 module.exports = router;

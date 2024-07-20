@@ -11,3 +11,15 @@ export class Todos implements PipeTransform {
   }
 
 }
+
+@Pipe({
+  name: 'asObject'
+})
+export class AsObject implements PipeTransform {
+
+  transform(value, key?: string) {
+    if (!value) return "undefined";
+    return value[key];
+  }
+
+}

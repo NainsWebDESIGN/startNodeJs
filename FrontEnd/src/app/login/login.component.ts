@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { UidService } from '@service/uid.service';
-import { TodosService } from '@service/todos.service';
+import { Router } from '@angular/router';
+// import { TodosService } from '@service/todos.service';
 import { LoginService } from '@service/login.service';
-import { Observable } from 'rxjs';
-
-import 'rxjs/add/operator/shareReplay';
 
 @Component({
   selector: 'app-login',
@@ -12,39 +9,24 @@ import 'rxjs/add/operator/shareReplay';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  todoList: Observable<any>;
-  Add: string = "";
-  changeNumber: number = 1;
-  Change: string = "";
-  Delete: string = "";
   constructor(
-    public uidStatus: UidService,
-    private todos: TodosService,
-    public islogin: LoginService
+    // private todos: TodosService,
+    public islogin: LoginService,
+    public router: Router
   ) { }
-
+  username: string = "";
+  password: string = "";
+  // todoList;
   ngOnInit() {
-    this.postServer();
-    this.todoList = this.todos.todos$;
+    // this.todos.getTodos('/api/product');
+    // this.todoList = this.todos.todos$;
+  }
+  login() {
+    const username = this.username.trim(),
+      password = this.password.trim();
+
+    const req = { data: { email: username, password: password } };
+    this.islogin.login(req);
   }
 
-  postServer(_name: string = "get") {
-    let req;
-
-    switch (_name) {
-      case "post":
-        req = { data: { title: this.Add, uuid: this.uidStatus.uid } };
-        break;
-      case "put":
-        req = { getway: this.changeNumber, data: { title: this.Change, uuid: this.uidStatus.uid } };
-        break;
-      case "delete":
-        req = { getway: this.Delete, data: { uuid: this.uidStatus.uid } };
-        break;
-    }
-
-    this.todos.getTodos('/api/product', _name, req);
-    ["Add", "Change", "Delete"].forEach(item => this[item] = "");
-    this.changeNumber = 1;
-  }
 }

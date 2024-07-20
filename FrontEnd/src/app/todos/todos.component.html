@@ -1,0 +1,32 @@
+<div class="btn">
+  <select [(ngModel)]="changeNumber">
+    <ng-container *ngFor="let changeID of todoList | async | todos">
+      <option *ngIf="!changeID" selected>0</option>
+      <option *ngIf="changeID && index == 0" selected [value]="changeID.id">
+        {{changeID.id}}
+      </option>
+      <option *ngIf="changeID">{{changeID.id}}</option>
+    </ng-container>
+  </select>
+  <input type="text" [(ngModel)]="Change" placeholder="欲修改之事項" (keyup.enter)="postServer('put')">
+  <button (click)='postServer("put")'>修改</button>
+  <input type="text" [(ngModel)]="Add" placeholder="備忘事項" (keyup.enter)="postServer('post')">
+  <button (click)='postServer("post")'>新增</button>
+  <select [(ngModel)]="Delete">
+    <ng-container *ngFor="let changeID of todoList | async | todos;let i = index;">
+      <option *ngIf="!changeID" selected>0</option>
+      <option *ngIf="changeID && index == 0" selected [value]="changeID.id">
+        {{changeID.id}}
+      </option>
+      <option *ngIf="changeID">{{changeID.id}}</option>
+    </ng-container>
+  </select>
+  <button (click)='postServer("delete")'>刪除</button>
+</div>
+<br><br>
+<hr><br>
+<input type="text" [(ngModel)]="Email" placeholder="email">
+<input type="text" [(ngModel)]="Price" placeholder="價格">
+<input type="text" [(ngModel)]="ItemDesc" placeholder="商品名稱">
+<button (click)='test()'>測試</button><br><br>
+<button (click)='islogin.logout({data: {uuid: uidStatus.uid}})'>登出</button>

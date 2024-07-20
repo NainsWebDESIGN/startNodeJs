@@ -1,15 +1,7 @@
 <h1>Memorandum:</h1>
 <ul>
-  <li *ngFor="let item of todoList | async | todos">
-    事項 {{item.id}} : {{item.title}}
+  <li *ngFor="let todo of todoList | async | todos">
+    事項 {{todo.id}} : {{todo.title}}
   </li>
 </ul>
-<footer>
-  <p>Login:</p>
-  <span>帳號：</span>
-  <input type="email" placeholder="信箱" [(ngModel)]="username" (keyup.enter)="login()">
-  <span>密碼：</span>
-  <input type="text" placeholder="密碼" [(ngModel)]="password" (keyup.enter)="login()">
-  <button (click)="islogin.changePage('signup')">註冊</button>
-  <button (click)="login()">登入</button>
-</footer>
+<router-outlet></router-outlet>

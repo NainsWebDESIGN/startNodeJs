@@ -1,19 +1,18 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { ApiService } from '@service/api.service';
 import { UidService } from '@service/uid.service';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class LoginService {
-    private page = 'front';
-    private pageSubject = new BehaviorSubject<string>(this.page);
-    page$ = this.pageSubject.asObservable();
-    constructor(private api: ApiService, private uuid: UidService) { }
+    constructor(private api: ApiService, private uuid: UidService, private router: Router) { }
     login(body: any) {
         this.api.apiServer('/users/login', "post", body).subscribe(res => {
+            console.log(res);
             if (res.message === "登入成功") {
                 this.uuid.uid = res.status;
-                this.changePage('login');
+                this.router.navigate(['/front/todos']);
             } else {
                 alert(res.message);
             }
@@ -22,7 +21,7 @@ export class LoginService {
     signup(body: any) {
         this.api.apiServer('/users/signup', 'post', body).subscribe(res => {
             if (res.message === "註冊成功") {
-                this.changePage('front');
+                this.router.navigate(['/login']);
             } else {
                 alert(res.message);
             }
@@ -32,14 +31,10 @@ export class LoginService {
         this.api.apiServer('/users/logout', 'post', body).subscribe(res => {
             if (res.message === "OK") {
                 this.uuid.clear();
-                this.changePage('front');
+                this.router.navigate(['/login']);
             } else {
                 alert(res.message);
             }
         })
-    }
-    changePage(page) {
-        this.page = page;
-        this.pageSubject.next(this.page);
     }
 }

@@ -1,34 +1,9 @@
-<h1>Memorandum:</h1>
-<div class="btn">
-  <!-- <input type="text" [(ngModel)]="changeNumber" placeholder="欲修改之編號"> -->
-  <select [(ngModel)]="changeNumber">
-    <ng-container *ngFor="let changeID of todoList | async | todos">
-      <option *ngIf="!changeID" selected>0</option>
-      <option *ngIf="changeID && index == 0" selected [value]="changeID.id">
-        {{changeID.id}}
-      </option>
-      <option *ngIf="changeID">{{changeID.id}}</option>
-    </ng-container>
-  </select>
-  <input type="text" [(ngModel)]="Change" placeholder="欲修改之事項" (keyup.enter)="postServer('put')">
-  <button (click)='postServer("put")'>修改</button>
-  <input type="text" [(ngModel)]="Add" placeholder="備忘事項" (keyup.enter)="postServer('post')">
-  <button (click)='postServer("post")'>新增</button>
-  <!-- <input type="text" [(ngModel)]="Delete" placeholder="欲刪除之編號"> -->
-  <select [(ngModel)]="Delete">
-    <ng-container *ngFor="let changeID of todoList | async | todos;let i = index;">
-      <option *ngIf="!changeID" selected>0</option>
-      <option *ngIf="changeID && index == 0" selected [value]="changeID.id">
-        {{changeID.id}}
-      </option>
-      <option *ngIf="changeID">{{changeID.id}}</option>
-    </ng-container>
-  </select>
-  <button (click)='postServer("delete")'>刪除</button>
-</div>
-<ul>
-  <li *ngFor="let todo of todoList | async | todos">
-    事項 {{todo.id}} : {{todo.title}}
-  </li>
-</ul>
-<button (click)='islogin.logout({data: {uuid: uidStatus.uid}})'>登出</button>
+<header>
+  <p>Login:</p>
+  <span>帳號：</span>
+  <input type="email" placeholder="信箱" [(ngModel)]="username" (keyup.enter)="login()">
+  <span>密碼：</span>
+  <input type="text" placeholder="密碼" [(ngModel)]="password" (keyup.enter)="login()">
+  <button (click)="router.navigate(['/signup'])">註冊</button>
+  <button (click)="login()">登入</button>
+</header>

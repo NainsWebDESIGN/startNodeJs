@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const err = require("../public/js/catchError");
-// 假資料庫
 const apiController = require("../controllers/apiController");
 
 /* GET home page. */

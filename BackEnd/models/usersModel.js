@@ -43,7 +43,7 @@ class UsersModel {
     return mysql
       .query(`SELECT * FROM users WHERE email='${email}'`)
       .then(async (res) => {
-        console.log(res);
+        // console.log(res);
 
         // 2-1 驗證用戶是否存在
         // const user = this.users[email];

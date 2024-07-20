@@ -8,5 +8,10 @@
     "target": "http://127.0.0.1:2862/",
     "secure": false,
     "changeOrigin": true
+  },
+  "/webPay": {
+    "target": "http://127.0.0.1:2862/",
+    "secure": false,
+    "changeOrigin": true
   }
 }

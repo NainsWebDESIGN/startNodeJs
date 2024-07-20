@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LoginService } from '@service/login.service';
+import { Router } from '@angular/Router';
 
 @Component({
   selector: 'app-root',
@@ -7,9 +7,10 @@ import { LoginService } from '@service/login.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  page: string = 'front';
-  constructor(private islogin: LoginService) { }
+  constructor(private router: Router) { }
   ngOnInit() {
-    this.islogin.page$.subscribe(page => this.page = page);
+    if (window.location.href.includes('confrim')) {
+      this.router.navigate(['/front/todos']);
+    }
   }
 }
