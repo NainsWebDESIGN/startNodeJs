@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '@service/login.service';
+import emailRule from '@ts/email';
 
 @Component({
   selector: 'app-signup',
@@ -14,6 +15,14 @@ export class SignupComponent implements OnInit {
   ngOnInit() {
   }
   signup() {
+    if (this.email.search(emailRule) == -1) {
+      alert("請輸入正確的信箱格式");
+      return;
+    } else if (this.username.trim() == "" || this.password.trim() == "" || this.email.trim() == "") {
+      alert("請填寫所有欄位");
+      return;
+    }
+
     let req = { data: { email: this.email, username: this.username, password: this.password } };
     this.islogin.signup(req);
   }
