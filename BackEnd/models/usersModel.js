@@ -8,7 +8,7 @@ const mysql = require("../public/js/database.js");
 class UsersModel {
   constructor() {
     this.token = [];
-    this.users = {};
+    // this.users = {};
   }
 
   // 1. 註冊
@@ -52,7 +52,7 @@ class UsersModel {
         }
 
         // 2-2 密碼驗證                 密碼, 加密後的密碼
-        if (!(await bcrypt.compare(password, res.password))) {
+        if (!(await bcrypt.compare(password, res[0].password))) {
           return "登入錯誤";
         }
 
