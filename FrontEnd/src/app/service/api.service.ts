@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import _url from '@app/ts/location';
+import { url } from '@app/ts/location';
 
 import { Observable } from 'rxjs/Observable';
 
@@ -20,28 +20,25 @@ export interface APIResponse {
 export class ApiService {
       constructor(private http: HttpClient) { }
       apiServer(getway: string, method: string = "get", body?: any) {
-            let url, options;
+            let _url, options;
 
             if ((getway.includes("/api") && method !== "get") || getway.includes("logout")) {
                   options = {
-                        headers: new HttpHeaders({
-                              "Authorization": body.data.uuid,
-                              // responseType: "text" 
-                        })
+                        headers: new HttpHeaders({ "Authorization": body.data.uuid })
                   }
             }
 
             switch (method) {
                   case "post":
-                        return this.finalAPI(this.http.post(_url + getway, body.data, options));
+                        return this.finalAPI(this.http.post(url + getway, body.data, options));
                   case "put":
-                        url = `${_url + getway}/${body.getway}`;
-                        return this.finalAPI(this.http.put(url, body.data, options));
+                        _url = `${url + getway}/${body.getway}`;
+                        return this.finalAPI(this.http.put(_url, body.data, options));
                   case "delete":
-                        url = `${_url + getway}/${body.getway}`;
-                        return this.finalAPI(this.http.delete(url, options));
+                        _url = `${url + getway}/${body.getway}`;
+                        return this.finalAPI(this.http.delete(_url, options));
                   default:
-                        return this.finalAPI(this.http.get(_url + getway));
+                        return this.finalAPI(this.http.get(url + getway));
             }
 
       }

@@ -6,7 +6,6 @@ const {
     HASHKEY,
     HASHIV,
     Version,
-    PayGateWay,
     NotifyUrl,
     ReturnUrl,
 } = process.env; // 取得環境變數
@@ -47,19 +46,17 @@ exports.aesCrypt = TradeInfo => {
 exports.shaCrypt = aesEncrypt => {
     const sha = crypto.createHash('sha256');
     const plainText = `HashKey=${HASHKEY}&${aesEncrypt}&HashIV=${HASHIV}`;
-  
+
     return sha.update(plainText).digest('hex').toUpperCase();
 }
 
 // 字串組合
 function genDataChain(order) {
-    return `MerchantID=${MerchantID}&TimeStamp=${
-      order.TimeStamp
-    }&Version=${Version}&RespondType=${RespondType}&MerchantOrderNo=${
-      order.MerchantOrderNo
-    }&Amt=${order.Amt}&NotifyURL=${encodeURIComponent(
-      NotifyUrl,
-    )}&ReturnURL=${encodeURIComponent(ReturnUrl)}&ItemDesc=${encodeURIComponent(
-      order.ItemDesc,
-    )}&Email=${encodeURIComponent(order.Email)}`;
-  }
+    return `MerchantID=${MerchantID}&TimeStamp=${order.TimeStamp
+        }&Version=${Version}&RespondType=${RespondType}&MerchantOrderNo=${order.MerchantOrderNo
+        }&Amt=${order.Amt}&NotifyURL=${encodeURIComponent(
+            NotifyUrl,
+        )}&ReturnURL=${encodeURIComponent(ReturnUrl)}&ItemDesc=${encodeURIComponent(
+            order.ItemDesc,
+        )}&Email=${encodeURIComponent(order.Email)}`;
+}

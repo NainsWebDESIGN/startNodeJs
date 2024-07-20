@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { CommodityService } from '@service/commodity.service';
 import { ApiService } from '@service/api.service';
 import { Observable } from 'rxjs/Observable';
+import { checkBack, checkFront } from '@ts/location';
 
 @Component({
   selector: 'app-confrimPage',
@@ -10,11 +11,9 @@ import { Observable } from 'rxjs/Observable';
   styleUrls: ['./confrimPage.component.scss']
 })
 export class ConfrimPageComponent implements OnInit {
-  // routerID = this.acRouter.snapshot.paramMap.get('id');
   merch$: Observable<any>;
   data;
   constructor(
-    // private acRouter: ActivatedRoute, 
     private router: Router,
     private Commod: CommodityService,
     private api: ApiService
@@ -29,20 +28,38 @@ export class ConfrimPageComponent implements OnInit {
   pay() {
     this.merch$.subscribe(
       res => {
+        res.ReturnUrl = checkFront;
+        res.NotifyUrl = checkBack;
         const req = {
-          MerchantID: res.MerchantID,
-          TradeSha: res.shaEncrypt,
-          TradeInfo: res.aesEncrypt,
-          TimeStamp: res.TimeStamp,
-          Version: res.Version,
-          NotifyUrl: res.NotifyUrl,
-          ReturnUrl: res.ReturnUrl,
-          MerchantOrderNo: res.MerchantOrderNo,
-          AtomicsItemDesc: res.AtomicsItemDesc,
-          Email: res.Email
-        }
-        this.api.apiServer("https://ccore.newebpay.com/MPG/mpg_gateway", 'post', req)
-          .subscribe(_res => console.log(_res))
+          MerchantID: "MerchantID",
+          shaEncrypt: "TradeSha",
+          aesEncrypt: "TradeInfo",
+          TimeStamp: "TimeStamp",
+          Version: "Version",
+          NotifyUrl: "NotifyUrl",
+          ReturnUrl: "ReturnUrl",
+          MerchantOrderNo: "MerchantOrderNo",
+          Amt: "Amt",
+          ItemDesc: "ItemDesc",
+          Email: "Email",
+        };
+        let test = {};
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = res.PayGateWay;
+
+        Object.keys(req).forEach(key => {
+          test[key] = res[key];
+          const input = document.createElement('input');
+          input.type = 'hidden';
+          input.name = req[key];
+          input.value = res[key];
+          form.appendChild(input);
+        })
+        console.log(test);
+
+        // document.body.appendChild(form);
+        // form.submit();
       },
       err => console.log(err)
     )

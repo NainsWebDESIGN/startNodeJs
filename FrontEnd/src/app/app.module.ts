@@ -24,17 +24,19 @@ import { PipeModule } from '@pipeModule';
 // import { xxx } from '@comModule';
 import { TodosComponent } from './todos/todos.component';
 import { ConfrimPageComponent } from './confrimPage/confrimPage.component';
+import { SuccessComponent } from './success/success.component';
 
 
 @NgModule({
-  declarations: [
+  declarations: [	
     AppComponent,
     SignupComponent,
     FrontPageComponent,
     LoginComponent,
     TodosComponent,
-    ConfrimPageComponent
-  ],
+    ConfrimPageComponent,
+      SuccessComponent
+   ],
   imports: [
     BrowserModule,
     FormsModule,
