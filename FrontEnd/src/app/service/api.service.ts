@@ -23,7 +23,7 @@ export class ApiService {
             let url, options;
 
             if ((getway.includes("/api") && method !== "get") || getway.includes("logout")) {
-                  options = { headers: new HttpHeaders({ "Authorization": body.data.uuid }) }
+                  options = { headers: new HttpHeaders({ "Authorization": body.data.uuid, responseType: "text" }) }
             }
 
             switch (method) {

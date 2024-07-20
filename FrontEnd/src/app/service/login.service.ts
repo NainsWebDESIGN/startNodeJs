@@ -9,7 +9,6 @@ export class LoginService {
     constructor(private api: ApiService, private uuid: UidService, private router: Router) { }
     login(body: any) {
         this.api.apiServer('/users/login', "post", body).subscribe(res => {
-            console.log(res);
             if (res.message === "登入成功") {
                 this.uuid.uid = res.status;
                 this.router.navigate(['/front/todos']);
