@@ -25,8 +25,8 @@ export class LoginService {
             }
         })
     }
-    logout(body) {
-        this.api.apiServer('/users/logout', 'post', body).subscribe(res => {
+    logout() {
+        this.api.apiServer('/users/logout', 'post', this.uuid.uid).subscribe(res => {
             if (res.message === "OK") {
                 location.href = "/";
                 this.uuid.clear();

@@ -26,9 +26,9 @@ export class ApiService {
       apiServer(getway: string, method: string = "get", body?: any) {
             let _url, options;
 
-            if ((getway.includes("/api") && method !== "get") || getway.includes("logout")) {
+            if (!["/users/signup", "/users/login"].includes(getway)) {
                   options = {
-                        headers: new HttpHeaders({ "Authorization": body.data.uuid })
+                        headers: new HttpHeaders({ "Authorization": this.uidStatus.uid })
                   }
             }
 

@@ -37,13 +37,13 @@ export class TodosComponent implements OnInit {
 
     switch (_name) {
       case "post":
-        req = { data: { title: this.Add, uuid: this.uidStatus.uid } };
+        req = { data: { title: this.Add } };
         break;
       case "put":
-        req = { getway: this.changeNumber, data: { title: this.Change, uuid: this.uidStatus.uid } };
+        req = { getway: this.changeNumber, data: { title: this.Change } };
         break;
       case "delete":
-        req = { getway: this.Delete, data: { uuid: this.uidStatus.uid } };
+        req = { getway: this.Delete, data: {} };
         break;
     }
 
