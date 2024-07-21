@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from '@service/api.service';
 import { UidService } from '@service/uid.service';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class LoginService {
@@ -29,8 +28,9 @@ export class LoginService {
     logout(body) {
         this.api.apiServer('/users/logout', 'post', body).subscribe(res => {
             if (res.message === "OK") {
+                location.href = "/";
                 this.uuid.clear();
-                this.router.navigate(['/login']);
+                sessionStorage.removeItem('uid');
             } else {
                 alert(res.message);
             }

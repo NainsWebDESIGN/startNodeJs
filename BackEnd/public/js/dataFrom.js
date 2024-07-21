@@ -25,9 +25,9 @@ exports.verify = req => {
 
     switch (status) {
         case "未登入":
-            return this.form(false, { message: "未登入" });
+            return this.form(false, {}, "未登入");
         case "驗證錯誤":
-            return this.form(false, { message: "驗證錯誤" });
+            return this.form(false, {}, "驗證錯誤");
         default:
             return this.form(true, { message: "成功", status });
     }
@@ -48,6 +48,17 @@ exports.shaCrypt = aesEncrypt => {
     const plainText = `HashKey=${HASHKEY}&${aesEncrypt}&HashIV=${HASHIV}`;
 
     return sha.update(plainText).digest('hex').toUpperCase();
+}
+
+
+// 對應文件 21, 22 頁：將 aes 解密
+exports.sesDecrypt = (TradeInfo) => {
+    const decrypt = crypto.createDecipheriv('aes256', HASHKEY, HASHIV);
+    decrypt.setAutoPadding(false);
+    const text = decrypt.update(TradeInfo, 'hex', 'utf8');
+    const plainText = text + decrypt.final('utf8');
+    const result = plainText.replace(/[\x00-\x20]+/g, '');
+    return JSON.parse(result);
 }
 
 // 字串組合

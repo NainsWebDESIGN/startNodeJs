@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { UidService } from '@service/uid.service';
 import { url } from '@app/ts/location';
 
 import { Observable } from 'rxjs/Observable';
@@ -18,7 +19,10 @@ export interface APIResponse {
 
 @Injectable()
 export class ApiService {
-      constructor(private http: HttpClient) { }
+      constructor(
+            private http: HttpClient,
+            private uidStatus: UidService
+      ) { }
       apiServer(getway: string, method: string = "get", body?: any) {
             let _url, options;
 
@@ -64,8 +68,28 @@ export class ApiService {
 
       catchError(err) {
             alert(err.error.message);
-            console.log(err);
-            return Observable.throw(err.error.message || err);
+            if (["未登入", "驗證失敗"].includes(err.error.message)) {
+                  this.apiServer('/users/logout', 'post', { data: { uuid: this.uidStatus.uid } })
+                        .subscribe(
+                              res => {
+                                    if (res.message === "OK") {
+                                          location.href = "/";
+                                          this.uidStatus.clear();
+                                          sessionStorage.removeItem('uid');
+                                    } else {
+                                          alert(res.message);
+                                    }
+                              },
+                              err => console.log(err),
+                              () => {
+                                    console.log(err);
+                                    return Observable.throw(err.error.message || err);
+                              }
+                        );
+            } else {
+                  console.log(err);
+                  return Observable.throw(err.error.message || err);
+            }
       }
 }
 
