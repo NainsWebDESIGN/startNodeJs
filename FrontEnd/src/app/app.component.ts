@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,9 +7,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(
-    @Inject(Router) private router: Router
-  ) { }
+  constructor(private router: Router) {
+    let path = (location.search).split("=");
+    if (path[0] == "?success" && path[1] == "true") {
+      this.router.navigate(['/success']);
+    }
+  }
   ngOnInit() {
     if (window.location.href.includes('confrim')) {
       this.router.navigate(['/front/todos']);
