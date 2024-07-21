@@ -19,7 +19,11 @@ router.post(
         }
       }
       #swagger.responses[200] = { 
-        schema: { $ref: '#/Users/Signup' }
+        schema: {
+          success: "成功或失敗",
+          message: "錯誤時的訊息",
+          data: { message: "註冊成功" }
+        }
       } */
   err.catch(usersController.SignUp)
 );
@@ -29,7 +33,7 @@ router.post(
   "/login",
   /* 	#swagger.tags = ['Users']
     #swagger.description = '登入' 
-	  #swagger.parameters['obj'] = {
+    #swagger.parameters['obj'] = {
       in: 'body',
       description: '登入內容',
       required: true,
@@ -39,7 +43,14 @@ router.post(
       }
     } 
     #swagger.responses[200] = { 
-    schema: { $ref: '#/Users/Login' }
+      schema: {
+            success: "成功或失敗",
+            message: "錯誤時的訊息",
+            data: {
+              message: "登入成功",
+              status: "登入成功的Token"
+            }
+      }
     } */
   err.catch(usersController.Login)
 );
@@ -48,14 +59,21 @@ router.post(
 router.get(
   "/profile",
   /* 	#swagger.tags = ['Users']
-      #swagger.description = '驗證，加密後的token須放在headers的Authorization'
+      #swagger.description = '驗證，token須放在headers的Authorization'
       #swagger.parameters['headers'] = {
         in: 'Authorization',
         type: 'string',
         description: '加密後的Token' 
       }
       #swagger.responses[200] = { 
-        schema: { $ref: '#/Users/Profile' }
+        schema: {
+          success: "成功或失敗",
+          message: "錯誤時的訊息",
+          data: {
+            message: "成功",
+            status: "解密後的會員資料"
+          }
+        }
       } */
   err.catch(usersController.Profile)
 );
@@ -63,14 +81,20 @@ router.get(
 router.post(
   '/logout',
   /* 	#swagger.tags = ['Users']
-      #swagger.description = '驗證，加密後的token須放在headers的Authorization'
+      #swagger.description = '登出，token須放在headers的Authorization'
       #swagger.parameters['headers'] = {
         in: 'Authorization',
         type: 'string',
         description: '加密後的Token' 
       }
       #swagger.responses[200] = { 
-        schema: { $ref: '#/Users/Profile' }
+        schema: {
+            success: "成功或失敗",
+            message: "錯誤時的訊息",
+            data: {
+              message: "OK"
+            }
+        }
       } */
   err.catch(usersController.Logout)
 )

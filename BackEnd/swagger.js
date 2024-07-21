@@ -10,22 +10,7 @@ const doc = {
   },
   basePath: "/",
   schemes: ["https"],
-  host: "backexample.zebur.app",
-  Todos: {
-    resPonse: [{ id: 1, title: "第一條備忘錄事項" }],
-  },
-  Users: {
-    Signup: { message: "註冊成功" },
-    Login: { message: "登入成功", status: "加密後的token" },
-    Profile: {
-      message: "成功",
-      status: {
-        email: "test@gmail.com",
-        username: "Nains",
-        password: "123456",
-      },
-    },
-  },
+  host: "backexample.zebur.app"
 };
 
 const outputFile = "./swagger-output.json";

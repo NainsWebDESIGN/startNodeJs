@@ -20,7 +20,36 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/Todos/resPonse"
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "string",
+                  "example": "成功或失敗"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "錯誤時的訊息"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number",
+                        "example": 1
+                      },
+                      "title": {
+                        "type": "string",
+                        "example": "第一條備忘錄事項"
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
             },
             "description": "OK"
           },
@@ -54,7 +83,36 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/Todos/resPonse"
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "string",
+                  "example": "成功或失敗"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "錯誤時的訊息"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number",
+                        "example": 1
+                      },
+                      "title": {
+                        "type": "string",
+                        "example": "第一條備忘錄事項"
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
             },
             "description": "OK"
           },
@@ -96,7 +154,36 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/Todos/resPonse"
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "string",
+                  "example": "成功或失敗"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "錯誤時的訊息"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number",
+                        "example": 1
+                      },
+                      "title": {
+                        "type": "string",
+                        "example": "第一條備忘錄事項"
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
             },
             "description": "OK"
           },
@@ -121,7 +208,36 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/Todos/resPonse"
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "string",
+                  "example": "成功或失敗"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "錯誤時的訊息"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number",
+                        "example": 1
+                      },
+                      "title": {
+                        "type": "string",
+                        "example": "第一條備忘錄事項"
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
             },
             "description": "OK"
           },
@@ -165,7 +281,29 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/Users/Signup"
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "string",
+                  "example": "成功或失敗"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "錯誤時的訊息"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "註冊成功"
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
             },
             "description": "OK"
           },
@@ -205,7 +343,33 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/Users/Login"
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "string",
+                  "example": "成功或失敗"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "錯誤時的訊息"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "登入成功"
+                    },
+                    "status": {
+                      "type": "string",
+                      "example": "登入成功的Token"
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
             },
             "description": "OK"
           },
@@ -220,7 +384,7 @@
         "tags": [
           "Users"
         ],
-        "description": "驗證，加密後的token須放在headers的Authorization",
+        "description": "驗證，token須放在headers的Authorization",
         "parameters": [
           {
             "name": "headers",
@@ -232,7 +396,33 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/Users/Profile"
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "string",
+                  "example": "成功或失敗"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "錯誤時的訊息"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "成功"
+                    },
+                    "status": {
+                      "type": "string",
+                      "example": "解密後的會員資料"
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
             },
             "description": "OK"
           },
@@ -242,39 +432,221 @@
         }
       }
     },
-    "/users/singout": {
+    "/users/logout": {
       "post": {
-        "description": "",
+        "tags": [
+          "Users"
+        ],
+        "description": "登出，token須放在headers的Authorization",
+        "parameters": [
+          {
+            "name": "headers",
+            "in": "Authorization",
+            "type": "string",
+            "description": "加密後的Token"
+          }
+        ],
         "responses": {
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "string",
+                  "example": "成功或失敗"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "錯誤時的訊息"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "OK"
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            },
+            "description": "OK"
+          },
           "500": {
             "description": "Internal Server Error"
           }
         }
       }
-    }
-  },
-  "Todos": {
-    "resPonse": [
-      {
-        "id": 1,
-        "title": "第一條備忘錄事項"
+    },
+    "/webPay/order": {
+      "post": {
+        "tags": [
+          "Orders"
+        ],
+        "description": "建立並加密訂單確認資訊",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "訂單內容",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "ItemDesc": {
+                  "type": "string",
+                  "example": "商品名稱"
+                },
+                "Amt": {
+                  "type": "string",
+                  "example": "價格"
+                },
+                "Email": {
+                  "type": "string",
+                  "example": "信箱"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "string",
+                  "example": "成功或失敗"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "錯誤時的訊息"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "ItemDesc": {
+                      "type": "string",
+                      "example": "商品名稱"
+                    },
+                    "Email": {
+                      "type": "string",
+                      "example": "信箱"
+                    },
+                    "PayGateWay": {
+                      "type": "string",
+                      "example": "藍新金流 API"
+                    },
+                    "Version": {
+                      "type": "string",
+                      "example": "藍新金流版本"
+                    },
+                    "MerchantID": {
+                      "type": "string",
+                      "example": "商店 ID"
+                    },
+                    "NotifyUrl": {
+                      "type": "string",
+                      "example": "結帳完成後通知後端的 URL"
+                    },
+                    "ReturnUrl": {
+                      "type": "string",
+                      "example": "結帳完成後通知前端的 URL"
+                    },
+                    "TimeStamp": {
+                      "type": "string",
+                      "example": "時間戳"
+                    },
+                    "Amt": {
+                      "type": "string",
+                      "example": "價格"
+                    },
+                    "MerchantOrderNo": {
+                      "type": "string",
+                      "example": "訂單編號(與時間戳相同)"
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            },
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
       }
-    ]
-  },
-  "Users": {
-    "Signup": {
-      "message": "註冊成功"
     },
-    "Login": {
-      "message": "登入成功",
-      "status": "加密後的token"
-    },
-    "Profile": {
-      "message": "成功",
-      "status": {
-        "email": "test@gmail.com",
-        "username": "Nains",
-        "password": "123456"
+    "/webPay/newebpay_notify": {
+      "post": {
+        "tags": [
+          "Orders"
+        ],
+        "description": "將訂單加入資料庫",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "結帳完成的資料",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "MerchantID": {
+                  "type": "string",
+                  "example": "商店 ID"
+                },
+                "Amt": {
+                  "type": "string",
+                  "example": "價格"
+                },
+                "TradeNo": {
+                  "type": "string",
+                  "example": "加密資訊"
+                },
+                "MerchantOrderNo": {
+                  "type": "string",
+                  "example": "訂單編號(與時間戳相同)"
+                },
+                "IP": {
+                  "type": "string",
+                  "example": "IP 位址"
+                },
+                "EscrowBank": {
+                  "type": "string",
+                  "example": "用哪間銀行"
+                },
+                "PaymentType": {
+                  "type": "string",
+                  "example": "付款方式"
+                },
+                "PayTime": {
+                  "type": "string",
+                  "example": "付款時間"
+                },
+                "PayerAccount5Code": {
+                  "type": "string",
+                  "example": "付款人帳號末五碼"
+                },
+                "PayBanCode": {
+                  "type": "string",
+                  "example": "銀行編號"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
       }
     }
   }

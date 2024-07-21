@@ -52,8 +52,8 @@ export class TodosComponent implements OnInit {
     this.changeNumber = 1;
   }
 
-  test() {
-    let req = { data: { ItemDesc: this.ItemDesc, Amt: this.Price, Email: this.Email, uuid: this.uidStatus.uid } };
+  confrim() {
+    let req = { data: { ItemDesc: this.ItemDesc, Amt: this.Price, Email: this.Email } };
     this.api.apiServer('/webPay/order', 'post', req).subscribe(
       res => {
         console.log(res);
