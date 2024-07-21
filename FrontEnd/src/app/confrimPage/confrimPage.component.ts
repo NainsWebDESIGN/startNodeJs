@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { CommodityService } from '@service/commodity.service';
 import { ApiService } from '@service/api.service';
 import { Observable } from 'rxjs/Observable';
-import { checkBack, checkFront } from '@ts/location';
 
 @Component({
   selector: 'app-confrimPage',
@@ -28,8 +27,6 @@ export class ConfrimPageComponent implements OnInit {
   pay() {
     this.merch$.subscribe(
       res => {
-        res.ReturnUrl = checkFront;
-        res.NotifyUrl = checkBack;
         const req = {
           MerchantID: "MerchantID",
           shaEncrypt: "TradeSha",
