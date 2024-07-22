@@ -4,8 +4,8 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --proxy-config proxy.config.json --port 1491",
-    "build": "ng build --output-hashing=none --prod",
+    "start": "ng serve --proxy-config proxy.config.json --port 1491 --environment=dev",
+    "build": "ng build --output-hashing=none --prod --environment=prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

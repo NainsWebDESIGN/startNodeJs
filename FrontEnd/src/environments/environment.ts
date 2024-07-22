@@ -3,6 +3,11 @@
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
-export const environment = {
-  production: false
+export default {
+  production: false,
+  testValue: "Nains Project",
+  emailRule: /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/,
+  unicode: (unicode) =>
+    String.fromCharCode(parseInt(unicode.substring(2), 16)),
+  url: window.location.href.includes("front-example.zeabur") ? "https://back-example.zeabur.app" : ""
 };

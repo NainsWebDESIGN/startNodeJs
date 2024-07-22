@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UidService } from '@service/uid.service';
-import { url } from '@app/ts/location';
+import { APIResponse } from '@ts/interface';
+import { Method } from '@ts/enum';
+import env from 'environments/environment';
 
 import { Observable } from 'rxjs/Observable';
 
@@ -11,19 +13,13 @@ import 'rxjs/add/operator/retry';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/shareReplay';
 
-export interface APIResponse {
-      success: boolean
-      data: any
-      message: string
-}
-
 @Injectable()
 export class ApiService {
       constructor(
             private http: HttpClient,
             private uidStatus: UidService
       ) { }
-      apiServer(getway: string, method: string = "get", body?: any) {
+      apiServer(getway: string, method: Method = Method.GET, body?: any) {
             let _url, options;
 
             if (!["/users/signup", "/users/login"].includes(getway)) {
@@ -33,16 +29,16 @@ export class ApiService {
             }
 
             switch (method) {
-                  case "post":
-                        return this.finalAPI(this.http.post(url + getway, body.data, options));
-                  case "put":
-                        _url = `${url + getway}/${body.getway}`;
+                  case Method.POST:
+                        return this.finalAPI(this.http.post(env.url + getway, body.data, options));
+                  case Method.PUT:
+                        _url = `${env.url + getway}/${body.getway}`;
                         return this.finalAPI(this.http.put(_url, body.data, options));
-                  case "delete":
-                        _url = `${url + getway}/${body.getway}`;
+                  case Method.DELETE:
+                        _url = `${env.url + getway}/${body.getway}`;
                         return this.finalAPI(this.http.delete(_url, options));
                   default:
-                        return this.finalAPI(this.http.get(url + getway));
+                        return this.finalAPI(this.http.get(env.url + getway));
             }
 
       }
@@ -69,7 +65,7 @@ export class ApiService {
       catchError(err) {
             alert(err.error.message);
             if (["未登入", "驗證失敗"].includes(err.error.message)) {
-                  this.apiServer('/users/logout', 'post', { data: { uuid: this.uidStatus.uid } })
+                  this.apiServer('/users/logout', Method.POST, { data: { uuid: this.uidStatus.uid } })
                         .subscribe(
                               res => {
                                     if (res.message === "OK") {
