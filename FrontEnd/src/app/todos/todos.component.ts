@@ -5,7 +5,7 @@ import { TodosService } from '@service/todos.service';
 import { ApiService } from '@service/api.service';
 import { LoginService } from '@service/login.service';
 import { CommodityService } from '@service/commodity.service';
-import { Observable } from 'rxjs';
+import { Method } from '@ts/enum';
 
 @Component({
   selector: 'app-todos',
@@ -13,7 +13,6 @@ import { Observable } from 'rxjs';
   styleUrls: ['./todos.component.scss']
 })
 export class TodosComponent implements OnInit {
-  // todoList: Observable<any>;
   Add: string = "";
   changeNumber: number = 1;
   Change: string = "";
@@ -23,26 +22,25 @@ export class TodosComponent implements OnInit {
   ItemDesc: string = "測試商品";
   constructor(
     public todoList: TodosService,
-    private api: ApiService,
     public islogin: LoginService,
     public uidStatus: UidService,
+    private api: ApiService,
     private router: Router,
     private Commod: CommodityService
   ) { }
   ngOnInit() {
-    // this.todoList = this.todos.todos$;
   }
-  postServer(_name: string = "get") {
+  postServer(_name: Method = Method.GET) {
     let req;
 
     switch (_name) {
-      case "post":
+      case Method.POST:
         req = { data: { title: this.Add } };
         break;
-      case "put":
+      case Method.PUT:
         req = { getway: this.changeNumber, data: { title: this.Change } };
         break;
-      case "delete":
+      case Method.DELETE:
         req = { getway: this.Delete, data: {} };
         break;
     }
@@ -54,7 +52,7 @@ export class TodosComponent implements OnInit {
 
   confrim() {
     let req = { data: { ItemDesc: this.ItemDesc, Amt: this.Price, Email: this.Email } };
-    this.api.apiServer('/webPay/order', 'post', req).subscribe(
+    this.api.apiServer('/webPay/order', Method.POST, req).subscribe(
       res => {
         console.log(res);
         this.Commod.changeMerch(res);

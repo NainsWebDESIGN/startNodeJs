@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UidService } from '@service/uid.service';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -9,7 +8,6 @@ import { UidService } from '@service/uid.service';
 })
 export class AppComponent {
   constructor(private router: Router, private uidStatus: UidService) {
-
     try {
       this.uidStatus.uid = sessionStorage.getItem("uid");
       console.log("uid: ", this.uidStatus.uid);

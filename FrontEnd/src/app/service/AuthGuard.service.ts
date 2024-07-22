@@ -1,8 +1,7 @@
 // Angular
 import { Injectable } from '@angular/core';
 import { CanActivate, CanLoad } from '@angular/router';
-import { Router, ActivatedRoute } from '@angular/router';
-// App
+import { Router } from '@angular/router';
 
 import { UidService } from '@service/uid.service';
 
@@ -13,8 +12,7 @@ export class AuthGuardService implements CanLoad, CanActivate {
 
     constructor(
         private router: Router,
-        private uidStatus: UidService,
-        private activatedRoute: ActivatedRoute,
+        private uidStatus: UidService
     ) { }
 
     canLoad() {
@@ -24,7 +22,6 @@ export class AuthGuardService implements CanLoad, CanActivate {
 
     canActivate() {
         // console.log('canActivate');
-        // console.log(this.router.url);
         return this.checkLogin();
     }
 
@@ -38,8 +35,5 @@ export class AuthGuardService implements CanLoad, CanActivate {
         this.uidStatus.clear();
         this.router.navigate(['/login']);
         return false;
-    }
-    getSelectRouterItem() {
-        // console.log(this.activatedRoute['component']['name']);
     }
 }

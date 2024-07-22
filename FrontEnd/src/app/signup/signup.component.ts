@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from '@service/login.service';
-import emailRule from '@ts/email';
+import { UserErr } from '@ts/enum';
+import env from 'environments/environment';
 
 @Component({
   selector: 'app-signup',
@@ -16,11 +17,13 @@ export class SignupComponent implements OnInit {
   ngOnInit() {
   }
   signup() {
-    if (this.email.search(emailRule) == -1) {
-      alert("請輸入正確的信箱格式");
+    if (this.email.search(env.emailRule) == -1) {
+      alert(UserErr.EmailError);
       return;
-    } else if (this.username.trim() == "" || this.password.trim() == "" || this.email.trim() == "") {
-      alert("請填寫所有欄位");
+    }
+
+    if (this.username.trim() == "" || this.password.trim() == "" || this.email.trim() == "") {
+      alert(UserErr.Blank);
       return;
     }
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from '@service/login.service';
+import env from 'environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -8,6 +9,7 @@ import { LoginService } from '@service/login.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  env = env.testValue;
   constructor(
     public islogin: LoginService,
     public router: Router
