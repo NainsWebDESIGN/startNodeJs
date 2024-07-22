@@ -1,6 +1,6 @@
 <h1>Memorandum:</h1>
 <ul>
-  <li *ngFor="let todo of todoList | async | todos">
+  <li *ngFor="let todo of todoList.todos$ | async | todos">
     事項 {{todo.id}} : {{todo.title}}
   </li>
 </ul>

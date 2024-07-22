@@ -3,7 +3,7 @@ const { jwtKey } = process.env; // 取得環境變數
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const uuid = require("uuid").v4;
-const mysql = require("../public/js/database.js");
+const mysql = require("../service/database");
 
 class UsersModel {
   constructor() {

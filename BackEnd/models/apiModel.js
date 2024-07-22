@@ -1,4 +1,4 @@
-const mysql = require("../public/js/database.js");
+const mysql = require("../service/database");
 class ApiModel {
   constructor() {}
 

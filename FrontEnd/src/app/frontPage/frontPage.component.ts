@@ -8,10 +8,10 @@ import { Observable } from 'rxjs';
   styleUrls: ['./frontPage.component.scss']
 })
 export class FrontPageComponent implements OnInit {
-  todoList: Observable<any>;
-  constructor(private todos: TodosService) { }
+  // todoList: Observable<any>;
+  constructor(public todoList: TodosService) { }
   ngOnInit() {
-    this.todos.getTodos("/api/product");
-    this.todoList = this.todos.todos$;
+    this.todoList.getTodos("/api/product");
+    // this.todoList = this.todos.todos$;
   }
 }

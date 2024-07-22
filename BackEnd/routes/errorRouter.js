@@ -1,6 +1,6 @@
 var express = require("express");
 var router = express.Router();
-const err = require("../public/js/catchError");
+const err = require("../service/catchError");
 
 const errorController = async (req, res) => {
   a; // 未定義

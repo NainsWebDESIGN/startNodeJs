@@ -13,7 +13,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./todos.component.scss']
 })
 export class TodosComponent implements OnInit {
-  todoList: Observable<any>;
+  // todoList: Observable<any>;
   Add: string = "";
   changeNumber: number = 1;
   Change: string = "";
@@ -22,7 +22,7 @@ export class TodosComponent implements OnInit {
   Email: string = "";
   ItemDesc: string = "測試商品";
   constructor(
-    private todos: TodosService,
+    public todoList: TodosService,
     private api: ApiService,
     public islogin: LoginService,
     public uidStatus: UidService,
@@ -30,7 +30,7 @@ export class TodosComponent implements OnInit {
     private Commod: CommodityService
   ) { }
   ngOnInit() {
-    this.todoList = this.todos.todos$;
+    // this.todoList = this.todos.todos$;
   }
   postServer(_name: string = "get") {
     let req;
@@ -47,7 +47,7 @@ export class TodosComponent implements OnInit {
         break;
     }
 
-    this.todos.getTodos('/api/product', _name, req);
+    this.todoList.getTodos('/api/product', _name, req);
     ["Add", "Change", "Delete"].forEach(item => this[item] = "");
     this.changeNumber = 1;
   }

@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const err = require("../public/js/catchError");
+const err = require("../service/catchError");
 const apiController = require("../controllers/apiController");
 
 /* GET home page. */

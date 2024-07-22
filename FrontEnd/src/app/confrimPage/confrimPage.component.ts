@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommodityService } from '@service/commodity.service';
-import { ApiService } from '@service/api.service';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
@@ -10,22 +9,21 @@ import { Observable } from 'rxjs/Observable';
   styleUrls: ['./confrimPage.component.scss']
 })
 export class ConfrimPageComponent implements OnInit {
-  merch$: Observable<any>;
+  // merch$: Observable<any>;
   data;
   constructor(
     private router: Router,
-    private Commod: CommodityService,
-    private api: ApiService
+    public Commod: CommodityService
 
   ) { }
   ngOnInit() {
-    this.merch$ = this.Commod.merch$;
+    // this.merch$ = this.Commod.merch$;
   }
   out() {
     this.router.navigate(['/front/todos']);
   }
   pay() {
-    this.merch$.subscribe(
+    this.Commod.merch$.subscribe(
       res => {
         const req = {
           MerchantID: "MerchantID",

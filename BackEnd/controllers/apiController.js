@@ -1,5 +1,5 @@
 const apiModel = require("../models/apiModel");
-const formData = require("../public/js/dataFrom");
+const formData = require("../service/dataFrom");
 
 exports.getAllTodos = async (req, res) => {
   const todos = await apiModel.getAll();

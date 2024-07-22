@@ -1,5 +1,5 @@
 const usersModel = require("../models/usersModel");
-const formData = require("../public/js/dataFrom");
+const formData = require("../service/dataFrom");
 
 // 1. 註冊
 exports.SignUp = async (req, res) => {

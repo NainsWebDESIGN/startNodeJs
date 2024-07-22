@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const err = require("../public/js/catchError");
+const err = require("../service/catchError");
 const usersController = require("../controllers/usersController");
 
 // 1. 註冊
@@ -79,7 +79,7 @@ router.get(
 );
 
 router.post(
-  '/logout',
+  "/logout",
   /* 	#swagger.tags = ['Users']
       #swagger.description = '登出，token須放在headers的Authorization'
       #swagger.parameters['headers'] = {
@@ -97,6 +97,6 @@ router.post(
         }
       } */
   err.catch(usersController.Logout)
-)
+);
 
 module.exports = router;

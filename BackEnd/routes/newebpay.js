@@ -1,11 +1,11 @@
 var express = require("express");
 var router = express.Router();
-const err = require("../public/js/catchError");
+const err = require("../service/catchError");
 const webPayController = require("../controllers/newebpayController");
 
 router.post(
-    "/order",
-    /* 	#swagger.tags = ['Orders']
+  "/order",
+  /* 	#swagger.tags = ['Orders']
         #swagger.description = '建立並加密訂單確認資訊' 
             #swagger.parameters['obj'] = {
           in: 'body',
@@ -35,13 +35,13 @@ router.post(
             }
           }
         } */
-    err.catch(webPayController.createOrder)
+  err.catch(webPayController.createOrder)
 );
 
 // 確認交易：Notify
 router.post(
-    '/newebpay_notify',
-    /* 	#swagger.tags = ['Orders']
+  "/newebpay_notify",
+  /* 	#swagger.tags = ['Orders']
         #swagger.description = '將訂單加入資料庫' 
             #swagger.parameters['obj'] = {
           in: 'body',
@@ -60,7 +60,7 @@ router.post(
             PayBanCode: "銀行編號"
           }
         } */
-    err.catch(webPayController.notifyUrl)
+  err.catch(webPayController.notifyUrl)
 );
 
 module.exports = router;
