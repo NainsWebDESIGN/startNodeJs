@@ -8,9 +8,7 @@ const {
   MYSQL_DATABASE,
 } = process.env; // 取得環境變數
 
-
 let connection = null;
-
 
 exports.query = (need) => {
   connection = mysql.createConnection({
@@ -20,7 +18,7 @@ exports.query = (need) => {
     password: MYSQL_PASSWORD,
     database: MYSQL_DATABASE,
     multipleStatements: true, // 允許多個SQL語句執行
-  })
+  });
   connection.connect();
 
   return new Promise((resolve, reject) => {
@@ -31,7 +29,7 @@ exports.query = (need) => {
           reject(new Error("Error rows is undefined"));
           break;
         case null:
-          reject(new Error("Error rows is undefined"));
+          reject(new Error("Error rows is null"));
           break;
         default:
           resolve(data);
@@ -48,16 +46,17 @@ exports.query = (need) => {
       //! protocol41: 指示 MySQL 服務器是否使用了協議版本 4.1
       //! changedRows: 指示執行 UPDATE 或 DELETE 操作後，受影響的行數
     });
-  }).finally(() => connection.end((err) => {
-    if (err) {
-      console.error("Error closing MySQL connection:", err);
-      return;
-    }
+  }).finally(() =>
+    connection.end((err) => {
+      if (err) {
+        console.error("Error closing MySQL connection:", err);
+        return;
+      }
 
-    console.log("MySQL connection closed");
-  }));
+      console.log("MySQL connection closed");
+    })
+  );
 };
-
 
 //* connection.query("SELECT * FROM todos", (err, data) => {
 //*   if (err) throw err;
