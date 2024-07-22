@@ -18,12 +18,12 @@ export class SignupComponent implements OnInit {
   }
   signup() {
     if (this.email.search(env.emailRule) == -1) {
-      alert(UserErr.EmailError);
+      alert(UserErr["EmailError"]);
       return;
     }
 
     if (this.username.trim() == "" || this.password.trim() == "" || this.email.trim() == "") {
-      alert(UserErr.Blank);
+      alert(UserErr["Blank"]);
       return;
     }
 

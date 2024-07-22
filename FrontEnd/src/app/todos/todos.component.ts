@@ -13,6 +13,7 @@ import { Method } from '@ts/enum';
   styleUrls: ['./todos.component.scss']
 })
 export class TodosComponent implements OnInit {
+  Method: Method;
   Add: string = "";
   changeNumber: number = 1;
   Change: string = "";
@@ -30,7 +31,7 @@ export class TodosComponent implements OnInit {
   ) { }
   ngOnInit() {
   }
-  postServer(_name: Method = Method.GET) {
+  postServer(_name: string = "get") {
     let req;
 
     switch (_name) {
@@ -45,7 +46,7 @@ export class TodosComponent implements OnInit {
         break;
     }
 
-    this.todoList.getTodos('/api/product', _name, req);
+    this.todoList.getTodos('/api/product', _name as Method, req);
     ["Add", "Change", "Delete"].forEach(item => this[item] = "");
     this.changeNumber = 1;
   }
