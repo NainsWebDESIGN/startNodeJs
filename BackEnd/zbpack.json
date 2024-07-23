@@ -1,7 +1,3 @@
 {
-  "build_command": "node ./swagger.js",
-  "packageManager": "npm@10.7.0",
-  "engines": {
-    "node": "18.20.3"
-  }
+  "build_command": "node ./swagger.js"
 }

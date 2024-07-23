@@ -1,6 +1,0 @@
-{
-  "packageManager": "npm@6.9.0",
-  "engines": {
-    "node": "10.16.0"
-  }
-}
