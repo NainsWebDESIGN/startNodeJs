@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from '@service/login.service';
 import { UserErr } from '@ts/enum';
-import env from 'environments/environment';
+import env from '@ts/env';
 
 @Component({
   selector: 'app-signup',

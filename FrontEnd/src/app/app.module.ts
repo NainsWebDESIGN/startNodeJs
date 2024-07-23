@@ -28,15 +28,15 @@ import { SuccessComponent } from './success/success.component';
 
 
 @NgModule({
-  declarations: [	
+  declarations: [
     AppComponent,
     SignupComponent,
     FrontPageComponent,
     LoginComponent,
     TodosComponent,
     ConfrimPageComponent,
-      SuccessComponent
-   ],
+    SuccessComponent
+  ],
   imports: [
     BrowserModule,
     FormsModule,

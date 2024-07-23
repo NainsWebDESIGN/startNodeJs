@@ -3,3 +3,11 @@ export interface APIResponse {
     data: any
     message: string
 }
+
+
+export interface IDefault {
+    testValue: string
+    emailRule: string
+    unicode: Function
+    url: string
+}

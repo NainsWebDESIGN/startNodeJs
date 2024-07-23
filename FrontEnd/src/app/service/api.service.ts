@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UidService } from '@service/uid.service';
 import { APIResponse } from '@ts/interface';
 import { Method } from '@ts/enum';
-import env from 'environments/environment';
+import env from '@ts/env';
 
 import { Observable } from 'rxjs/Observable';
 
