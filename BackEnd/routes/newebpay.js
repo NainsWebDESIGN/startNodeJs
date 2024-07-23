@@ -1,7 +1,8 @@
-var express = require("express");
-var router = express.Router();
-const err = require("../service/catchError");
-const webPayController = require("../controllers/newebpayController");
+import express from "express";
+const router = express.Router();
+import err from "../service/catchError.js";
+
+import { createOrder, notifyUrl } from "../controllers/newebpayController.js";
 
 router.post(
   "/order",
@@ -35,7 +36,7 @@ router.post(
             }
           }
         } */
-  err.catch(webPayController.createOrder)
+  err(createOrder)
 );
 
 // 確認交易：Notify
@@ -60,7 +61,7 @@ router.post(
             PayBanCode: "銀行編號"
           }
         } */
-  err.catch(webPayController.notifyUrl)
+  err(notifyUrl)
 );
 
-module.exports = router;
+export default router;

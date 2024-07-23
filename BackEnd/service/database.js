@@ -1,5 +1,7 @@
-require("dotenv").config(); // 載入.env 檔案
-const mysql = require("mysql");
+import mysql from "mysql";
+import dotenv from "dotenv";
+dotenv.config(); // 載入.env 檔案
+
 const {
   MYSQL_HOST,
   MYSQL_PORT,
@@ -7,10 +9,11 @@ const {
   MYSQL_PASSWORD,
   MYSQL_DATABASE,
 } = process.env; // 取得環境變數
+// const mysql = require("mysql");
 
 let connection = null;
 
-exports.query = (need) => {
+export default (need) => {
   connection = mysql.createConnection({
     host: MYSQL_HOST,
     port: MYSQL_PORT,

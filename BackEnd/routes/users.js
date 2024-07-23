@@ -1,7 +1,13 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const err = require("../service/catchError");
-const usersController = require("../controllers/usersController");
+import err from "../service/catchError.js";
+
+import {
+  SignUp,
+  Login,
+  Profile,
+  Logout,
+} from "../controllers/usersController.js";
 
 // 1. 註冊
 router.post(
@@ -25,7 +31,7 @@ router.post(
           data: { message: "註冊成功" }
         }
       } */
-  err.catch(usersController.SignUp)
+  err(SignUp)
 );
 
 // 2. 登入
@@ -52,7 +58,7 @@ router.post(
             }
       }
     } */
-  err.catch(usersController.Login)
+  err(Login)
 );
 
 // 3. 驗證用戶(同時取得用戶資料)
@@ -75,7 +81,7 @@ router.get(
           }
         }
       } */
-  err.catch(usersController.Profile)
+  err(Profile)
 );
 
 router.post(
@@ -96,7 +102,7 @@ router.post(
             }
         }
       } */
-  err.catch(usersController.Logout)
+  err(Logout)
 );
 
-module.exports = router;
+export default router;

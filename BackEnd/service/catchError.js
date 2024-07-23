@@ -1,4 +1,4 @@
-exports.catch = (asyncFun) => {
+export default (asyncFun) => {
   return (req, res, next) => {
     asyncFun(req, res, next)?.catch((err) => {
       console.log("錯誤捕捉: ", err);

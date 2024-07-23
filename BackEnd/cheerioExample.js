@@ -1,5 +1,6 @@
-const axios = require("axios");
-const cheerio = require("cheerio");
+import { axios } from "axios";
+import { cheerio } from "cheerio";
+
 const url = "https://www.ettoday.net/?from=rf";
 
 // 發送HTTP GET請求來獲取網頁內容

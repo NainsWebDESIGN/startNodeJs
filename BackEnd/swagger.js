@@ -1,7 +1,7 @@
-const { serve } = require("swagger-ui-express");
+import serve from "swagger-ui-express";
+import swaggerAutogen from "swagger-autogen";
 
-const swaggerAutogen = require("swagger-autogen")();
-
+const swaggerUI = swaggerAutogen();
 
 const doc = {
   info: {
@@ -10,7 +10,7 @@ const doc = {
   },
   basePath: "/",
   schemes: ["https"],
-  host: "backexample.zebur.app"
+  host: "backexample.zebur.app",
 };
 
 const outputFile = "./swagger-output.json";
@@ -19,4 +19,4 @@ const routes = ["./app.js"];
 /* NOTE: If you are using the express Router, you must pass in the 'routes' only the 
 root file where the route starts, such as index.js, app.js, routes.js, etc ... */
 
-swaggerAutogen(outputFile, routes, doc);
+swaggerUI(outputFile, routes, doc);

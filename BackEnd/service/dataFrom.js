@@ -1,11 +1,13 @@
-const crypto = require("crypto");
-const usersModel = require("../models/usersModel");
-require("dotenv").config(); // 載入.env 檔案
+import crypto from "crypto";
+import usersModel from "../models/usersModel.js";
+import dotenv from "dotenv";
+dotenv.config(); // 載入.env 檔案
+
 const { MerchantID, HASHKEY, HASHIV, Version, NotifyUrl, ReturnUrl } =
   process.env; // 取得環境變數
 const RespondType = "JSON";
 
-exports.form = (status, data, msg = "") => {
+export const Form = (status, data, msg = "") => {
   return {
     success: status,
     data: data,
@@ -13,7 +15,7 @@ exports.form = (status, data, msg = "") => {
   };
 };
 
-exports.verify = (req) => {
+export const Verify = (req) => {
   const status = usersModel.Profile(req);
 
   switch (status) {
@@ -28,7 +30,7 @@ exports.verify = (req) => {
 
 // 對應文件 P17：使用 aes 加密
 // $edata1=bin2hex(openssl_encrypt($data1, "AES-256-CBC", $key, OPENSSL_RAW_DATA, $iv));
-exports.aesCrypt = (TradeInfo) => {
+export const AesCrypt = (TradeInfo) => {
   const encrypt = crypto.createCipheriv("aes-256-cbc", HASHKEY, HASHIV);
   const enc = encrypt.update(genDataChain(TradeInfo), "utf8", "hex");
   return enc + encrypt.final("hex");
@@ -36,7 +38,7 @@ exports.aesCrypt = (TradeInfo) => {
 
 // 對應文件 P18：使用 sha256 加密
 // $hashs="HashKey=".$key."&".$edata1."&HashIV=".$iv;
-exports.shaCrypt = (aesEncrypt) => {
+export const ShaCrypt = (aesEncrypt) => {
   const sha = crypto.createHash("sha256");
   const plainText = `HashKey=${HASHKEY}&${aesEncrypt}&HashIV=${HASHIV}`;
 
@@ -44,7 +46,7 @@ exports.shaCrypt = (aesEncrypt) => {
 };
 
 // 對應文件 21, 22 頁：將 aes 解密
-exports.sesDecrypt = (TradeInfo) => {
+export const SesDecrypt = (TradeInfo) => {
   const decrypt = crypto.createDecipheriv("aes256", HASHKEY, HASHIV);
   decrypt.setAutoPadding(false);
   const text = decrypt.update(TradeInfo, "hex", "utf8");

@@ -1,9 +1,9 @@
-var express = require("express");
-var router = express.Router();
+import express from "express";
+const router = express.Router();
 
 router.get("/", function (req, res) {
   // #swagger.ignore = true
   res.render("index", { title: "結帳失敗" });
 });
 
-module.exports = router;
+export default router;

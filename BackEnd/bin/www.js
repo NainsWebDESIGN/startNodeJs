@@ -4,11 +4,13 @@
  * Module dependencies.
  */
 
-var app = require("../app");
-var debug = require("debug")("backend:server");
-var http = require("http");
-const { parse } = require("url");
-const wss1 = require("../routes/ws");
+import app from "../app.js";
+import debug from "debug";
+import http from "http";
+import { parse } from "url";
+import wss1 from "../routes/ws.js";
+
+const debugInstand = debug("backend:server");
 
 /**
  * Get port from environment and store in Express.
@@ -96,5 +98,5 @@ function onError(error) {
 function onListening() {
   var addr = server.address();
   var bind = typeof addr === "string" ? "pipe " + addr : "port " + addr.port;
-  debug("Listening on " + bind);
+  debugInstand("Listening on " + bind);
 }

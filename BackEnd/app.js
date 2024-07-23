@@ -1,29 +1,45 @@
-const createError = require("http-errors");
-const express = require("express");
-const path = require("path");
-const cookieParser = require("cookie-parser");
-const logger = require("morgan");
-const cors = require("cors");
-const swaggerUi = require("swagger-ui-express");
-const swaggerDocument = require("./swagger-output.json");
+// const createError = require("http-errors");
+// const express = require("express");
+// const path = require("path");
+// const cookieParser = require("cookie-parser");
+// const logger = require("morgan");
+// const cors = require("cors");
+// const swaggerUi = require("swagger-ui-express");
+// const swaggerDocument = require("./swagger-output.json");
 
-const indexRouter = require("./routes/index");
-const errorRouter = require("./routes/errorRouter");
-const apiRouter = require("./routes/api");
-const usersRouter = require("./routes/users");
-const newebPay = require("./routes/newebpay");
+// const indexRouter = require("./routes/index");
+// const errorRouter = require("./routes/errorRouter");
+// const apiRouter = require("./routes/api");
+// const usersRouter = require("./routes/users");
+// const newebPay = require("./routes/newebpay");
+
+import createError from "http-errors";
+import express from "express";
+import path from "path";
+import cookieParser from "cookie-parser";
+import logger from "morgan";
+import cors from "cors";
+import swaggerUi from "swagger-ui-express";
+
+import indexRouter from "./routes/index.js";
+import errorRouter from "./routes/errorRouter.js";
+import apiRouter from "./routes/api.js";
+import usersRouter from "./routes/users.js";
+import newebPay from "./routes/newebpay.js";
+
+import { readFile } from "fs/promises";
+const swaggerDocument = JSON.parse(
+  await readFile(new URL("./swagger-output.json", import.meta.url))
+);
 
 const app = express();
-app.use(cors());
 
-// 解決 CORS 問題
-// app.all("*", (req, res, next) => {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header("Access-Control-Allow-Methods", "PUT, GET, POST, DELETE, OPTIONS");
-//   res.header("Access-Control-Allow-Headers", "X-Requested-With");
-//   res.header("Access-Control-Allow-Headers", ["mytoken", "Content-Type"]);
-//   next();
-// });
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+app.use(cors());
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -58,4 +74,5 @@ app.use(function (err, req, res, next) {
   res.render("error");
 });
 
-module.exports = app;
+// module.exports = app;
+export default app;

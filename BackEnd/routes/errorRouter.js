@@ -1,6 +1,6 @@
-var express = require("express");
-var router = express.Router();
-const err = require("../service/catchError");
+import express from "express";
+const router = express.Router();
+import err from "../service/catchError.js";
 
 const errorController = async (req, res) => {
   a; // 未定義
@@ -14,7 +14,7 @@ const errorController = async (req, res) => {
 router.get(
   "/",
   // #swagger.ignore = true
-  err.catch(errorController)
+  err(errorController)
 );
 
-module.exports = router;
+export default router;

@@ -1,9 +1,11 @@
-const mysql = require("../service/database");
-const Encrypt = require("../service/dataFrom");
-require("dotenv").config(); // 載入.env 檔案
+import mysql from "../service/database.js";
+import dotenv from "dotenv";
+dotenv.config(); // 載入.env 檔案
+
+import { AesCrypt, ShaCrypt, SesDecrypt } from "../service/dataFrom.js";
 const { MerchantID, Version, PayGateWay, NotifyUrl, ReturnUrl } = process.env; // 取得環境變數
 
-class NewebPayModel {
+export default class NewebPayModel {
   constructor() {
     this.orders = {};
   }
@@ -25,11 +27,11 @@ class NewebPayModel {
 
     // 進行訂單加密
     // 加密第一段字串，此段主要是提供交易內容給予藍新金流
-    const aesEncrypt = Encrypt.aesCrypt(order);
+    const aesEncrypt = AesCrypt(order);
     // console.log('aesEncrypt:', aesEncrypt);
 
     // 使用 HASH 再次 SHA 加密字串，作為驗證使用
-    const shaEncrypt = Encrypt.shaCrypt(aesEncrypt);
+    const shaEncrypt = ShaCrypt(aesEncrypt);
     // console.log('shaEncrypt:', shaEncrypt);
     order.aesEncrypt = aesEncrypt;
     order.shaEncrypt = shaEncrypt;
@@ -41,7 +43,7 @@ class NewebPayModel {
 
   NotifyUrl(response) {
     // 解密交易內容
-    const data = Encrypt.sesDecrypt(response.TradeInfo);
+    const data = SesDecrypt(response.TradeInfo);
     console.log("data:", data);
 
     // 取得交易內容，並查詢本地端資料庫是否有相符的訂單
@@ -52,7 +54,7 @@ class NewebPayModel {
     }
 
     // 使用 HASH 再次 SHA 加密字串，確保比對一致（確保不正確的請求觸發交易成功）
-    const thisShaEncrypt = Encrypt.shaCrypt(response.TradeInfo);
+    const thisShaEncrypt = ShaCrypt(response.TradeInfo);
     if (!thisShaEncrypt === response.TradeSha) {
       console.log("付款失敗：TradeSha 不一致");
       return res.end();
@@ -76,8 +78,7 @@ class NewebPayModel {
     const queryParams = Object.keys(ordersData)
       .map((key) => `'${ordersData[key]}'`)
       .join(", ");
-    return mysql
-      .query(`INSERT INTO orders VALUES (${queryParams})`)
+    return mysql(`INSERT INTO orders VALUES (${queryParams})`)
       .then((res) => {
         console.log("mysqlMessage", res);
         // 交易完成，將成功資訊儲存於資料庫
@@ -88,5 +89,3 @@ class NewebPayModel {
       .catch((err) => console.log(err));
   }
 }
-
-module.exports = new NewebPayModel();

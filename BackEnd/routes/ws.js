@@ -1,8 +1,8 @@
-const WebSocket = require("ws");
-// const uuid = require("uuid/v4");
-const uuid = require("uuid").v4;
+import WebSocket, { WebSocketServer } from "ws";
 
-const wss1 = new WebSocket.WebSocketServer({ noServer: true });
+import { v4 as uuid } from "uuid";
+
+const wss1 = new WebSocketServer({ noServer: true });
 
 wss1.on(
   "connection",
@@ -51,4 +51,4 @@ function sendAllUser(msg) {
   });
 }
 
-module.exports = wss1;
+export default wss1;

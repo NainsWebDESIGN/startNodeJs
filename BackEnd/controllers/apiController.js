@@ -1,14 +1,15 @@
-const apiModel = require("../models/apiModel");
-const formData = require("../service/dataFrom");
+import apiModel from "../models/apiModel.js";
 
-exports.getAllTodos = async (req, res) => {
+import { Form, Verify } from "../service/dataFrom.js";
+
+export const getAllTodos = async (req, res) => {
   const todos = await apiModel.getAll();
-  res.send(formData.form(true, todos));
+  res.send(Form(true, todos));
   res.end();
 };
 
-exports.createTodo = async (req, res) => {
-  const verify = await formData.verify(req);
+export const createTodo = async (req, res) => {
+  const verify = await Verify(req);
   if (!verify.success) {
     res.status(401).send(verify);
     res.end();
@@ -19,15 +20,15 @@ exports.createTodo = async (req, res) => {
         res.status(400).send(final(false, {}, create.Msg));
         break;
       default:
-        res.send(formData.form(true, create));
+        res.send(Form(true, create));
         break;
     }
     res.end();
   }
 };
 
-exports.updateTodo = async (req, res) => {
-  const verify = await formData.verify(req);
+export const updateTodo = async (req, res) => {
+  const verify = await Verify(req);
   if (!verify.success) {
     res.status(401).send(verify);
     res.end();
@@ -35,18 +36,18 @@ exports.updateTodo = async (req, res) => {
     const update = await apiModel.update(req);
     switch (update.status) {
       case "OK":
-        res.status(400).send(formData.form(false, {}, update.Msg));
+        res.status(400).send(Form(false, {}, update.Msg));
         break;
       default:
-        res.send(formData.form(true, update));
+        res.send(Form(true, update));
         break;
     }
     res.end();
   }
 };
 
-exports.deleteTodo = async (req, res) => {
-  const verify = await formData.verify(req);
+export const deleteTodo = async (req, res) => {
+  const verify = await Verify(req);
   if (!verify.success) {
     res.status(401).send(verify);
     res.end();
@@ -54,10 +55,10 @@ exports.deleteTodo = async (req, res) => {
     const _delete = await apiModel.delete(req.params);
     switch (_delete) {
       case "Error":
-        res.status(400).send(formData.form(false, {}, _delete.Msg));
+        res.status(400).send(Form(false, {}, _delete.Msg));
         break;
       default:
-        res.send(formData.form(true, _delete));
+        res.send(Form(true, _delete));
         break;
     }
     res.end();

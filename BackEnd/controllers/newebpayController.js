@@ -1,19 +1,20 @@
-const formData = require("../service/dataFrom");
-const webpayModel = require("../models/newebpayModel");
+import webpayModel from "../models/newebpayModel.js";
 
-exports.createOrder = async (req, res) => {
-  const verify = await formData.verify(req);
+import { Form, Verify } from "../service/dataFrom.js";
+
+export const createOrder = async (req, res) => {
+  const verify = await Verify(req);
   if (!verify.success) {
     res.status(401).send(verify);
     res.end();
   } else {
     const order = webpayModel.Create(req.body);
-    res.send(formData.form(true, order));
+    res.send(Form(true, order));
     res.end();
   }
 };
 
-exports.notifyUrl = async (req, res) => {
+export const notifyUrl = async (req, res) => {
   console.log("req.body notify data", req.body);
   await webpayModel.NotifyUrl(req.body);
   res.end();

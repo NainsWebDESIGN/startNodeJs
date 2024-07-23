@@ -1,7 +1,13 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const err = require("../service/catchError");
-const apiController = require("../controllers/apiController");
+import err from "../service/catchError.js";
+
+import {
+  getAllTodos,
+  createTodo,
+  updateTodo,
+  deleteTodo,
+} from "../controllers/apiController.js";
 
 /* GET home page. */
 router.get(
@@ -15,7 +21,7 @@ router.get(
           data: [{ id: 1, title: "第一條備忘錄事項" }]
         }
       } */
-  err.catch(apiController.getAllTodos)
+  err(getAllTodos)
 );
 
 router.post(
@@ -35,7 +41,7 @@ router.post(
           data: [{ id: 1, title: "第一條備忘錄事項" }]
         }   
       } */
-  err.catch(apiController.createTodo)
+  err(createTodo)
 );
 
 router.put(
@@ -55,7 +61,7 @@ router.put(
           data: [{ id: 1, title: "第一條備忘錄事項" }]
         }
       } */
-  err.catch(apiController.updateTodo)
+  err(updateTodo)
 );
 
 router.delete(
@@ -69,7 +75,7 @@ router.delete(
           data: [{ id: 1, title: "第一條備忘錄事項" }]
         }
       } */
-  err.catch(apiController.deleteTodo)
+  err(deleteTodo)
 );
 
-module.exports = router;
+export default router;
