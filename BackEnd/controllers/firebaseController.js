@@ -1,33 +1,5 @@
-import admin from 'firebase-admin';
-import dotenv from "dotenv";
-dotenv.config(); // 載入.env 檔案
-
 import { Form } from '../service/dataFrom.js';
-
-// 初始化 Firebase Admin SDK
-// 載入 Firebase Admin 資源配置
-const {
-    FIREBASE_PROJECT_ID,
-    FIREBASE_PRIVATE_KEY_ID,
-    FIREBASE_PRIVATE_KEY,
-    FIREBASE_CLIENT_EMAIL,
-    FIREBASE_STORAGE_BUCKET,
-} = process.env;
-
-const serviceAccount = {
-    type: 'service_account',
-    project_id: FIREBASE_PROJECT_ID,
-    private_key_id: FIREBASE_PRIVATE_KEY_ID,
-    private_key: FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'),
-    client_email: FIREBASE_CLIENT_EMAIL,
-};
-
-admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-    storageBucket: FIREBASE_STORAGE_BUCKET,
-});
-
-const bucket = admin.storage().bucket();
+import bucket from '../service/firebase-admin.js';
 
 export const upLoad = (req, res) => {
     // console.log("file", req.file);
