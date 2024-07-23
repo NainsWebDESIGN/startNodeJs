@@ -63,7 +63,7 @@ export class ApiService {
       }
 
       catchError(err) {
-            alert(err.error.message);
+            alert(err.error.message || err.message);
             if (["未登入", "驗證失敗"].includes(err.error.message)) {
                   location.href = "/";
                   this.uidStatus.clear();

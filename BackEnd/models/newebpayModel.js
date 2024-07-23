@@ -44,10 +44,10 @@ export default class NewebPayModel {
   NOTIFYURL(response) {
     // 解密交易內容
     const data = SesDecrypt(response.TradeInfo);
-    console.log("data:", data);
+    // console.log("data:", data);
 
     // 取得交易內容，並查詢本地端資料庫是否有相符的訂單
-    console.log(this.orders[data?.Result?.MerchantOrderNo]);
+    // console.log(this.orders[data?.Result?.MerchantOrderNo]);
     if (!this.orders[data?.Result?.MerchantOrderNo]) {
       console.log("找不到訂單");
       return res.end();
@@ -80,9 +80,9 @@ export default class NewebPayModel {
       .join(", ");
     return mysql(`INSERT INTO orders VALUES (${queryParams})`)
       .then((res) => {
-        console.log("mysqlMessage", res);
+        // console.log("mysqlMessage", res);
         // 交易完成，將成功資訊儲存於資料庫
-        console.log("付款完成，訂單：", finalData);
+        // console.log("付款完成，訂單：", finalData);
         delete this.orders[data?.Result?.MerchantOrderNo];
         return "付款完成";
       })

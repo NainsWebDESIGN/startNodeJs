@@ -9,7 +9,7 @@ wss1.on(
   // #swagger.ignore = true
   function connection(ws) {
     ws.on("error", console.error);
-    console.log("連線成功 / WebSocket connection Succes");
+    // console.log("連線成功 / WebSocket connection Succes");
 
     const uid = uuid();
 

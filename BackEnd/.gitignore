@@ -4,3 +4,4 @@
 /.DS_Store
 /swagger-output.json
 /.env
+/backdata/.DS_Store

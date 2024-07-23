@@ -29,6 +29,7 @@ import errorRouter from "./routes/errorRouter.js";
 import apiRouter from "./routes/api.js";
 import usersRouter from "./routes/users.js";
 import newebPay from "./routes/newebpay.js";
+import FireBase from './routes/firebase.js';
 
 import { readFile } from "fs/promises";
 const swaggerDocument = JSON.parse(
@@ -58,6 +59,7 @@ app.use("/error", errorRouter);
 app.use("/api", apiRouter);
 app.use("/users", usersRouter);
 app.use("/webPay", newebPay);
+app.use("/firebase", FireBase);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // catch 404 and forward to error handler

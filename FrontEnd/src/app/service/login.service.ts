@@ -11,8 +11,7 @@ export class LoginService {
         this.api.apiServer('/users/login', Method.POST, body).subscribe(res => {
             if (res.message === "登入成功") {
                 this.uuid.uid = res.status;
-                console.log(res.status);
-                console.log(this.uuid.uid);
+                // console.log(res.status);
                 this.router.navigate(['/front/todos']);
             } else {
                 alert(res.message);

@@ -56,7 +56,7 @@ export default (need) => {
         return;
       }
 
-      console.log("MySQL connection closed");
+      // console.log("MySQL connection closed");
     })
   );
 };

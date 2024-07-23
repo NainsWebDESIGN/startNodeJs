@@ -13,5 +13,10 @@
     "target": "http://127.0.0.1:2862/",
     "secure": false,
     "changeOrigin": true
+  },
+  "/firebase": {
+    "target": "http://127.0.0.1:2862/",
+    "secure": false,
+    "changeOrigin": true
   }
 }

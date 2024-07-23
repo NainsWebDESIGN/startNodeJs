@@ -6,6 +6,7 @@ import { ApiService } from '@service/api.service';
 import { LoginService } from '@service/login.service';
 import { CommodityService } from '@service/commodity.service';
 import { Method } from '@ts/enum';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-todos',
@@ -21,6 +22,8 @@ export class TodosComponent implements OnInit {
   Price: number = 1000;
   Email: string = "";
   ItemDesc: string = "測試商品";
+  SelectFile: File | null = null;
+  fileUrl: Observable<string>;
   constructor(
     public todoList: TodosService,
     public islogin: LoginService,
@@ -43,7 +46,6 @@ export class TodosComponent implements OnInit {
         break;
       case Method.DELETE:
         req = { getway: this.Delete, data: {} };
-        console.log(req);
         break;
     }
 
@@ -56,14 +58,21 @@ export class TodosComponent implements OnInit {
     let req = { data: { ItemDesc: this.ItemDesc, Amt: this.Price, Email: this.Email } };
     this.api.apiServer('/webPay/order', Method.POST, req).subscribe(
       res => {
-        console.log(res);
         this.Commod.changeMerch(res);
         this.router.navigate([`/front/confrim/${res.MerchantOrderNo}`]);
       }
     );
   }
 
-  test(value) {
-    console.log(value);
+  fileEvent(value) {
+    this.SelectFile = (value.target.files.length > 0) ? value.target.files[0] : null;
+  }
+  upLoadFile() {
+    if (this.SelectFile) {
+      let fileName = this.SelectFile.name;
+      let formData = new FormData();
+      formData.append('file', this.SelectFile, fileName);
+      this.fileUrl = this.api.apiServer('/firebase/upload', Method.POST, { data: formData });
+    }
   }
 }
