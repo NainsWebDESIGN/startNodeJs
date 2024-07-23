@@ -10,7 +10,7 @@ export default class NewebPayModel {
     this.orders = {};
   }
 
-  Create(data) {
+  CREATE(data) {
     const TimeStamp = Math.round(new Date().getTime() / 1000);
     const order = {
       ItemDesc: data.ItemDesc,
@@ -41,7 +41,7 @@ export default class NewebPayModel {
     return order;
   }
 
-  NotifyUrl(response) {
+  NOTIFYURL(response) {
     // 解密交易內容
     const data = SesDecrypt(response.TradeInfo);
     console.log("data:", data);

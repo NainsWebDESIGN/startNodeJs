@@ -12,6 +12,9 @@
 // const apiRouter = require("./routes/api");
 // const usersRouter = require("./routes/users");
 // const newebPay = require("./routes/newebpay");
+// const app = express();
+
+// 在 package.json 中添加 "type": "module"
 
 import createError from "http-errors";
 import express from "express";
@@ -36,8 +39,7 @@ const app = express();
 
 import { fileURLToPath } from "url";
 import { dirname } from "path";
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 app.use(cors());
 
@@ -74,5 +76,5 @@ app.use(function (err, req, res, next) {
   res.render("error");
 });
 
-// module.exports = app;
+// export default app;
 export default app;

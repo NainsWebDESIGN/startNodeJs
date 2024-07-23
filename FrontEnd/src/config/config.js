@@ -5,10 +5,12 @@ function env() {
         unicode: (unicode) =>
             String.fromCharCode(parseInt(unicode.substring(2), 16)),
         url: "https://back-example.zeabur.app"
-    }
+    };
     try {
-        DEFAULT.url = window.location.href.includes("front-example.zeabur") ? "https://back-example.zeabur.app" : "";
-    } catch (e) { }
+        _DEFAULT.url = window.location.href.includes("front-example.zeabur") ? "https://back-example.zeabur.app" : "";
+    } catch (e) {
+        console.log(`Config url Error: ${e}`);
+    }
     return _DEFAULT;
 }
 window['env'] = env();

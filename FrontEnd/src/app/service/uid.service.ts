@@ -6,15 +6,15 @@ export class UidService {
     private _uid: string;
 
     get uid(): string {
-        this._uid = sessionStorage.getItem('uid');
+        this._uid = localStorage.getItem('uid');
         return this._uid;
     }
 
     set uid(uid: string) {
         if (uid) {
-            sessionStorage.setItem('uid', uid);
+            localStorage.setItem('uid', uid);
         } else {
-            sessionStorage.removeItem('uid');
+            localStorage.removeItem('uid');
         }
 
         this._uid = uid;

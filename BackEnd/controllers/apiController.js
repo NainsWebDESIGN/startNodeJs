@@ -1,9 +1,10 @@
 import apiModel from "../models/apiModel.js";
 
 import { Form, Verify } from "../service/dataFrom.js";
+const api = new apiModel();
 
 export const getAllTodos = async (req, res) => {
-  const todos = await apiModel.getAll();
+  const todos = await api.GETALL();
   res.send(Form(true, todos));
   res.end();
 };
@@ -14,7 +15,7 @@ export const createTodo = async (req, res) => {
     res.status(401).send(verify);
     res.end();
   } else {
-    const create = await apiModel.create(req.body);
+    const create = await api.CREATE(req.body);
     switch (create.status) {
       case "Error":
         res.status(400).send(final(false, {}, create.Msg));
@@ -33,7 +34,7 @@ export const updateTodo = async (req, res) => {
     res.status(401).send(verify);
     res.end();
   } else {
-    const update = await apiModel.update(req);
+    const update = await api.UPDATE(req);
     switch (update.status) {
       case "OK":
         res.status(400).send(Form(false, {}, update.Msg));
@@ -52,7 +53,7 @@ export const deleteTodo = async (req, res) => {
     res.status(401).send(verify);
     res.end();
   } else {
-    const _delete = await apiModel.delete(req.params);
+    const _delete = await api.DELETE(req.params);
     switch (_delete) {
       case "Error":
         res.status(400).send(Form(false, {}, _delete.Msg));

@@ -8,18 +8,15 @@ import { v4 as uuid } from "uuid";
 const { jwtKey } = process.env; // 取得環境變數
 
 export default class UsersModel {
-  constructor() {
-    this.token = [];
-    // this.users = {};
-  }
+  token = []; // 儲存token
+  constructor() { }
 
   // 1. 註冊
-  async SignUp(req) {
+  async SIGNUP(req) {
     const { email, password, username } = req.body;
 
     return (
       mysql(`SELECT * FROM users WHERE email='${email}'`)
-        // .query(`SELECT * FROM users WHERE email='${email}'`)
         .then(async (res) => {
           if (res.length !== 0) return false;
           // 1-1 加密
@@ -29,31 +26,26 @@ export default class UsersModel {
           !hashPassword
             ? false
             : // 1-2 儲存
-              mysql(
-                `INSERT INTO users VALUES ('${username}', '${email}', '${hashPassword}')`
-              )
-                // .query(
-                //   `INSERT INTO users VALUES ('${username}', '${email}', '${hashPassword}')`
-                // )
-                .then((res) => res.affectedTows !== 0)
-                .catch((err) => console.log(err))
+            mysql(
+              `INSERT INTO users VALUES ('${username}', '${email}', '${hashPassword}')`
+            )
+              .then((res) => res.affectedTows !== 0)
+              .catch((err) => console.log(err))
         )
         .catch((err) => console.log(err))
     );
   }
 
   // 2. 登入
-  async Login(req) {
+  async LOGIN(req) {
     const { email, password } = req.body;
 
     return (
       mysql(`SELECT * FROM users WHERE email='${email}'`)
-        // .query(`SELECT * FROM users WHERE email='${email}'`)
         .then(async (res) => {
           // console.log(res);
 
           // 2-1 驗證用戶是否存在
-          // const user = this.users[email];
           if (res.length == 0) {
             return "用戶不存在";
           }
@@ -81,6 +73,8 @@ export default class UsersModel {
             this.token.push(uid); // 儲存token
           });
 
+          console.log("token", this.token);
+
           return uid;
         })
         .catch((err) => console.log(err))
@@ -88,10 +82,10 @@ export default class UsersModel {
   }
 
   // 3. 驗證用戶(同時取得用戶資料)
-  Profile(req) {
+  PROFILE(req) {
     const Authorization = req.headers["authorization"];
     const token = Authorization.split("?uuid=")[0];
-
+    console.log("token", this.token);
     // 3-1 驗證用戶有送token
     if (!token || !this.token.includes(Authorization)) {
       return "未登入";
@@ -108,7 +102,7 @@ export default class UsersModel {
   }
 
   // 4. 登出
-  Logout(req) {
+  LOGOUT(req) {
     const Authorization = req.headers["authorization"];
     let index = this.token.indexOf(Authorization);
     switch (index) {
@@ -121,4 +115,3 @@ export default class UsersModel {
   }
 }
 
-// module.exports = new UsersModel();

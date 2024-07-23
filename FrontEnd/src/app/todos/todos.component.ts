@@ -17,7 +17,7 @@ export class TodosComponent implements OnInit {
   Add: string = "";
   changeNumber: number = 1;
   Change: string = "";
-  Delete: string = "";
+  Delete: number = 1;
   Price: number = 1000;
   Email: string = "";
   ItemDesc: string = "測試商品";
@@ -43,12 +43,13 @@ export class TodosComponent implements OnInit {
         break;
       case Method.DELETE:
         req = { getway: this.Delete, data: {} };
+        console.log(req);
         break;
     }
 
     this.todoList.getTodos('/api/product', _name as Method, req);
-    ["Add", "Change", "Delete"].forEach(item => this[item] = "");
-    this.changeNumber = 1;
+    ["Change", "Add"].forEach(item => this[item] = "");
+    ["changeNumber", "Delete"].forEach(item => this[item] = 1);
   }
 
   confrim() {
@@ -62,4 +63,7 @@ export class TodosComponent implements OnInit {
     );
   }
 
+  test(value) {
+    console.log(value);
+  }
 }

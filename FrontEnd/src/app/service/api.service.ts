@@ -65,27 +65,12 @@ export class ApiService {
       catchError(err) {
             alert(err.error.message);
             if (["未登入", "驗證失敗"].includes(err.error.message)) {
-                  this.apiServer('/users/logout', Method.POST, { data: { uuid: this.uidStatus.uid } })
-                        .subscribe(
-                              res => {
-                                    if (res.message === "OK") {
-                                          location.href = "/";
-                                          this.uidStatus.clear();
-                                          sessionStorage.removeItem('uid');
-                                    } else {
-                                          alert(res.message);
-                                    }
-                              },
-                              err => console.log(err),
-                              () => {
-                                    console.log(err);
-                                    return Observable.throw(err.error.message || err);
-                              }
-                        );
-            } else {
-                  console.log(err);
-                  return Observable.throw(err.error.message || err);
+                  location.href = "/";
+                  this.uidStatus.clear();
+                  sessionStorage.removeItem('uid');
             }
+            console.log(err);
+            return Observable.throw(err.error.message || err);
       }
 }
 

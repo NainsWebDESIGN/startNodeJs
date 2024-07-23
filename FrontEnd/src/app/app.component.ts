@@ -9,10 +9,10 @@ import { UidService } from '@service/uid.service';
 export class AppComponent {
   constructor(private router: Router, private uidStatus: UidService) {
     try {
-      this.uidStatus.uid = sessionStorage.getItem("uid");
+      this.uidStatus.uid = localStorage.getItem("uid");
       console.log("uid: ", this.uidStatus.uid);
     } catch (e) {
-      console.log("sessionStorage is not found uid: " + e);
+      console.log("localStorage is not found uid: " + e);
     }
 
     if (location.search.includes('success=true')) {

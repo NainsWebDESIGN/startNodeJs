@@ -1,25 +1,25 @@
 import mysql from "../service/database.js";
 export default class ApiModel {
-  constructor() {}
+  constructor() { }
 
   final = async (el) => {
     return el
       ? await this.getAll()
       : JSON.stringify({
-          status: "Error",
-          Msg: el.message,
-        });
+        status: "Error",
+        Msg: el.message,
+      });
   };
 
   //取得全部
-  getAll() {
+  GETALL() {
     return mysql("SELECT * FROM todos")
       .then((res) => res)
       .catch((err) => console.log("err", err));
   }
 
   //新增資料
-  create(todo) {
+  CREATE(todo) {
     const { title } = todo;
     return mysql(`INSERT INTO todos VALUES(NULL, '${title}')`)
       .then((res) => this.final(res.affectedTows !== 0))
@@ -27,7 +27,7 @@ export default class ApiModel {
   }
 
   // 更新資料
-  update(req) {
+  UPDATE(req) {
     const { id } = req.params;
     const { title } = req.body;
 
@@ -37,7 +37,7 @@ export default class ApiModel {
   }
 
   // 刪除資料
-  async delete(params) {
+  async DELETE(params) {
     const { id } = params;
     const data = await this.truncate(id);
     const box = data.map((item) => `(NULL, '${item.title}')`);

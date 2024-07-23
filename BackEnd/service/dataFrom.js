@@ -16,15 +16,15 @@ export const Form = (status, data, msg = "") => {
 };
 
 export const Verify = (req) => {
-  const status = usersModel.Profile(req);
+  const status = new usersModel().PROFILE(req);
 
   switch (status) {
     case "未登入":
-      return this.form(false, {}, "未登入");
+      return Form(false, {}, "未登入");
     case "驗證錯誤":
-      return this.form(false, {}, "驗證錯誤");
+      return Form(false, {}, "驗證錯誤");
     default:
-      return this.form(true, { message: "成功", status });
+      return Form(true, { message: "成功", status });
   }
 };
 
@@ -57,13 +57,11 @@ export const SesDecrypt = (TradeInfo) => {
 
 // 字串組合
 function genDataChain(order) {
-  return `MerchantID=${MerchantID}&TimeStamp=${
-    order.TimeStamp
-  }&Version=${Version}&RespondType=${RespondType}&MerchantOrderNo=${
-    order.MerchantOrderNo
-  }&Amt=${order.Amt}&NotifyURL=${encodeURIComponent(
-    NotifyUrl
-  )}&ReturnURL=${encodeURIComponent(ReturnUrl)}&ItemDesc=${encodeURIComponent(
-    order.ItemDesc
-  )}&Email=${encodeURIComponent(order.Email)}`;
+  return `MerchantID=${MerchantID}&TimeStamp=${order.TimeStamp
+    }&Version=${Version}&RespondType=${RespondType}&MerchantOrderNo=${order.MerchantOrderNo
+    }&Amt=${order.Amt}&NotifyURL=${encodeURIComponent(
+      NotifyUrl
+    )}&ReturnURL=${encodeURIComponent(ReturnUrl)}&ItemDesc=${encodeURIComponent(
+      order.ItemDesc
+    )}&Email=${encodeURIComponent(order.Email)}`;
 }

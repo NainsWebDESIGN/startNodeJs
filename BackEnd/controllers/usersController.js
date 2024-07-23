@@ -1,10 +1,11 @@
 import usersModel from "../models/usersModel.js";
 
 import { Form } from "../service/dataFrom.js";
+const user = new usersModel();
 
 // 1. 註冊
 export const SignUp = async (req, res) => {
-  const password = await usersModel.SignUp(req);
+  const password = await user.SIGNUP(req);
   // console.log(JSON.stringify(password));
 
   if (!password) {
@@ -19,7 +20,7 @@ export const SignUp = async (req, res) => {
 
 // 2. 登入
 export const Login = async (req, res) => {
-  const status = await usersModel.Login(req);
+  const status = await user.LOGIN(req);
 
   // 2-4 回應
   switch (status) {
@@ -39,7 +40,7 @@ export const Login = async (req, res) => {
 
 // 3. 驗證用戶(同時取得用戶資料)
 export const Profile = (req, res) => {
-  const status = usersModel.Profile(req);
+  const status = user.PROFILE(req);
 
   // 3-3 回應
   switch (status) {
@@ -58,7 +59,7 @@ export const Profile = (req, res) => {
 };
 
 export const Logout = (req, res) => {
-  const status = usersModel.Logout(req);
+  const status = user.LOGOUT(req);
 
   switch (status) {
     case "未登入":
