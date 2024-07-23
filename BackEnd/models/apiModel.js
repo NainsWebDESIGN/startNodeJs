@@ -1,10 +1,10 @@
-import mysql from "../service/database.js";
+import mysql from "../service/mysql.js";
 export default class ApiModel {
   constructor() { }
 
   final = async (el) => {
     return el
-      ? await this.getAll()
+      ? await this.GETALL()
       : JSON.stringify({
         status: "Error",
         Msg: el.message,

@@ -1,4 +1,4 @@
-import mysql from "../service/database.js";
+import mysql from "../service/mysql.js";
 import dotenv from "dotenv";
 dotenv.config(); // 載入.env 檔案
 

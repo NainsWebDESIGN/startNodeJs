@@ -1,14 +1,17 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import mysql from "../service/database.js";
+import mysql from "../service/mysql.js";
 import dotenv from "dotenv";
 dotenv.config(); // 載入.env 檔案
 
 import { v4 as uuid } from "uuid";
+import { readFile } from "fs/promises";
+const Token = JSON.parse(
+  await readFile(new URL("../backdata/data.json", import.meta.url))
+);
 const { jwtKey } = process.env; // 取得環境變數
 
 export default class UsersModel {
-  token = []; // 儲存token
   constructor() { }
 
   // 1. 註冊
@@ -70,10 +73,10 @@ export default class UsersModel {
             if (err) {
               return "驗證錯誤";
             }
-            this.token.push(uid); // 儲存token
+            Token.push(uid); // 儲存token
           });
 
-          console.log("token", this.token);
+          // console.log("token", Token);
 
           return uid;
         })
@@ -85,9 +88,9 @@ export default class UsersModel {
   PROFILE(req) {
     const Authorization = req.headers["authorization"];
     const token = Authorization.split("?uuid=")[0];
-    console.log("token", this.token);
+
     // 3-1 驗證用戶有送token
-    if (!token || !this.token.includes(Authorization)) {
+    if (!token || !Token.includes(Authorization)) {
       return "未登入";
     }
 
@@ -104,12 +107,12 @@ export default class UsersModel {
   // 4. 登出
   LOGOUT(req) {
     const Authorization = req.headers["authorization"];
-    let index = this.token.indexOf(Authorization);
+    let index = Token.indexOf(Authorization);
     switch (index) {
       case -1:
         return "未登入";
       default:
-        this.token.splice(index, 1); // 刪除token
+        Token.splice(index, 1); // 刪除token
         return "OK";
     }
   }
