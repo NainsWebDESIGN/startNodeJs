@@ -12,7 +12,7 @@
   <button (click)='postServer("put")'>修改</button>
   <input type="text" [(ngModel)]="Add" placeholder="備忘事項" (keyup.enter)="postServer('post')">
   <button (click)='postServer("post")'>新增</button>
-  <select [(ngModel)]="Delete" (ngModelChange)="test($event)">
+  <select [(ngModel)]="Delete">
     <ng-container *ngFor="let changeID of todoList.todos$ | async | todos">
       <option *ngIf="!changeID" selected>0</option>
       <option *ngIf="changeID && index == 0" selected [value]="changeID.id">
