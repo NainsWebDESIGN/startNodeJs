@@ -25,12 +25,12 @@ export default class OAuthModel {
             .then(async response => {
                 const { access_token } = response.data;
 
-                return axios.all([
+                return await axios.all([
                     axios.get('https://api.github.com/user', {
-                        headers: { Authorization: `token ${access_token}` },
+                        headers: { Authorization: `Bearer ${access_token}` },
                     }),
                     axios.get('https://api.github.com/user/emails', {
-                        headers: { Authorization: `token ${access_token}` },
+                        headers: { Authorization: `Bearer ${access_token}` },
                     })
                 ])
                     .then(axios.spread(async (obj1, obj2) => {

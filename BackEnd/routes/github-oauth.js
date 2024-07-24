@@ -1,5 +1,6 @@
 import express from "express";
 
+import err from '../service/catchError.js';
 import { callback, authenticateJWT, getUser } from '../controllers/github-oauthController.js';
 const router = express.Router();
 
@@ -11,7 +12,7 @@ router.get(
       #swagger.responses[200] = { 
         schema: "重新導向至前端頁面並附上Token"
       } */
-  callback
+  err(callback)
 );
 
 // 受保護的路由範例，需要 JWT 驗證
@@ -25,7 +26,7 @@ router.get(
         }
       } */
   authenticateJWT,
-  getUser
+  err(getUser)
 );
 
 export default router;
