@@ -27,18 +27,10 @@ export default class OAuthModel {
 
                 return await axios.all([
                     axios.get('https://api.github.com/user', {
-                        headers: {
-                            // Accept: 'application/json',
-                            Authorization: `token ${access_token}`,
-                            // 'X-GitHub-Api-Version': '2022-11-28'
-                        },
+                        headers: { Authorization: `token ${access_token}` },
                     }),
                     axios.get('https://api.github.com/user/emails', {
-                        headers: {
-                            // Accept: 'application/json',
-                            Authorization: `token ${access_token}`,
-                            // 'X-GitHub-Api-Version': '2022-11-28'
-                        },
+                        headers: { Authorization: `token ${access_token}` },
                     })
                 ])
                     .then(axios.spread(async (obj1, obj2) => {
