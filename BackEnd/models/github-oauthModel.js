@@ -38,7 +38,7 @@ export default class OAuthModel {
                         const userResponse = obj1;
                         // 獲取用戶電子郵件地址
                         const emailResponse = obj2;
-                        F
+
                         const user = {
                             ...userResponse.data,
                             email: emailResponse.data[0].email,
