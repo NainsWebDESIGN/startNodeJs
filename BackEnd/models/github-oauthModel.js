@@ -25,25 +25,32 @@ export default class OAuthModel {
             .then(async response => {
                 const { access_token } = response.data;
 
-                // 使用存取 Token 獲取 GitHub 用戶資訊
-                const userResponse = await axios.get('https://api.github.com/user', {
-                    headers: { Authorization: `token ${access_token}` },
-                });
+                return axios.all([
+                    axios.get('https://api.github.com/user', {
+                        headers: { Authorization: `token ${access_token}` },
+                    }),
+                    axios.get('https://api.github.com/user/emails', {
+                        headers: { Authorization: `token ${access_token}` },
+                    })
+                ])
+                    .then(axios.spread(async (obj1, obj2) => {
+                        // 使用存取 Token 獲取 GitHub 用戶資訊
+                        const userResponse = obj1;
+                        // 獲取用戶電子郵件地址
+                        const emailResponse = obj2;
+                        F
+                        const user = {
+                            ...userResponse.data,
+                            email: emailResponse.data[0].email,
+                            password: "githubToken"
+                        };
 
-                // 獲取用戶電子郵件地址
-                const emailResponse = await axios.get('https://api.github.com/user/emails', {
-                    headers: { Authorization: `token ${access_token}` },
-                });
-                const user = {
-                    ...userResponse.data,
-                    email: emailResponse.data[0].email,
-                    password: "githubToken"
-                };
+                        // 此處將用戶資訊存儲到資料庫
+                        await new usersModel().SIGNUP({ body: user });
 
-                // 此處將用戶資訊存儲到資料庫
-                await new usersModel().SIGNUP({ body: user });
-
-                return user;
+                        return user;
+                    }))
+                    .catch(err => console.log(err));
             })
             .catch(err => console.log(err));
 
