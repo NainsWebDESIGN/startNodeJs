@@ -12,7 +12,7 @@ export default class OAuthModel {
     async CallBack(query) {
         const { code } = query;
         const tokenURL = `https://github.com/login/oauth/access_token`;
-        const response = await axios.post(tokenURL, null, {
+        return await axios.post(tokenURL, null, {
             params: {
                 client_id: GITHUB_CLIENT_ID,
                 client_secret: GITHUB_SECRET,
@@ -21,29 +21,32 @@ export default class OAuthModel {
             headers: {
                 Accept: 'application/json',
             },
-        });
+        })
+            .then(async response => {
+                const { access_token } = response.data;
 
-        const { access_token } = response.data;
+                // 使用存取 Token 獲取 GitHub 用戶資訊
+                const userResponse = await axios.get('https://api.github.com/user', {
+                    headers: { Authorization: `token ${access_token}` },
+                });
 
-        // 使用存取 Token 獲取 GitHub 用戶資訊
-        const userResponse = await axios.get('https://api.github.com/user', {
-            headers: { Authorization: `token ${access_token}` },
-        });
+                // 獲取用戶電子郵件地址
+                const emailResponse = await axios.get('https://api.github.com/user/emails', {
+                    headers: { Authorization: `token ${access_token}` },
+                });
+                const user = {
+                    ...userResponse.data,
+                    email: emailResponse.data[0].email,
+                    password: "githubToken"
+                };
 
-        // 獲取用戶電子郵件地址
-        const emailResponse = await axios.get('https://api.github.com/user/emails', {
-            headers: { Authorization: `token ${access_token}` },
-        });
-        const user = {
-            ...userResponse.data,
-            email: emailResponse.data[0].email,
-            password: "githubToken"
-        };
+                // 此處將用戶資訊存儲到資料庫
+                await new usersModel().SIGNUP({ body: user });
 
-        // 此處將用戶資訊存儲到資料庫
-        await new usersModel().SIGNUP({ body: user });
+                return user;
+            })
+            .catch(err => console.log(err));
 
-        return user;
     }
 
     getUser(user) {
