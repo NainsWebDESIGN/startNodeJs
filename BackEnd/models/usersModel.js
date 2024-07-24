@@ -9,34 +9,56 @@ import { readFile } from "fs/promises";
 const Token = JSON.parse(
   await readFile(new URL("../backdata/data.json", import.meta.url))
 );
-const { jwtKey } = process.env; // 取得環境變數
+const { JWT_SECRET } = process.env; // 取得環境變數
 
 export default class UsersModel {
   constructor() { }
 
   // 1. 註冊
   async SIGNUP(req) {
-    const { email, password, username } = req.body;
-
-    return (
-      mysql(`SELECT * FROM users WHERE email='${email}'`)
-        .then(async (res) => {
-          if (res.length !== 0) return false;
-          // 1-1 加密
-          return await bcrypt.hash(password, 10);
-        })
-        .then((hashPassword) =>
-          !hashPassword
-            ? false
-            : // 1-2 儲存
-            mysql(
-              `INSERT INTO users VALUES ('${username}', '${email}', '${hashPassword}')`
-            )
-              .then((res) => res.affectedTows !== 0)
-              .catch((err) => console.log(err))
-        )
+    const { password, email } = req.body;
+    const signup = (username, email, password) => {
+      return mysql(`INSERT INTO users VALUES ('${username}', '${email}', '${password}')`)
+        .then((res) => res.affectedTows !== 0)
         .catch((err) => console.log(err))
-    );
+    };
+
+    return mysql(`SELECT * FROM users WHERE email='${email}'`)
+      .then(async (res) => {
+        if (res.length !== 0 && res[0].password == "githubToken") {
+          return "githubSignuped";
+        } else if (res.length !== 0) {
+          return false;
+        } else {
+          // 1-1 加密
+          switch (password) {
+            case "githubToken":
+              return password;
+            default:
+              return await bcrypt.hash(password, 10);
+          }
+        }
+      })
+      .then((hashPassword) => {
+        if (!hashPassword) {
+          return false;
+        } else {
+          if (hashPassword == "githubSignuped") {
+            return "OK";
+          }
+          // 1-2 儲存
+          switch (password) {
+            case "githubToken":
+              const { login } = req.body;
+              return signup(login, email, hashPassword);
+            default:
+              const { username } = req.body;
+              return signup(username, email, hashPassword);
+          }
+        }
+      })
+      .catch((err) => console.log(err));
+
   }
 
   // 2. 登入
@@ -54,7 +76,7 @@ export default class UsersModel {
           }
 
           // 2-2 密碼驗證                 密碼, 加密後的密碼
-          if (!(await bcrypt.compare(password, res[0].password))) {
+          if (res[0].password !== "githubToken" && !(await bcrypt.compare(password, res[0].password))) {
             return "登入錯誤";
           }
 
@@ -64,12 +86,12 @@ export default class UsersModel {
               email,
               username: res.username,
             },
-            jwtKey
+            JWT_SECRET
           ); // key原則上會儲存在環境變數
 
           const uid = `${token}?uuid=${uuid()}`;
 
-          jwt.verify(token, jwtKey, (err, user) => {
+          jwt.verify(token, JWT_SECRET, (err, user) => {
             if (err) {
               return "驗證錯誤";
             }
@@ -95,7 +117,7 @@ export default class UsersModel {
     }
 
     // 3-2 進行驗證
-    return jwt.verify(token, jwtKey, (err, user) => {
+    return jwt.verify(token, JWT_SECRET, (err, user) => {
       if (err) {
         return "驗證錯誤";
       }

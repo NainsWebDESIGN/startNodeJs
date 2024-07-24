@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from '@service/login.service';
+import authURL from '@ts/githubOAuth';
 import env from '@ts/env';
 
 @Component({
@@ -24,6 +25,10 @@ export class LoginComponent implements OnInit {
 
     const req = { data: { email: username, password: password } };
     this.islogin.login(req);
+  }
+
+  githubLogin() {
+    location.href = authURL;
   }
 
 }

@@ -22,8 +22,9 @@ export class ApiService {
       apiServer(getway: string, method: Method = Method.GET, body?: any) {
             let _url, options;
 
-            if (!["/users/signup", "/users/login"].includes(getway)) {
+            if (!["/users/signup", "/users/login", "/githubOAuth/login"].includes(getway)) {
                   options = {
+                        // headers: new HttpHeaders({ "Authorization": (getway == "/githubOAuth/user") ? `token=${this.uidStatus.uid}` : this.uidStatus.uid })
                         headers: new HttpHeaders({ "Authorization": this.uidStatus.uid })
                   }
             }
@@ -38,14 +39,14 @@ export class ApiService {
                         _url = `${env.url + getway}/${body.getway}`;
                         return this.finalAPI(this.http.delete(_url, options));
                   default:
-                        return this.finalAPI(this.http.get(env.url + getway));
+                        return this.finalAPI(this.http.get(env.url + getway, options));
             }
 
       }
 
       finalAPI(res: Observable<any>) {
             return res
-                  .retry(2)
+                  // .retry(2)
                   .map(this.checkAPI)
                   .catch(this.catchError)
                   .shareReplay();

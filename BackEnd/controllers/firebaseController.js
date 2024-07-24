@@ -1,5 +1,16 @@
 import { Form } from '../service/dataFrom.js';
 import bucket from '../service/firebase-admin.js';
+import multer from "multer";
+
+export const File = (req, res, next) => {
+    // 設定 Multer 的存儲設定
+    const storage = multer.memoryStorage();
+    const upload = multer({ storage: storage });
+
+    upload.single('file');
+    req.file = upload.file;
+    next();
+}
 
 export const upLoad = (req, res) => {
     // console.log("file", req.file);

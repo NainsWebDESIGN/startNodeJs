@@ -2,7 +2,7 @@ import { puppeteer } from "puppeteer";
 import dotenv from "dotenv";
 dotenv.config(); // 載入.env 檔案
 
-const { testValue } = process.env; // 取得環境變數
+const { JWT_SECRET } = process.env; // 取得環境變數
 
 const waitForTimeout = (t) =>
   new Promise((resolve) => setTimeout(resolve, t * 1000)); // 等待指定秒數
@@ -37,7 +37,7 @@ const checkClickDom = async (page, selector) => {
     () => (document.querySelector("body > app-root > div > input").value = "")
   ); // 先確保 input 為空
 
-  await page.type(input_1, testValue); // 對 input 輸入testValue文字
+  await page.type(input_1, JWT_SECRET); // 對 input 輸入JWT_SECRET文字
 
   const expectValue = 123; // 期待的數值
   const value = await page.$eval(input_1, (el) => el.value.trim()); // 取得 input 值

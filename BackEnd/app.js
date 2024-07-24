@@ -1,21 +1,3 @@
-// const createError = require("http-errors");
-// const express = require("express");
-// const path = require("path");
-// const cookieParser = require("cookie-parser");
-// const logger = require("morgan");
-// const cors = require("cors");
-// const swaggerUi = require("swagger-ui-express");
-// const swaggerDocument = require("./swagger-output.json");
-
-// const indexRouter = require("./routes/index");
-// const errorRouter = require("./routes/errorRouter");
-// const apiRouter = require("./routes/api");
-// const usersRouter = require("./routes/users");
-// const newebPay = require("./routes/newebpay");
-// const app = express();
-
-// 在 package.json 中添加 "type": "module"
-
 import createError from "http-errors";
 import express from "express";
 import path from "path";
@@ -30,6 +12,7 @@ import apiRouter from "./routes/api.js";
 import usersRouter from "./routes/users.js";
 import newebPay from "./routes/newebpay.js";
 import FireBase from './routes/firebase.js';
+import GithubOAuth from './routes/github-oauth.js';
 
 import { readFile } from "fs/promises";
 const swaggerDocument = JSON.parse(
@@ -60,6 +43,7 @@ app.use("/api", apiRouter);
 app.use("/users", usersRouter);
 app.use("/webPay", newebPay);
 app.use("/firebase", FireBase);
+app.use("/githubOAuth", GithubOAuth);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // catch 404 and forward to error handler

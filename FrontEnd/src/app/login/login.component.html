@@ -6,5 +6,6 @@
   <span>密碼：</span>
   <input type="text" placeholder="密碼" [(ngModel)]="password" (keyup.enter)="login()">
   <button (click)="router.navigate(['/signup'])">註冊</button>
-  <button (click)="login()">登入</button>
+  <button (click)="login()">登入</button><br><br>
+  <button (click)='githubLogin()'>Github 登入</button>
 </header>

@@ -10,4 +10,6 @@ export interface IDefault {
     emailRule: string
     unicode: Function
     url: string
+    GITHUB_CLIENT_ID: string
+    redirectURI: string
 }
