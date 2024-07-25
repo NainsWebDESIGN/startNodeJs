@@ -9,37 +9,37 @@ export default class EcPayModel {
     constructor() { }
 
     OrderStore(params) {
-        const keys = `${params.MerchantTradeDate}${params.TradeNo}`;
         return new Promise((resolve, reject) => {
-            if (orders[keys]) {
+            if (orders[params.TradeNo]) {
                 reject("Order is have user");
             } else {
-                orders[keys] = params;
-                console.log(orders);
+                orders[params.TradeNo] = params;
                 resolve(true);
             }
         })
     }
 
     CreatOrder(checkValue) {
-        let _req = {
-            MerchantID: '3002607',
-            TradeAmt: '1000',
-            TradeNo: '2407260214465702',
-            MerchantTradeNo: 'ecPay1721931286524',
-            IP: null,
-            PaymentType: 'WebATM_TAISHIN',
-            PaymentType: 'WebATM_TAISHIN',
-            PaymentDate: '2024/07/26 02:15:03',
-            PayerAccount5Code: null,
-            PayBanCode: null,
-            Email: null,
-            ItemDesc: null
+        let data = {
+            MerchantID: checkValue.MerchantID,
+            TradeAmt: checkValue.TradeAmt,
+            TradeNo: checkValue.TradeNo,
+            MerchantTradeNo: checkValue.MerchantTradeNo,
+            IP: "ecpay",
+            PaymentType: checkValue.PaymentType.split("_")[0],
+            PaymentType: checkValue.PaymentType.split("_")[1],
+            PaymentDate: checkValue.PaymentDate,
+            PayerAccount5Code: "ecpay",
+            PayBanCode: "ecpay",
+            Email: keys.Email,
+            ItemDesc: keys.ItemName
         };
-        console.log("checkValue", checkValue);
-        const keys = `${checkValue.PaymentDate}${checkValue.MerchantTradeNo}`;
-        console.log("keys", orders[keys]);
-        console.log("orders", orders);
+        const keys = orders[checkValue.MerchantTradeNo];
+        const queryparams = Object.values(data).map(item => `'${item}'`).join(",");
+
+        return mysql(`INSERT INTO orders VALUES (${queryparams})`)
+            .then(res => this.final(res.affectedTows !== 0))
+            .catch(err => console.log(err));
     }
 
 }

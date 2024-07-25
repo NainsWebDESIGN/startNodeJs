@@ -90,7 +90,7 @@ export const GetReturn = async (req, res) => {
     );
 
     if (CheckMacValue === checkValue) {
-        ecpay.CreatOrder(req.body);
+        await ecpay.CreatOrder(req.body);
     }
 
     // 交易成功後，需要回傳 1|OK 給綠界
