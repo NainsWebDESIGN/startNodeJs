@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommodityService } from '@service/commodity.service';
+import { FormDataService } from '@service/formData.service';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
@@ -13,7 +14,8 @@ export class ConfrimPageComponent implements OnInit {
   data;
   constructor(
     private router: Router,
-    public Commod: CommodityService
+    public Commod: CommodityService,
+    private form: FormDataService
 
   ) { }
   ngOnInit() {
@@ -27,8 +29,8 @@ export class ConfrimPageComponent implements OnInit {
       res => {
         const req = {
           MerchantID: "MerchantID",
-          shaEncrypt: "TradeSha",
-          aesEncrypt: "TradeInfo",
+          TradeSha: "shaEncrypt",
+          TradeInfo: "aesEncrypt",
           TimeStamp: "TimeStamp",
           Version: "Version",
           NotifyUrl: "NotifyUrl",
@@ -38,20 +40,7 @@ export class ConfrimPageComponent implements OnInit {
           ItemDesc: "ItemDesc",
           Email: "Email",
         };
-        const form = document.createElement('form');
-        form.method = 'POST';
-        form.action = res.PayGateWay;
-
-        Object.keys(req).forEach(key => {
-          const input = document.createElement('input');
-          input.type = 'hidden';
-          input.name = req[key];
-          input.value = res[key];
-          form.appendChild(input);
-        })
-
-        document.body.appendChild(form);
-        form.submit();
+        this.form.formToURI("POST", res.PayGateWay, [req, res]);
       },
       err => console.log(err)
     )

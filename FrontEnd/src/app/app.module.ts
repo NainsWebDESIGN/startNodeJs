@@ -17,6 +17,7 @@ import { UidService } from '@service/uid.service';
 import { TodosService } from '@service/todos.service';
 import { LoginService } from '@service/login.service';
 import { CommodityService } from '@service/commodity.service';
+import { FormDataService } from '@service/formData.service';
 
 // Pipe && Component
 import { PipeModule } from '@pipeModule';
@@ -50,7 +51,8 @@ import { SuccessComponent } from './success/success.component';
     TodosService,
     LoginService,
     AuthGuardService,
-    CommodityService
+    CommodityService,
+    FormDataService
   ],
   bootstrap: [AppComponent]
 })

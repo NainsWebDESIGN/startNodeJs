@@ -11,6 +11,7 @@ import errorRouter from "./routes/errorRouter.js";
 import apiRouter from "./routes/api.js";
 import usersRouter from "./routes/users.js";
 import newebPay from "./routes/newebpay.js";
+import ecPay from "./routes/ecpay.js";
 import FireBase from './routes/firebase.js';
 import GithubOAuth from './routes/github-oauth.js';
 
@@ -42,6 +43,7 @@ app.use("/error", errorRouter);
 app.use("/api", apiRouter);
 app.use("/users", usersRouter);
 app.use("/webPay", newebPay);
+app.use("/ecPay", ecPay);
 app.use("/firebase", FireBase);
 app.use("/githubOAuth", GithubOAuth);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));

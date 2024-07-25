@@ -5,7 +5,9 @@ import { TodosService } from '@service/todos.service';
 import { ApiService } from '@service/api.service';
 import { LoginService } from '@service/login.service';
 import { CommodityService } from '@service/commodity.service';
+import { FormDataService } from '@service/formData.service';
 import { Method } from '@ts/enum';
+import env from '@ts/env';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -19,9 +21,12 @@ export class TodosComponent implements OnInit {
   changeNumber: number = 1;
   Change: string = "";
   Delete: number = 1;
-  Price: number = 1000;
-  Email: string = "";
-  ItemDesc: string = "測試商品";
+  webpayPrice: number = 1000;
+  webpayEmail: string = "";
+  webpayItemDesc: string = "測試商品";
+  ecpayPrice: number = 1000;
+  ecpayDesc: string = "交易商品描述";
+  ecpayItemDesc: string = "測試商品";
   SelectFile: File | null = null;
   fileUrl: Observable<string>;
   constructor(
@@ -30,7 +35,8 @@ export class TodosComponent implements OnInit {
     public uidStatus: UidService,
     private api: ApiService,
     private router: Router,
-    private Commod: CommodityService
+    private Commod: CommodityService,
+    private form: FormDataService
   ) { }
   ngOnInit() {
   }
@@ -54,14 +60,27 @@ export class TodosComponent implements OnInit {
     ["changeNumber", "Delete"].forEach(item => this[item] = 1);
   }
 
-  confrim() {
-    let req = { data: { ItemDesc: this.ItemDesc, Amt: this.Price, Email: this.Email } };
-    this.api.apiServer('/webPay/order', Method.POST, req).subscribe(
-      res => {
-        this.Commod.changeMerch(res);
-        this.router.navigate([`/front/confrim/${res.MerchantOrderNo}`]);
-      }
-    );
+  confrim(GatePayWay) {
+    let req;
+    switch (GatePayWay) {
+      case "webpay":
+        req = { data: { ItemDesc: this.webpayItemDesc, Amt: this.webpayPrice, Email: this.webpayEmail } };
+        this.api.apiServer('/webPay/order', Method.POST, req).subscribe(
+          res => {
+            this.Commod.changeMerch(res);
+            this.router.navigate([`/front/confrim/${res.MerchantOrderNo}`]);
+          }
+        );
+        break;
+      case "ecpay":
+        req = {
+          TotalAmount: this.ecpayPrice,
+          TradeDesc: this.ecpayDesc,
+          ItemName: this.ecpayItemDesc
+        };
+        this.form.formToURI("GET", `${env.url}/ecPay`, [req]);
+        break;
+    }
   }
 
   fileEvent(value) {
