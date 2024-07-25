@@ -30,9 +30,7 @@ let TradeNo;
 
 export const GetEcPay = (req, res) => {
     const { TotalAmount, TradeDesc, ItemName } = req.body;
-    // console.log("TotalAmount", TotalAmount);
-    // console.log("TradeDesc", TradeDesc);
-    // console.log("ItemName", ItemName);
+
     // SDK 提供的範例，參數設定
     // https://github.com/ECPay/ECPayAIO_Node.js/blob/master/ECPAY_Payment_node_js/conf/config-example.js
     const MerchantTradeDate = new Date().toLocaleString('zh-TW', {
@@ -67,6 +65,7 @@ export const GetEcPay = (req, res) => {
 // 後端接收綠界回傳的資料
 export const GetReturn = async (req, res) => {
     console.log('req.body:', req.body);
+    console.log(123456);
 
     const { CheckMacValue } = req.body;
     const data = { ...req.body };
@@ -83,5 +82,5 @@ export const GetReturn = async (req, res) => {
     );
 
     // 交易成功後，需要回傳 1|OK 給綠界
-    res.send('1|OK');
+    res.send("1|OK");
 }

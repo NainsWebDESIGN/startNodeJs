@@ -16,8 +16,6 @@ export class FormDataService {
             input.value = req[key];
             form.appendChild(input);
         })
-        let box = {};
-        Object.keys(req).forEach(key => box[key] = req[key]);
 
         document.body.appendChild(form);
         form.submit();

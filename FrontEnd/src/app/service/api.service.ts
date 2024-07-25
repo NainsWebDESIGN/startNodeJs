@@ -15,6 +15,7 @@ import 'rxjs/add/operator/shareReplay';
 
 @Injectable()
 export class ApiService {
+      certificate = ["/users/signup", "/users/login", "/githubOAuth/login"];
       constructor(
             private http: HttpClient,
             private uidStatus: UidService
@@ -22,9 +23,8 @@ export class ApiService {
       apiServer(getway: string, method: Method = Method.GET, body?: any) {
             let _url, options;
 
-            if (!["/users/signup", "/users/login", "/githubOAuth/login"].includes(getway)) {
+            if (!this.certificate.includes(getway)) {
                   options = {
-                        // headers: new HttpHeaders({ "Authorization": (getway == "/githubOAuth/user") ? `token=${this.uidStatus.uid}` : this.uidStatus.uid })
                         headers: new HttpHeaders({ "Authorization": this.uidStatus.uid })
                   }
             }

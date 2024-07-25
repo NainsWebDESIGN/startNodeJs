@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommodityService } from '@service/commodity.service';
 import { FormDataService } from '@service/formData.service';
-import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-confrimPage',
