@@ -5,7 +5,7 @@ dotenv.config();
 // 綠界提供的 SDK
 import ecpay_payment from 'ecpay_aio_nodejs';
 
-const { MERCHANTID, HASHKEY, HASHIV, BACKHOST, ReturnUrl } = process.env;
+const { MERCHANTID, ECHASHKEY, ECHASHIV, BACKHOST, ReturnUrl } = process.env;
 
 // SDK 提供的範例，初始化
 // https://github.com/ECPay/ECPayAIO_Node.js/blob/master/ECPAY_Payment_node_js/conf/config-example.js
@@ -13,8 +13,8 @@ const options = {
     OperationMode: 'Test', //Test or Production
     MercProfile: {
         MerchantID: MERCHANTID,
-        HashKey: HASHKEY,
-        HashIV: HASHIV,
+        HashKey: ECHASHKEY,
+        HashIV: ECHASHIV,
     },
     IgnorePayment: [
         //    "Credit",
