@@ -52,7 +52,7 @@ export const GetEcPay = (req, res) => {
         TotalAmount: TotalAmount,
         TradeDesc: TradeDesc,
         ItemName: ItemName,
-        ReturnURL: BACKHOST,
+        ReturnURL: `${BACKHOST}/ecPay/return`,
         ClientBackURL: ReturnUrl,
     };
     const create = new ecpay_payment(options);
