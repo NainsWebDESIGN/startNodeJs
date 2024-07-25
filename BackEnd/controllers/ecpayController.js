@@ -82,12 +82,12 @@ export const GetReturn = async (req, res) => {
     const create = new ecpay_payment(options);
     const checkValue = create.payment_client.helper.gen_chk_mac_value(data);
 
-    console.log(
-        '確認交易正確性：',
-        CheckMacValue === checkValue,
-        // CheckMacValue,
-        // checkValue,
-    );
+    // console.log(
+    //     '確認交易正確性：',
+    //      CheckMacValue === checkValue,
+    //      CheckMacValue,
+    //      checkValue,
+    // );
 
     if (CheckMacValue === checkValue) {
         await ecpay.CreatOrder(req.body);

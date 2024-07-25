@@ -41,7 +41,6 @@ export default class EcPayModel {
 
         const queryparams = Object.values(data).map(item => `'${item}'`).join(",");
 
-        console.log(queryparams);
         return mysql(`INSERT INTO orders VALUES (${queryparams})`)
             .then(res => res.affectedTows !== 0)
             .catch(err => console.log(err))
