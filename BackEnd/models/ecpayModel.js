@@ -30,7 +30,7 @@ export default class EcPayModel {
             TradeNo: checkValue.TradeNo,
             MerchantTradeNo: checkValue.MerchantTradeNo,
             IP: "ecpay",
-            PaymentType: checkValue.PaymentType.split("_")[0],
+            Bank: checkValue.PaymentType.split("_")[0],
             PaymentType: checkValue.PaymentType.split("_")[1],
             PaymentDate: checkValue.PaymentDate,
             PayerAccount5Code: "ecpay",
