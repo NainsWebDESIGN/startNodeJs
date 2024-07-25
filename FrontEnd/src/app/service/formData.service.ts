@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class FormDataService {
     constructor() { }
-    formToURI(method: string, url: string, ...data: any[]) {
+    formToURI(method: string, url: string, data: any[]) {
         const req = this.checkData(data);
         const form = document.createElement('form');
         form.method = method;
@@ -16,6 +16,8 @@ export class FormDataService {
             input.value = req[key];
             form.appendChild(input);
         })
+        let box = {};
+        Object.keys(req).forEach(key => box[key] = req[key]);
 
         document.body.appendChild(form);
         form.submit();
