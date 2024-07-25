@@ -1,4 +1,3 @@
-
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -15,6 +14,7 @@ const options = {
         MerchantID: MERCHANTID,
         HashKey: ECHASHKEY,
         HashIV: ECHASHIV,
+        TransMsg: "測試 TransMsg"
     },
     IgnorePayment: [
         //    "Credit",
@@ -43,7 +43,7 @@ export const GetEcPay = (req, res) => {
         hour12: false,
         timeZone: 'UTC',
     });
-    TradeNo = 'test' + new Date().getTime();
+    TradeNo = 'ecPay' + new Date().getTime();
     let base_param = {
         MerchantTradeNo: TradeNo, //請帶20碼uid, ex: f0a0d7e9fae1bb72bc93
         MerchantTradeDate,
@@ -57,15 +57,13 @@ export const GetEcPay = (req, res) => {
 
     // 注意：在此事直接提供 html + js 直接觸發的範例，直接從前端觸發付款行為
     const html = create.payment_client.aio_check_out_all(base_param);
-    console.log(html);
-
+    // console.log(html);
     res.render('ecpay', { title: 'Loading...', html });
 }
 
 // 後端接收綠界回傳的資料
 export const GetReturn = async (req, res) => {
     console.log('req.body:', req.body);
-    console.log(123456);
 
     const { CheckMacValue } = req.body;
     const data = { ...req.body };

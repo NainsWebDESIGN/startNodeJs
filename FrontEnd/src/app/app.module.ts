@@ -9,6 +9,9 @@ import { AppComponent } from '@app/app.component';
 import { SignupComponent } from '@app/signup/signup.component';
 import { FrontPageComponent } from '@app/frontPage/frontPage.component';
 import { LoginComponent } from '@app/login/login.component';
+import { TodosComponent } from './todos/todos.component';
+import { ConfrimPageComponent } from './confrimPage/confrimPage.component';
+import { SuccessComponent } from './success/success.component';
 
 // Service
 import { AuthGuardService } from '@service/AuthGuard.service';
@@ -23,9 +26,6 @@ import { FormDataService } from '@service/formData.service';
 import { PipeModule } from '@pipeModule';
 
 // import { xxx } from '@comModule';
-import { TodosComponent } from './todos/todos.component';
-import { ConfrimPageComponent } from './confrimPage/confrimPage.component';
-import { SuccessComponent } from './success/success.component';
 
 
 @NgModule({
