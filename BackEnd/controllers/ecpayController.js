@@ -61,7 +61,7 @@ export const GetEcPay = (req, res) => {
     const html = create.payment_client.aio_check_out_all(base_param);
     console.log(html);
 
-    res.render('index', { title: 'Express' });
+    res.render('ecpay', { title: 'Loading...', html });
 }
 
 // 後端接收綠界回傳的資料
