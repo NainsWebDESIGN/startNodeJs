@@ -4,12 +4,11 @@ export interface APIResponse {
     message: string
 }
 
-
 export interface IDefault {
     testValue: string
     emailRule: string
     unicode: Function
     url: string
     GITHUB_CLIENT_ID: string
-    redirectURI: string
+    githubOAuthURI: string
 }

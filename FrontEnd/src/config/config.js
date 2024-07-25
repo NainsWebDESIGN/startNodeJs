@@ -6,7 +6,7 @@ function env() {
             String.fromCharCode(parseInt(unicode.substring(2), 16)),
         url: "https://back-example.zeabur.app",
         GITHUB_CLIENT_ID: "Ov23ct9WXyQ1HTRQkrWa",
-        redirectURI: "/githubOAuth/callback"
+        githubOAuthURI: "/githubOAuth/callback"
     };
     try {
         _DEFAULT.url = window.location.href.includes("front-example.zeabur") ? "https://back-example.zeabur.app" : "";
