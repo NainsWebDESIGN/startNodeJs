@@ -73,7 +73,7 @@ export const GetEcPay = async (req, res) => {
 
 // 後端接收綠界回傳的資料
 export const GetReturn = async (req, res) => {
-    console.log('req.body:', req.body);
+    // console.log('req.body:', req.body);
 
     const { CheckMacValue } = req.body;
     const data = { ...req.body };
@@ -85,8 +85,8 @@ export const GetReturn = async (req, res) => {
     console.log(
         '確認交易正確性：',
         CheckMacValue === checkValue,
-        CheckMacValue,
-        checkValue,
+        // CheckMacValue,
+        // checkValue,
     );
 
     if (CheckMacValue === checkValue) {

@@ -34,12 +34,17 @@ export default class EcPayModel {
             Email: keys.Email,
             ItemDesc: keys.ItemName
         };
+
+        if (!orders[checkValue.MerchantTradeNo]) return false;
+
         const keys = orders[checkValue.MerchantTradeNo];
         const queryparams = Object.values(data).map(item => `'${item}'`).join(",");
 
+        console.log(queryparams);
         return mysql(`INSERT INTO orders VALUES (${queryparams})`)
             .then(res => this.final(res.affectedTows !== 0))
-            .catch(err => console.log(err));
+            .catch(err => console.log(err))
+            .finally(() => delete orders[checkValue.MerchantTradeNo]);
     }
 
 }
