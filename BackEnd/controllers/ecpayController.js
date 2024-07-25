@@ -30,6 +30,9 @@ let TradeNo;
 
 export const GetEcPay = (req, res) => {
     const { TotalAmount, TradeDesc, ItemName } = req.body;
+    console.log("TotalAmount", TotalAmount);
+    console.log("TradeDesc", TradeDesc);
+    console.log("ItemName", ItemName);
     // SDK 提供的範例，參數設定
     // https://github.com/ECPay/ECPayAIO_Node.js/blob/master/ECPAY_Payment_node_js/conf/config-example.js
     const MerchantTradeDate = new Date().toLocaleString('zh-TW', {
@@ -58,10 +61,7 @@ export const GetEcPay = (req, res) => {
     const html = create.payment_client.aio_check_out_all(base_param);
     console.log(html);
 
-    res.render('index', {
-        title: 'Express',
-        html,
-    });
+    res.render('index', { title: 'Express' });
 }
 
 // 後端接收綠界回傳的資料
