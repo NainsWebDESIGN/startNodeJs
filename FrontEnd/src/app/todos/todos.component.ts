@@ -78,7 +78,7 @@ export class TodosComponent implements OnInit {
           TradeDesc: this.ecpayDesc,
           ItemName: this.ecpayItemDesc
         };
-        this.form.formToURI("GET", `${env.url}/ecPay`, [req]);
+        this.form.formToURI("POST", `${env.url}/ecPay`, [req]);
         break;
     }
   }

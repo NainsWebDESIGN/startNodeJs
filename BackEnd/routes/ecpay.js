@@ -4,7 +4,7 @@ import { GetEcPay, GetReturn } from '../controllers/ecpayController.js';
 
 const router = express.Router();
 
-router.get('/', err(GetEcPay));
+router.post('/', err(GetEcPay));
 
 router.post('/return', err(GetReturn));
 
