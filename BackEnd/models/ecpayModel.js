@@ -20,6 +20,10 @@ export default class EcPayModel {
     }
 
     CreatOrder(checkValue) {
+        if (!orders[checkValue.MerchantTradeNo]) return false;
+
+        const keys = orders[checkValue.MerchantTradeNo];
+
         let data = {
             MerchantID: checkValue.MerchantID,
             TradeAmt: checkValue.TradeAmt,
@@ -35,9 +39,6 @@ export default class EcPayModel {
             ItemDesc: keys.ItemName
         };
 
-        if (!orders[checkValue.MerchantTradeNo]) return false;
-
-        const keys = orders[checkValue.MerchantTradeNo];
         const queryparams = Object.values(data).map(item => `'${item}'`).join(",");
 
         console.log(queryparams);
