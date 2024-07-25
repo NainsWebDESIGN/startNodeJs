@@ -43,7 +43,7 @@ export default class EcPayModel {
 
         console.log(queryparams);
         return mysql(`INSERT INTO orders VALUES (${queryparams})`)
-            .then(res => this.final(res.affectedTows !== 0))
+            .then(res => res.affectedTows !== 0)
             .catch(err => console.log(err))
             .finally(() => delete orders[checkValue.MerchantTradeNo]);
     }
