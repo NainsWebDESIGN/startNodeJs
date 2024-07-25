@@ -24,6 +24,7 @@ export class TodosComponent implements OnInit {
   webpayPrice: number = 1000;
   webpayEmail: string = "";
   webpayItemDesc: string = "測試商品";
+  ecpayEmail: string = "";
   ecpayPrice: number = 1000;
   ecpayDesc: string = "交易商品描述";
   ecpayItemDesc: string = "測試商品";
@@ -76,7 +77,8 @@ export class TodosComponent implements OnInit {
         req = {
           TotalAmount: this.ecpayPrice,
           TradeDesc: this.ecpayDesc,
-          ItemName: this.ecpayItemDesc
+          ItemName: this.ecpayItemDesc,
+          Email: this.ecpayEmail
         };
         this.form.formToURI("POST", `${env.url}/ecPay`, [req]);
         break;

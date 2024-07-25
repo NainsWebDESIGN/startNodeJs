@@ -1,10 +1,12 @@
+// 綠界提供的 SDK
+import ecpay_payment from 'ecpay_aio_nodejs';
+import ecpayModel from '../models/ecpayModel.js';
 import dotenv from 'dotenv';
 
 dotenv.config();
-// 綠界提供的 SDK
-import ecpay_payment from 'ecpay_aio_nodejs';
 
 const { MERCHANTID, ECHASHKEY, ECHASHIV, BACKHOST, ReturnUrl } = process.env;
+const ecpay = new ecpayModel();
 
 // SDK 提供的範例，初始化
 // https://github.com/ECPay/ECPayAIO_Node.js/blob/master/ECPAY_Payment_node_js/conf/config-example.js
@@ -13,8 +15,7 @@ const options = {
     MercProfile: {
         MerchantID: MERCHANTID,
         HashKey: ECHASHKEY,
-        HashIV: ECHASHIV,
-        TransMsg: "測試 TransMsg"
+        HashIV: ECHASHIV
     },
     IgnorePayment: [
         //    "Credit",
@@ -28,8 +29,8 @@ const options = {
 };
 let TradeNo;
 
-export const GetEcPay = (req, res) => {
-    const { TotalAmount, TradeDesc, ItemName } = req.body;
+export const GetEcPay = async (req, res) => {
+    const { TotalAmount, TradeDesc, ItemName, Email } = req.body;
 
     // SDK 提供的範例，參數設定
     // https://github.com/ECPay/ECPayAIO_Node.js/blob/master/ECPAY_Payment_node_js/conf/config-example.js
@@ -51,8 +52,17 @@ export const GetEcPay = (req, res) => {
         TradeDesc: TradeDesc,
         ItemName: ItemName,
         ReturnURL: `${BACKHOST}/ecPay/return`,
-        ClientBackURL: ReturnUrl,
+        ClientBackURL: ReturnUrl
     };
+    const userOrder = {
+        TotalAmount: TotalAmount,
+        TradeDesc: TradeDesc,
+        ItemName: ItemName,
+        Email: Email,
+        MerchantTradeDate,
+        TradeNo
+    };
+    await ecpay.OrderStore(userOrder);
     const create = new ecpay_payment(options);
 
     // 注意：在此事直接提供 html + js 直接觸發的範例，直接從前端觸發付款行為
@@ -78,6 +88,10 @@ export const GetReturn = async (req, res) => {
         CheckMacValue,
         checkValue,
     );
+
+    if (CheckMacValue === checkValue) {
+        ecpay.CreatOrder(req.body);
+    }
 
     // 交易成功後，需要回傳 1|OK 給綠界
     res.send("1|OK");
