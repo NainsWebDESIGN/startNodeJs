@@ -15,6 +15,7 @@ import ecPay from "./routes/ecpay.js";
 import FireBase from './routes/firebase.js';
 import GithubOAuth from './routes/github-oauth.js';
 import GoogleOAuth from './routes/googleOAuth.js';
+import LineOAuth from './routes/lineOAuth.js';
 
 import { readFile } from "fs/promises";
 const swaggerDocument = JSON.parse(
@@ -48,6 +49,7 @@ app.use("/ecPay", ecPay);
 app.use("/firebase", FireBase);
 app.use("/githubOAuth", GithubOAuth);
 app.use("/googleOAuth", GoogleOAuth);
+app.use("/lineOAuth", LineOAuth);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // catch 404 and forward to error handler

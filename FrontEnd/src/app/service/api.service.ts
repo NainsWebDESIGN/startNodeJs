@@ -9,7 +9,6 @@ import { Observable } from 'rxjs/Observable';
 
 //RxJS
 import 'rxjs/add/operator/map'
-import 'rxjs/add/operator/retry';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/shareReplay';
 
@@ -46,7 +45,6 @@ export class ApiService {
 
       finalAPI(res: Observable<any>) {
             return res
-                  // .retry(2)
                   .map(this.checkAPI)
                   .catch(this.catchError)
                   .shareReplay();
@@ -55,6 +53,7 @@ export class ApiService {
       checkAPI(res: APIResponse) {
             switch (res.success) {
                   case true:
+                        console.log(res.data);
                         return res.data;
                   default:
                         console.log(res);

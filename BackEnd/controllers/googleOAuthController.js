@@ -47,7 +47,6 @@ export const callback = async (req, res) => {
     }
 }
 
-
 export const getUser = async (req, res) => {
     try {
         const user = await google.getUser(req.user);

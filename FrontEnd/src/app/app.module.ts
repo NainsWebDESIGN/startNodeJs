@@ -21,6 +21,7 @@ import { TodosService } from '@service/todos.service';
 import { LoginService } from '@service/login.service';
 import { CommodityService } from '@service/commodity.service';
 import { FormDataService } from '@service/formData.service';
+import { LineOAuthService } from '@service/lineOAuth.service';
 
 // Pipe && Component
 import { PipeModule } from '@pipeModule';
@@ -52,7 +53,8 @@ import { PipeModule } from '@pipeModule';
     LoginService,
     AuthGuardService,
     CommodityService,
-    FormDataService
+    FormDataService,
+    LineOAuthService
   ],
   bootstrap: [AppComponent]
 })

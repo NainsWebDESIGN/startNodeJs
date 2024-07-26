@@ -7,12 +7,13 @@
   <input type="text" placeholder="密碼" [(ngModel)]="password" (keyup.enter)="login()">
   <button (click)="router.navigate(['/signup'])">註冊</button>
   <button (click)="login()">登入</button><br><br>
-  <button (click)='githubLogin()' class="githubBtn">
+  <button (click)='OAuthLogin("github")' class="githubBtn">
     <i class="fa fa-github"></i>
-    <!-- Github 登入 -->
   </button>
-  <button (click)='googleLogin()' class="googleBtn">
+  <button (click)='OAuthLogin("google")' class="googleBtn">
     <i class="fa fa-google"></i>
-    <!-- Google 登入 -->
+  </button>
+  <button (click)='OAuthLogin("line")' class="lineBtn">
+    <i>LINE</i>
   </button>
 </header>

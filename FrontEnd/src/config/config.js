@@ -8,11 +8,21 @@ function env() {
         GITHUB_CLIENT_ID: "Ov23ct9WXyQ1HTRQkrWa",
         githubOAuthURI: "/githubOAuth/callback",
         googleOAuthURI: "/googleOAuth/login",
+        LINE_CLIENT_ID: "2005925311",
+        LINE_CLIENT_SECRET: "cf503c9d094c7987408d999dc70da629",
+        LINE_URL: "https://access.line.me/oauth2/v2.1/authorize?",
+        LINE_API: "https://api.line.me/oauth2/v2.1/token",
+        FRONT_URL: "https://front-example.zeabur.app"
     };
     try {
         _DEFAULT.url = window.location.href.includes("front-example.zeabur") ? "https://back-example.zeabur.app" : "";
     } catch (e) {
         console.log(`Config url Error: ${e}`);
+    }
+    try {
+        _DEFAULT.FRONT_URL = window.location.href.includes("front-example.zeabur") ? "https://front-example.zeabur.app" : "";
+    } catch (e) {
+        console.log(`Config FRONT_URL Error: ${e}`);
     }
     return _DEFAULT;
 }
