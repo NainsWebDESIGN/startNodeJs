@@ -53,7 +53,6 @@ export class ApiService {
       checkAPI(res: APIResponse) {
             switch (res.success) {
                   case true:
-                        console.log(res.data);
                         return res.data;
                   default:
                         console.log(res);
