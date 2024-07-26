@@ -26,15 +26,15 @@
 <br><br>
 <hr><br>
 藍新購物：<br>
-<input type="text" [(ngModel)]="webpayEmail" placeholder="email" (keyup.enter)="confrim(" webpay")">
-<input type="text" [(ngModel)]="webpayPrice" placeholder="價格" (keyup.enter)="confrim(" webpay")">
-<input type="text" [(ngModel)]="webpayItemDesc" placeholder="商品名稱" (keyup.enter)="confrim(" webpay")">
+<input type="text" [(ngModel)]="webpayEmail" placeholder="email" (keyup.enter)='confrim("webpay")'>
+<input type="text" [(ngModel)]="webpayPrice" placeholder="價格" (keyup.enter)='confrim("webpay")'>
+<input type="text" [(ngModel)]="webpayItemDesc" placeholder="商品名稱" (keyup.enter)='confrim("webpay")'>
 <button (click)='confrim("webpay")'>購買</button>
 <br><br>
 綠界購物：<br>
-<input type="text" [(ngModel)]="ecpayEmail" placeholder="email" (keyup.enter)="confrim(" ecpay")">
-<input type="text" [(ngModel)]="ecpayPrice" placeholder="價格" (keyup.enter)="confrim(" ecpay")">
-<input type="text" [(ngModel)]="ecpayItemDesc" placeholder="商品名稱" (keyup.enter)="confrim(" ecpay")">
+<input type="text" [(ngModel)]="ecpayEmail" placeholder="email" (keyup.enter)='confrim("ecpay")'>
+<input type="text" [(ngModel)]="ecpayPrice" placeholder="價格" (keyup.enter)='confrim("ecpay")'>
+<input type="text" [(ngModel)]="ecpayItemDesc" placeholder="商品名稱" (keyup.enter)='confrim("ecpay")'>
 <button (click)='confrim("ecpay")'>購買</button>
 <br><br>
 <hr><br>
