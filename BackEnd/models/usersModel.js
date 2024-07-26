@@ -25,14 +25,14 @@ export default class UsersModel {
 
     return mysql(`SELECT * FROM users WHERE email='${email}'`)
       .then(async (res) => {
-        if (res.length !== 0 && res[0].password == "githubToken") {
-          return "githubSignuped";
+        if (res.length !== 0 && res[0].password == "OAuthToken") {
+          return "OAuthSignUped";
         } else if (res.length !== 0) {
           return false;
         } else {
           // 1-1 加密
           switch (password) {
-            case "githubToken":
+            case "OAuthToken":
               return password;
             default:
               return await bcrypt.hash(password, 10);
@@ -48,7 +48,7 @@ export default class UsersModel {
           }
           // 1-2 儲存
           switch (password) {
-            case "githubToken":
+            case "OAuthToken":
               const { login } = req.body;
               return signup(login, email, hashPassword);
             default:
@@ -76,7 +76,7 @@ export default class UsersModel {
           }
 
           // 2-2 密碼驗證                 密碼, 加密後的密碼
-          if (res[0].password !== "githubToken" && !(await bcrypt.compare(password, res[0].password))) {
+          if (res[0].password !== "OAuthToken" && !(await bcrypt.compare(password, res[0].password))) {
             return "登入錯誤";
           }
 

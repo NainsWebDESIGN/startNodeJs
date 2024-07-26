@@ -1,9 +1,10 @@
 import crypto from "crypto";
 import usersModel from "../models/usersModel.js";
+import jwt from 'jsonwebtoken';
 import dotenv from "dotenv";
-dotenv.config(); // 載入.env 檔案
 
-const { MerchantID, HASHKEY, HASHIV, Version, NotifyUrl, ReturnUrl } =
+dotenv.config(); // 載入.env 檔案
+const { MerchantID, HASHKEY, HASHIV, Version, NotifyUrl, ReturnUrl, JWT_SECRET } =
   process.env; // 取得環境變數
 const RespondType = "JSON";
 
@@ -64,4 +65,21 @@ function genDataChain(order) {
     )}&ReturnURL=${encodeURIComponent(ReturnUrl)}&ItemDesc=${encodeURIComponent(
       order.ItemDesc
     )}&Email=${encodeURIComponent(order.Email)}`;
+}
+
+export const authenticateJWT = (req, res, next) => {
+  const token = req.header('Authorization');
+
+  if (token) {
+    jwt.verify(token, JWT_SECRET, (err, user) => {
+      if (err) {
+        return res.sendStatus(403); // 令牌無效
+      }
+
+      req.user = user; // 附加用戶資訊到請求
+      next(); // 繼續處理請求
+    });
+  } else {
+    res.sendStatus(401); // 沒有提供令牌
+  }
 }

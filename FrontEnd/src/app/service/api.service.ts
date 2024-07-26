@@ -15,7 +15,7 @@ import 'rxjs/add/operator/shareReplay';
 
 @Injectable()
 export class ApiService {
-      certificate = ["/users/signup", "/users/login", "/githubOAuth/login"];
+      certificate = ["/users/signup", "/users/login", "/githubOAuth/login", "/googleOAuth/login"];
       constructor(
             private http: HttpClient,
             private uidStatus: UidService

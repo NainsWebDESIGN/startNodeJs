@@ -24,6 +24,11 @@
     "secure": false,
     "changeOrigin": true
   },
+  "/googleOAuth": {
+    "target": "http://127.0.0.1:2862/",
+    "secure": false,
+    "changeOrigin": true
+  },
   "/ecPay": {
     "target": "http://127.0.0.1:2862/",
     "secure": false,

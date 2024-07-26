@@ -1,0 +1,37 @@
+button {
+    cursor: pointer;
+}
+
+.githubBtn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    color: #fff;
+    background: rgb(95, 24, 150);
+    box-shadow: 0 0 2px rgba(95, 24, 150, 0.2),
+        0 0 10px rgba(95, 24, 150, 0.4),
+        0 0 20px rgba(95, 24, 150, 0.6);
+
+    i {
+        font-size: 1.5em;
+        font-weight: bold;
+    }
+}
+
+.googleBtn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    color: rgb(255, 50, 2);
+    background: rgb(112, 185, 220);
+    box-shadow: 0 0 2px rgba(112, 185, 220, 0.2),
+        0 0 10px rgba(112, 185, 220, 0.4),
+        0 0 20px rgba(112, 185, 220, 0.6);
+
+    i {
+        font-size: 1.5em;
+        font-weight: bold;
+    }
+}

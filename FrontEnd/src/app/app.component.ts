@@ -23,10 +23,12 @@ export class AppComponent {
       console.log("localStorage is not found uid: " + e);
     }
 
-    if (location.search.includes('githubToken')) {
-      this.uidStatus.uid = location.search.split("?githubToken=")[1];
+    if (location.search.includes('OAuthToken')) {
+      const OAuthToken = location.search.split("&")[0].split("=")[1];
+      const OAuthfrom = location.search.split("&")[1].split("=")[1];
+      this.uidStatus.uid = OAuthToken;
 
-      this.api.apiServer("/githubOAuth/user")
+      this.api.apiServer(`/${OAuthfrom}/user`)
         .map(res => res.user)
         .subscribe(
           res => this.islogin.login({ data: { email: res.email, password: res.password } }),

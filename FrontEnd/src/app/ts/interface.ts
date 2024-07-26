@@ -11,4 +11,5 @@ export interface IDefault {
     url: string
     GITHUB_CLIENT_ID: string
     githubOAuthURI: string
+    googleOAuthURI: string
 }

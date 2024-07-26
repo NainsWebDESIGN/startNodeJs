@@ -1,7 +1,8 @@
 import express from "express";
 
 import err from '../service/catchError.js';
-import { callback, authenticateJWT, getUser } from '../controllers/github-oauthController.js';
+import { callback, getUser } from '../controllers/github-oauthController.js';
+import { authenticateJWT } from '../service/dataFrom.js';
 const router = express.Router();
 
 // 路由處理 GitHub 回傳

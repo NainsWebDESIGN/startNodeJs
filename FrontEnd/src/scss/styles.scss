@@ -1,3 +1,4 @@
+@import '~font-awesome/css/font-awesome.min.css';
 @import "./font";
 
 * {
@@ -14,3 +15,5 @@ ul {
 a {
   text-decoration: none;
 }
+
+@import "login";

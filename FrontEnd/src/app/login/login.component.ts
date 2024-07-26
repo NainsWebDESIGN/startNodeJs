@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from '@service/login.service';
-import authURL from '@ts/githubOAuth';
+import githubURL from '@ts/githubOAuth';
 import env from '@ts/env';
 
 @Component({
@@ -28,7 +28,11 @@ export class LoginComponent implements OnInit {
   }
 
   githubLogin() {
-    location.href = authURL;
+    location.href = githubURL;
+  }
+
+  googleLogin() {
+    location.href = `${env.url}${env.googleOAuthURI}`;
   }
 
 }

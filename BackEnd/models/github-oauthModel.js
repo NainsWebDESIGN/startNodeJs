@@ -42,7 +42,7 @@ export default class OAuthModel {
                         const user = {
                             ...userResponse.data,
                             email: emailResponse.data[0].email,
-                            password: "githubToken"
+                            password: "OAuthToken"
                         };
 
                         // 此處將用戶資訊存儲到資料庫
