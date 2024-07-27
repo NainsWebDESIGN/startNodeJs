@@ -17,6 +17,7 @@ export default class UsersModel {
   // 1. 註冊
   async SIGNUP(req) {
     const { password, email } = req.body;
+
     const signup = (username, email, password) => {
       return mysql(`INSERT INTO users VALUES ('${username}', '${email}', '${password}')`)
         .then((res) => res.affectedTows !== 0)
@@ -43,17 +44,18 @@ export default class UsersModel {
         if (!hashPassword) {
           return false;
         } else {
-          if (hashPassword == "githubSignuped") {
+          if (hashPassword == "OAuthSignUped") {
             return "OK";
-          }
-          // 1-2 儲存
-          switch (password) {
-            case "OAuthToken":
-              const { login } = req.body;
-              return signup(login, email, hashPassword);
-            default:
-              const { username } = req.body;
-              return signup(username, email, hashPassword);
+          } else {
+            // 1-2 儲存
+            switch (password) {
+              case "OAuthToken":
+                const { login } = req.body;
+                return signup(login, email, hashPassword);
+              default:
+                const { username } = req.body;
+                return signup(username, email, hashPassword);
+            }
           }
         }
       })

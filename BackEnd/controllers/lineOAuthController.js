@@ -1,5 +1,4 @@
 import dotenv from 'dotenv';
-import mysql from "../service/mysql.js";
 import userModel from '../models/usersModel.js';
 import { Form } from '../service/dataFrom.js';
 
@@ -16,6 +15,7 @@ export const getToken = async (req, res) => {
     }
 
     const _user = await new userModel().SIGNUP({ body: users });
+
     if (_user) {
         res.send(Form(true, { status: true, user: users }));
     } else {

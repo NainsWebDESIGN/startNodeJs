@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
   password: string = "";
   ngOnInit() {
     this.linehref = `${env.LINE_URL}${Object.keys(lineToken).map(item => `${item}=${lineToken[item]}`).join("&")}`;
-    // console.log(this.linehref);
+    // console.log(lineToken);
   }
   login() {
     const username = this.username.trim(),
