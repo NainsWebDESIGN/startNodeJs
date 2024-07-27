@@ -12,6 +12,7 @@ import { LoginComponent } from '@app/login/login.component';
 import { TodosComponent } from './todos/todos.component';
 import { ConfrimPageComponent } from './confrimPage/confrimPage.component';
 import { SuccessComponent } from './success/success.component';
+import { ThreeJsComponent } from './three-js/three-js.component';
 
 // Service
 import { AuthGuardService } from '@service/AuthGuard.service';
@@ -37,7 +38,8 @@ import { PipeModule } from '@pipeModule';
     LoginComponent,
     TodosComponent,
     ConfrimPageComponent,
-    SuccessComponent
+    SuccessComponent,
+    ThreeJsComponent
   ],
   imports: [
     BrowserModule,

@@ -40,4 +40,6 @@
 <hr><br>
 <input type="file" (change)="fileEvent($event)"><button (click)='upLoadFile()'>上傳檔案</button>
 <p><a [href]="fileUrl | async" target="_blank">{{ fileUrl | async }}</a></p>
+
+<app-three-js></app-three-js>
 <br><br><button (click)='islogin.logout()'>登出</button>
