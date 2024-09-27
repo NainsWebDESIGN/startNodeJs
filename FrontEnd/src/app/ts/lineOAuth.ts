@@ -1,9 +1,9 @@
 import { LineToken, PostLine } from '@ts/interface';
-import env from '@ts/env';
+import ENV from '@ts/env';
 export const lineToken: LineToken = {
     response_type: "code",
-    client_id: env.LINE_CLIENT_ID,
-    redirect_uri: (env.FRONT_URL == "") ? "http://localhost:1491" : env.FRONT_URL,
+    client_id: ENV.LINE_CLIENT_ID,
+    redirect_uri: (ENV.FRONT_URL == "") ? "http://localhost:1491" : ENV.FRONT_URL,
     state: "shizuna1223",
     scope: "profile%20openid%20email",
     nonce: "NainsStartNodeJs",
@@ -15,7 +15,7 @@ export const lineToken: LineToken = {
 export const postLine: PostLine = {
     grant_type: "authorization_code",
     code: "",
-    redirect_uri: (env.FRONT_URL == "") ? "http://localhost:1491" : env.FRONT_URL,
-    client_id: env.LINE_CLIENT_ID,
-    client_secret: env.LINE_CLIENT_SECRET
+    redirect_uri: (ENV.FRONT_URL == "") ? "http://localhost:1491" : ENV.FRONT_URL,
+    client_id: ENV.LINE_CLIENT_ID,
+    client_secret: ENV.LINE_CLIENT_SECRET
 }

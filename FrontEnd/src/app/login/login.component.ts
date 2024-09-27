@@ -12,7 +12,6 @@ import env from '@ts/env';
 })
 export class LoginComponent implements OnInit {
   env = env.testValue;
-  linehref: string;
   constructor(
     public islogin: LoginService,
     public router: Router
@@ -20,18 +19,17 @@ export class LoginComponent implements OnInit {
   username: string = "";
   password: string = "";
   ngOnInit() {
-    this.linehref = `${env.LINE_URL}${Object.keys(lineToken).map(item => `${item}=${lineToken[item]}`).join("&")}`;
     // console.log(lineToken);
   }
   login() {
-    const username = this.username.trim(),
-      password = this.password.trim();
-
+    const username = this.username.trim();
+    const password = this.password.trim();
     const req = { data: { email: username, password: password } };
+
     this.islogin.login(req);
   }
-  OAuthLogin(where: string) {
-    switch (where) {
+  OAuthLogin(oAuth: string) {
+    switch (oAuth) {
       case "github":
         location.href = githubURL;
         break;
@@ -39,7 +37,7 @@ export class LoginComponent implements OnInit {
         location.href = `${env.url}${env.googleOAuthURI}`;
         break;
       case "line":
-        location.href = this.linehref;
+        location.href = `${env.LINE_URL}${Object.keys(lineToken).map(item => `${item}=${lineToken[item]}`).join("&")}`;
         break;
     }
   }

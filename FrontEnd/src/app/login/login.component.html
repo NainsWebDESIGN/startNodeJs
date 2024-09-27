@@ -7,7 +7,11 @@
   <input type="text" placeholder="密碼" [(ngModel)]="password" (keyup.enter)="login()">
   <button (click)="router.navigate(['/signup'])">註冊</button>
   <button (click)="login()">登入</button><br><br>
-  <button (click)='OAuthLogin("github")' class="githubBtn">
+  <button *ngFor="let item of ['github', 'google', 'line']" [class]="item + 'Btn'" (click)='OAuthLogin(item)'>
+    <i [class]="'fa fa-' + item" *ngIf="item !== 'line'"></i>
+    <i *ngIf="item == 'line'">LINE</i>
+  </button>
+  <!-- <button (click)='OAuthLogin("github")' class="githubBtn">
     <i class="fa fa-github"></i>
   </button>
   <button (click)='OAuthLogin("google")' class="googleBtn">
@@ -15,5 +19,5 @@
   </button>
   <button (click)='OAuthLogin("line")' class="lineBtn">
     <i>LINE</i>
-  </button>
+  </button> -->
 </header>
